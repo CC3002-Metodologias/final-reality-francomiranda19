@@ -1,4 +1,4 @@
-package com.github.cc3002.finalreality.gui;
+package com.github.francomiranda19.finalreality.gui;
 
 import javafx.application.Application;
 import javafx.geometry.Pos;
