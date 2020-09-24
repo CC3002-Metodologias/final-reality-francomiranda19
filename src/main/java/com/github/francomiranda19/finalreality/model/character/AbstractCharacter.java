@@ -31,6 +31,14 @@ public abstract class AbstractCharacter implements ICharacter {
     this.characterClass = characterClass;
   }
 
+  /**
+   * Adds this character to the turns queue.
+   */
+  private void addToQueue() {
+    turnsQueue.add(this);
+    scheduledExecutor.shutdown();
+  }
+
   @Override
   public void waitTurn() {
     scheduledExecutor = Executors.newSingleThreadScheduledExecutor();
@@ -44,18 +52,8 @@ public abstract class AbstractCharacter implements ICharacter {
     }
   }
 
-  /**
-   * Adds this character to the turns queue.
-   */
-  private void addToQueue() {
-    turnsQueue.add(this);
-    scheduledExecutor.shutdown();
-  }
-
   @Override
-  public String getName() {
-    return name;
-  }
+  public String getName() { return name; }
 
   @Override
   public void equip(Weapon weapon) {
@@ -65,12 +63,8 @@ public abstract class AbstractCharacter implements ICharacter {
   }
 
   @Override
-  public Weapon getEquippedWeapon() {
-    return equippedWeapon;
-  }
+  public Weapon getEquippedWeapon() { return equippedWeapon; }
 
   @Override
-  public CharacterClass getCharacterClass() {
-    return characterClass;
-  }
+  public CharacterClass getCharacterClass() { return characterClass; }
 }
