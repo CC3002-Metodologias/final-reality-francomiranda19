@@ -21,10 +21,13 @@ public class WhiteMage extends AbstractMage {
     super(name, turnsQueue, characterClass, lifePoints, defense, mana);
   }
 
-  public void equip(Weapon weapon) {
-    if (weapon.getType() == WeaponType.KNIFE) {
-      this.equippedWeapon = weapon;
-    }
+  /**
+   * Equips a knife to this character.
+   *
+   * @param knife the character will equip this weapon
+   */
+  public void equipKnife(Weapon knife) {
+      this.equippedWeapon = knife;
   }
 
 }

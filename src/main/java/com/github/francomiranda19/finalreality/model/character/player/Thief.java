@@ -21,10 +21,31 @@ public class Thief extends PlayerCharacter {
     super(name, turnsQueue, characterClass, lifePoints, defense);
   }
 
-  public void equip(Weapon weapon) {
-    if ((weapon.getType() == WeaponType.SWORD) || (weapon.getType() == WeaponType.STAFF) || (weapon.getType() == WeaponType.BOW)) {
-      this.equippedWeapon = weapon;
-    }
+  /**
+   * Equips a sword to this character.
+   *
+   * @param sword the character will equip this weapon
+   */
+  public void equipSword(Weapon sword) {
+    this.equippedWeapon = sword;
+  }
+
+  /**
+   * Equips a staff to this character.
+   *
+   * @param staff the character will equip this weapon
+   */
+  public void equipStaff(Weapon staff) {
+    this.equippedWeapon = staff;
+  }
+
+  /**
+   * Equips a bow to this character.
+   *
+   * @param bow the character will equip this weapon
+   */
+  public void equipBow(Weapon bow) {
+    this.equippedWeapon = bow;
   }
 
 }

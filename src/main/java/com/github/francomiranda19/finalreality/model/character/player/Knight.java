@@ -21,10 +21,31 @@ public class Knight extends PlayerCharacter {
     super(name, turnsQueue, characterClass, lifePoints, defense);
   }
 
-  public void equip(Weapon weapon) {
-    if ((weapon.getType() == WeaponType.SWORD) || (weapon.getType() == WeaponType.AXE) || (weapon.getType() == WeaponType.KNIFE)) {
-      this.equippedWeapon = weapon;
-    }
+  /**
+   * Equips a sword to this character.
+   *
+   * @param sword the character will equip this weapon
+   */
+  public void equipSword(Weapon sword) {
+    this.equippedWeapon = sword;
+  }
+
+  /**
+   * Equips an axe to this character.
+   *
+   * @param axe the character will equip this weapon
+   */
+  public void equipAxe(Weapon axe) {
+    this.equippedWeapon = axe;
+  }
+
+  /**
+   * Equips a knife to this character.
+   *
+   * @param knife the character will equip this weapon
+   */
+  public void equipKnife(Weapon knife) {
+    this.equippedWeapon = knife;
   }
 
 }
