@@ -21,10 +21,22 @@ public class BlackMage extends AbstractMage{
     super(name, turnsQueue, characterClass, lifePoints, defense, mana);
   }
 
-  public void equip(Weapon weapon) {
-    if ((weapon.getType() == WeaponType.KNIFE) || (weapon.getType() == WeaponType.STAFF)) {
-      this.equippedWeapon = weapon;
-    }
+  /**
+   * Equips a knife to this character.
+   *
+   * @param knife the character will equip this weapon
+   */
+  public void equipKnife(Weapon knife) {
+    this.equippedWeapon = knife;
+  }
+
+  /**
+   * Equips a staff to this character.
+   *
+   * @param staff the character will equip this weapon
+   */
+  public void equipStaff(Weapon staff) {
+    this.equippedWeapon = staff;
   }
 
 }

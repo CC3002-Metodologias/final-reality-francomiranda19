@@ -21,10 +21,22 @@ public class Engineer extends PlayerCharacter {
     super(name, turnsQueue, characterClass, lifePoints, defense);
   }
 
-  public void equip(Weapon weapon) {
-    if ((weapon.getType() == WeaponType.AXE) || (weapon.getType() == WeaponType.BOW)) {
-      this.equippedWeapon = weapon;
-    }
+  /**
+   * Equips an axe to this character.
+   *
+   * @param axe the character will equip this weapon
+   */
+  public void equipAxe(Weapon axe) {
+    this.equippedWeapon = axe;
+  }
+
+  /**
+   * Equips a bow to this character.
+   *
+   * @param bow the character will equip this weapon
+   */
+  public void equipBow(Weapon bow) {
+    this.equippedWeapon = bow;
   }
 
 }

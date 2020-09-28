@@ -3,6 +3,7 @@ ChangeLog
 
 Version 2.0
 -----------
+- (B.3) Created methods to equip each type of weapon
 - (B.2) Created more classes and interfaces for the characters and weapons
 - (B.1) Corrected the design of the program
 
