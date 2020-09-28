@@ -3,7 +3,8 @@ ChangeLog
 
 Version 2.0
 -----------
-Write your changes in here
+- (B.2) Created more classes and interfaces for the characters and weapons
+- (B.1) Corrected the design of the program
 
 Version 1.0
 -----------
