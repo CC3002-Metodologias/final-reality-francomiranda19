@@ -4,6 +4,9 @@ import com.github.francomiranda19.finalreality.model.character.AbstractCharacter
 import com.github.francomiranda19.finalreality.model.character.ICharacter;
 import java.util.Objects;
 import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
+
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -23,11 +26,15 @@ public class PlayerCharacter extends AbstractCharacter {
    *     the queue with the characters waiting for their turn
    * @param characterClass
    *     the class of this character
+   * @param lifePoints
+   *     the character's life points
+   * @param defense
+   *     the character's defense
    */
-  public PlayerCharacter(@NotNull String name,
-      @NotNull BlockingQueue<ICharacter> turnsQueue,
-      final CharacterClass characterClass) {
-    super(turnsQueue, name, characterClass);
+  public PlayerCharacter(@NotNull String name, @NotNull BlockingQueue<ICharacter> turnsQueue,
+                         final CharacterClass characterClass,
+                         int lifePoints, int defense) {
+    super(turnsQueue, name, characterClass, lifePoints, defense);
   }
 
   @Override
@@ -45,6 +52,13 @@ public class PlayerCharacter extends AbstractCharacter {
     }
     final PlayerCharacter that = (PlayerCharacter) o;
     return getCharacterClass() == that.getCharacterClass()
-        && getName().equals(that.getName());
+            && getName().equals(that.getName());
   }
+
+  @Override
+  public void waitTurn() {
+    scheduledExecutor = Executors.newSingleThreadScheduledExecutor();
+    scheduledExecutor.schedule(this::addToQueue, equippedWeapon.getWeight() / 10, TimeUnit.SECONDS);
+  }
+
 }
