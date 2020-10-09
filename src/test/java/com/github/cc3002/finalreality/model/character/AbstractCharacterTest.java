@@ -34,9 +34,9 @@ public abstract class AbstractCharacterTest {
   protected static final String ENGINEER_NAME = "Cid";
   protected static final String THIEF_NAME = "Zidane";
   protected Map<CharacterClass, String> characterNames;
-  protected static final int LIFE = 100;
-  protected static final int DEFENSE = 30;
-  protected static final int ATTACK = 15;
+  protected final int LIFE = 100;
+  protected final int DEFENSE = 30;
+  protected final int ATTACK = 15;
 
   protected Axe testAxe;
   protected Bow testBow;
@@ -49,8 +49,8 @@ public abstract class AbstractCharacterTest {
   protected static final String SWORD_NAME = "Test Sword";
   protected static final String BOW_NAME = "Test Bow";
   protected static final String KNIFE_NAME = "Test Knife";
-  protected static final int DAMAGE = 15;
-  protected static final int SPEED = 10;*/
+  protected final int DAMAGE = 15;
+  protected final int SPEED = 10;*/
 
   /**
    * Checks that the character waits the appropriate amount of time for it's turn.

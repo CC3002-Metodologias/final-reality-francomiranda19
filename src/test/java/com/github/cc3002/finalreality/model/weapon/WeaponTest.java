@@ -1,6 +1,7 @@
 package com.github.cc3002.finalreality.model.weapon;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import com.github.cc3002.finalreality.model.character.PlayerCharacterTest;
 import com.github.francomiranda19.finalreality.model.weapon.*;

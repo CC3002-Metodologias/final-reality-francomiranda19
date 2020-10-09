@@ -28,10 +28,31 @@ public class PlayerCharacterTest extends AbstractCharacterTest {
   protected static final String WHITE_MAGE_NAME = "Eiko";
   protected static final String ENGINEER_NAME = "Cid";
   protected static final String THIEF_NAME = "Zidane";
+  protected Engineer engineer;
+  protected Knight knight;
+  protected Thief thief;
+  protected BlackMage blackMage;
+  protected WhiteMage whiteMage;
+
+  protected static final String AXE_NAME = "Test Axe";
+  protected static final String STAFF_NAME = "Test Staff";
+  protected static final String SWORD_NAME = "Test Sword";
+  protected static final String BOW_NAME = "Test Bow";
+  protected static final String KNIFE_NAME = "Test Knife";
+  protected static final int DAMAGE = 15;
+  protected static final int SPEED = 10;
+
+  protected Axe testAxe;
+  protected Staff testStaff;
+  protected Sword testSword;
+  protected Bow testBow;
+  protected Knife testKnife;
+
   protected Map<CharacterClass, String> characterNames;
   protected static final int LIFE = 100;
   protected static final int DEFENSE = 30;
   protected static final int ATTACK = 15;
+  protected static final int MANA = 50;
 
   /**
    * Setup method.
@@ -40,6 +61,18 @@ public class PlayerCharacterTest extends AbstractCharacterTest {
   @BeforeEach
   void setUp() {
     super.basicSetUp();
+
+    engineer = new Engineer(ENGINEER_NAME, turns, CharacterClass.ENGINEER, LIFE, DEFENSE);
+    knight = new Knight(KNIGHT_NAME, turns, CharacterClass.KNIGHT, LIFE, DEFENSE);
+    thief = new Thief(THIEF_NAME, turns, CharacterClass.THIEF, LIFE, DEFENSE);
+    blackMage = new BlackMage(BLACK_MAGE_NAME, turns, CharacterClass.BLACK_MAGE, LIFE, DEFENSE, MANA);
+    whiteMage = new WhiteMage(WHITE_MAGE_NAME, turns, CharacterClass.WHITE_MAGE, LIFE, DEFENSE, MANA);
+
+    testAxe = new Axe(AXE_NAME, DAMAGE, SPEED, WeaponType.AXE);
+    testStaff = new Staff(STAFF_NAME, DAMAGE, SPEED, WeaponType.STAFF);
+    testSword = new Sword(SWORD_NAME, DAMAGE, SPEED, WeaponType.SWORD);
+    testBow = new Bow(BOW_NAME, DAMAGE, SPEED, WeaponType.BOW);
+    testKnife = new Knife(KNIFE_NAME, DAMAGE, SPEED, WeaponType.KNIFE);
 
     characterNames = new EnumMap<>(CharacterClass.class);
     characterNames.put(CharacterClass.BLACK_MAGE, BLACK_MAGE_NAME);
@@ -74,6 +107,59 @@ public class PlayerCharacterTest extends AbstractCharacterTest {
       assertNotEquals(character, enemy);
     }
 
+  }
+
+  @Test
+  void engineerEquipWeaponTest() {
+    assertNull(engineer.getEquippedWeapon());
+    engineer.equipAxe(testAxe);
+    assertEquals(testAxe, engineer.getEquippedWeapon());
+    engineer.equipBow(testBow);
+    assertEquals(testBow, engineer.getEquippedWeapon());
+  }
+
+  @Test
+  void knightEquipWeaponTest() {
+    assertNull(knight.getEquippedWeapon());
+    knight.equipSword(testSword);
+    assertEquals(testSword, knight.getEquippedWeapon());
+    knight.equipAxe(testAxe);
+    assertEquals(testAxe, knight.getEquippedWeapon());
+    knight.equipKnife(testKnife);
+    assertEquals(testKnife, knight.getEquippedWeapon());
+  }
+
+  @Test
+  void thiefEquipWeaponTest() {
+    assertNull(thief.getEquippedWeapon());
+    thief.equipSword(testSword);
+    assertEquals(testSword, thief.getEquippedWeapon());
+    thief.equipStaff(testStaff);
+    assertEquals(testStaff, thief.getEquippedWeapon());
+    thief.equipBow(testBow);
+    assertEquals(testBow, thief.getEquippedWeapon());
+  }
+
+  @Test
+  void blackMageEquipWeaponTest() {
+    assertNull(blackMage.getEquippedWeapon());
+    blackMage.equipKnife(testKnife);
+    assertEquals(testKnife, blackMage.getEquippedWeapon());
+    blackMage.equipStaff(testStaff);
+    assertEquals(testStaff, blackMage.getEquippedWeapon());
+  }
+
+  @Test
+  void whiteMageEquipWeaponTest() {
+    assertNull(whiteMage.getEquippedWeapon());
+    whiteMage.equipKnife(testKnife);
+    assertEquals(testKnife, whiteMage.getEquippedWeapon());
+  }
+
+  @Test
+  void testMana() {
+    assertEquals(50, blackMage.getMana());
+    assertEquals(50, whiteMage.getMana());
   }
 
   @Test
