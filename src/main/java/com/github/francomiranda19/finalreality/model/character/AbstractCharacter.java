@@ -2,7 +2,8 @@ package com.github.francomiranda19.finalreality.model.character;
 
 import com.github.francomiranda19.finalreality.model.character.player.CharacterClass;
 import com.github.francomiranda19.finalreality.model.character.player.PlayerCharacter;
-import com.github.francomiranda19.finalreality.model.weapon.Weapon;
+import com.github.francomiranda19.finalreality.model.weapon.*;
+
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;

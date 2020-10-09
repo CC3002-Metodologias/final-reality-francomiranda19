@@ -1,8 +1,7 @@
 package com.github.francomiranda19.finalreality.model.character.player;
 
 import com.github.francomiranda19.finalreality.model.character.ICharacter;
-import com.github.francomiranda19.finalreality.model.weapon.Weapon;
-import com.github.francomiranda19.finalreality.model.weapon.WeaponType;
+import com.github.francomiranda19.finalreality.model.weapon.*;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.concurrent.BlockingQueue;
@@ -26,7 +25,7 @@ public class Thief extends PlayerCharacter {
    *
    * @param sword the character will equip this weapon
    */
-  public void equipSword(Weapon sword) {
+  public void equipSword(Sword sword) {
     this.equippedWeapon = sword;
   }
 
@@ -35,7 +34,7 @@ public class Thief extends PlayerCharacter {
    *
    * @param staff the character will equip this weapon
    */
-  public void equipStaff(Weapon staff) {
+  public void equipStaff(Staff staff) {
     this.equippedWeapon = staff;
   }
 
@@ -44,7 +43,7 @@ public class Thief extends PlayerCharacter {
    *
    * @param bow the character will equip this weapon
    */
-  public void equipBow(Weapon bow) {
+  public void equipBow(Bow bow) {
     this.equippedWeapon = bow;
   }
 

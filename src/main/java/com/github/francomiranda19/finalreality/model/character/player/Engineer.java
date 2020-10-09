@@ -1,6 +1,8 @@
 package com.github.francomiranda19.finalreality.model.character.player;
 
 import com.github.francomiranda19.finalreality.model.character.ICharacter;
+import com.github.francomiranda19.finalreality.model.weapon.Axe;
+import com.github.francomiranda19.finalreality.model.weapon.Bow;
 import com.github.francomiranda19.finalreality.model.weapon.Weapon;
 import com.github.francomiranda19.finalreality.model.weapon.WeaponType;
 import org.jetbrains.annotations.NotNull;
@@ -26,7 +28,7 @@ public class Engineer extends PlayerCharacter {
    *
    * @param axe the character will equip this weapon
    */
-  public void equipAxe(Weapon axe) {
+  public void equipAxe(Axe axe) {
     this.equippedWeapon = axe;
   }
 
@@ -35,7 +37,7 @@ public class Engineer extends PlayerCharacter {
    *
    * @param bow the character will equip this weapon
    */
-  public void equipBow(Weapon bow) {
+  public void equipBow(Bow bow) {
     this.equippedWeapon = bow;
   }
 

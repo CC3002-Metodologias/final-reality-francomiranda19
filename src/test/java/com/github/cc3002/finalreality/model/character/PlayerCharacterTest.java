@@ -5,10 +5,12 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
 import com.github.francomiranda19.finalreality.model.character.Enemy;
-import com.github.francomiranda19.finalreality.model.character.player.CharacterClass;
-import com.github.francomiranda19.finalreality.model.character.player.PlayerCharacter;
+import com.github.francomiranda19.finalreality.model.character.player.*;
+
 import java.util.EnumMap;
 import java.util.Map;
+
+import com.github.francomiranda19.finalreality.model.weapon.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -16,17 +18,20 @@ import org.junit.jupiter.api.Test;
  * Set of tests for the {@code GameCharacter} class.
  *
  * @author Ignacio Slater Muñoz.
- * @author <Your name>
+ * @author Franco Miranda Oyarzún
  * @see PlayerCharacter
  */
-class PlayerCharacterTest extends AbstractCharacterTest {
+public class PlayerCharacterTest extends AbstractCharacterTest {
 
-  private static final String BLACK_MAGE_NAME = "Vivi";
-  private static final String KNIGHT_NAME = "Adelbert";
-  private static final String WHITE_MAGE_NAME = "Eiko";
-  private static final String ENGINEER_NAME = "Cid";
-  private static final String THIEF_NAME = "Zidane";
-  private Map<CharacterClass, String> characterNames;
+  protected static final String BLACK_MAGE_NAME = "Vivi";
+  protected static final String KNIGHT_NAME = "Adelbert";
+  protected static final String WHITE_MAGE_NAME = "Eiko";
+  protected static final String ENGINEER_NAME = "Cid";
+  protected static final String THIEF_NAME = "Zidane";
+  protected Map<CharacterClass, String> characterNames;
+  protected static final int LIFE = 100;
+  protected static final int DEFENSE = 30;
+  protected static final int ATTACK = 15;
 
   /**
    * Setup method.
@@ -46,7 +51,7 @@ class PlayerCharacterTest extends AbstractCharacterTest {
     for (var characterClass :
         characterNames.keySet()) {
       testCharacters.add(
-          new PlayerCharacter(characterNames.get(characterClass), turns, characterClass));
+          new PlayerCharacter(characterNames.get(characterClass), turns, characterClass, LIFE, DEFENSE));
     }
   }
 
@@ -55,17 +60,17 @@ class PlayerCharacterTest extends AbstractCharacterTest {
    */
   @Test
   void constructorTest() {
-    var enemy = new Enemy("Enemy", 10, turns);
+    var enemy = new Enemy("Enemy", 10, turns, LIFE, DEFENSE, ATTACK);
     for (var character :
         testCharacters) {
       var characterClass = character.getCharacterClass();
       var characterName = characterNames.get(characterClass);
-      checkConstruction(new PlayerCharacter(characterName, turns, characterClass),
+      checkConstruction(new PlayerCharacter(characterName, turns, characterClass, LIFE, DEFENSE),
           character,
-          new PlayerCharacter("Test", turns, characterClass),
+          new PlayerCharacter("Test", turns, characterClass, LIFE, DEFENSE),
           new PlayerCharacter(characterName, turns,
               characterClass == CharacterClass.THIEF ? CharacterClass.BLACK_MAGE
-                  : CharacterClass.THIEF));
+                  : CharacterClass.THIEF, LIFE, DEFENSE));
       assertNotEquals(character, enemy);
     }
 
@@ -76,8 +81,22 @@ class PlayerCharacterTest extends AbstractCharacterTest {
     for (var character :
         testCharacters) {
       assertNull(character.getEquippedWeapon());
-      character.equip(testWeapon);
+      //character.equip(testWeapon);
       assertEquals(testWeapon, character.getEquippedWeapon());
+    }
+  }
+
+  @Test
+  void lifePointsTest() {
+    for (var character : testCharacters) {
+      assertEquals(100, character.getLifePoints());
+    }
+  }
+
+  @Test
+  void defenseTest() {
+    for (var character : testCharacters) {
+      assertEquals(30, character.getDefense());
     }
   }
 }
