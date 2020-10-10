@@ -57,9 +57,9 @@ public class Weapon implements IWeapon {
       return false;
     }
     final Weapon weapon = (Weapon) o;
-    return getDamage() == weapon.getDamage() &&
+    return getName().equals(weapon.getName()) &&
+            getDamage() == weapon.getDamage() &&
             getWeight() == weapon.getWeight() &&
-            getName().equals(weapon.getName()) &&
             getType() == weapon.getType();
   }
 

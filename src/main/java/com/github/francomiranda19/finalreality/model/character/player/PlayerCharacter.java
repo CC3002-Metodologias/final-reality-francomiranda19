@@ -39,7 +39,7 @@ public class PlayerCharacter extends AbstractCharacter {
 
   @Override
   public int hashCode() {
-    return Objects.hash(getCharacterClass());
+    return Objects.hash(getName(), getCharacterClass(), getLifePoints(), getDefense());
   }
 
   @Override
@@ -51,8 +51,10 @@ public class PlayerCharacter extends AbstractCharacter {
       return false;
     }
     final PlayerCharacter that = (PlayerCharacter) o;
-    return getCharacterClass() == that.getCharacterClass()
-            && getName().equals(that.getName());
+    return getName().equals(that.getName())
+            && getCharacterClass() == that.getCharacterClass()
+            && getLifePoints() == that.getLifePoints()
+            && getDefense() == that.getDefense();
   }
 
   @Override

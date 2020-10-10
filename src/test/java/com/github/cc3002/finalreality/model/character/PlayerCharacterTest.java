@@ -1,9 +1,5 @@
 package com.github.cc3002.finalreality.model.character;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
-
 import com.github.francomiranda19.finalreality.model.character.Enemy;
 import com.github.francomiranda19.finalreality.model.character.player.*;
 
@@ -13,6 +9,8 @@ import java.util.Map;
 import com.github.francomiranda19.finalreality.model.weapon.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Set of tests for the {@code GameCharacter} class.
@@ -41,6 +39,7 @@ public class PlayerCharacterTest extends AbstractCharacterTest {
   protected static final String KNIFE_NAME = "Test Knife";
   protected static final int DAMAGE = 15;
   protected static final int SPEED = 10;
+  private static final int MAGIC_DAMAGE = 40;
 
   protected Axe testAxe;
   protected Staff testStaff;
@@ -69,7 +68,7 @@ public class PlayerCharacterTest extends AbstractCharacterTest {
     whiteMage = new WhiteMage(WHITE_MAGE_NAME, turns, CharacterClass.WHITE_MAGE, LIFE, DEFENSE, MANA);
 
     testAxe = new Axe(AXE_NAME, DAMAGE, SPEED, WeaponType.AXE);
-    testStaff = new Staff(STAFF_NAME, DAMAGE, SPEED, WeaponType.STAFF);
+    testStaff = new Staff(STAFF_NAME, DAMAGE, SPEED, WeaponType.STAFF, MAGIC_DAMAGE);
     testSword = new Sword(SWORD_NAME, DAMAGE, SPEED, WeaponType.SWORD);
     testBow = new Bow(BOW_NAME, DAMAGE, SPEED, WeaponType.BOW);
     testKnife = new Knife(KNIFE_NAME, DAMAGE, SPEED, WeaponType.KNIFE);
@@ -94,12 +93,10 @@ public class PlayerCharacterTest extends AbstractCharacterTest {
   @Test
   void constructorTest() {
     var enemy = new Enemy("Enemy", 10, turns, LIFE, DEFENSE, ATTACK);
-    for (var character :
-        testCharacters) {
+    for (var character : testCharacters) {
       var characterClass = character.getCharacterClass();
       var characterName = characterNames.get(characterClass);
-      checkConstruction(new PlayerCharacter(characterName, turns, characterClass, LIFE, DEFENSE),
-          character,
+      checkConstruction(new PlayerCharacter(characterName, turns, characterClass, LIFE, DEFENSE), character,
           new PlayerCharacter("Test", turns, characterClass, LIFE, DEFENSE),
           new PlayerCharacter(characterName, turns,
               characterClass == CharacterClass.THIEF ? CharacterClass.BLACK_MAGE
@@ -107,6 +104,17 @@ public class PlayerCharacterTest extends AbstractCharacterTest {
       assertNotEquals(character, enemy);
     }
 
+  }
+
+  @Test
+  void equalsHashTest() {
+    var expectedEngineer = new Engineer(ENGINEER_NAME, turns, CharacterClass.ENGINEER, LIFE, DEFENSE);
+    var notExpectedEngineer1 = new Engineer(ENGINEER_NAME, turns, CharacterClass.ENGINEER, LIFE + 1, DEFENSE);
+    var notExpectedEngineer2 = new Engineer(ENGINEER_NAME, turns, CharacterClass.ENGINEER, LIFE, DEFENSE + 1);
+
+    assertEquals(engineer, engineer);
+    assertFalse(notExpectedEngineer1.equals(engineer));
+    assertFalse(notExpectedEngineer2.equals(engineer));
   }
 
   @Test
