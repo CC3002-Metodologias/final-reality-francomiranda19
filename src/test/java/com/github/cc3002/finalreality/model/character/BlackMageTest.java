@@ -27,6 +27,7 @@ public class BlackMageTest extends PlayerCharacterTest {
   @Test
   void constructorTest() {
     var expectedBlackMage = new BlackMage(BLACK_MAGE_NAME, turns, CharacterClass.BLACK_MAGE, LIFE, DEFENSE, MANA);
+    var otherWeaponBlackMage = new BlackMage(BLACK_MAGE_NAME, turns, CharacterClass.BLACK_MAGE, LIFE, DEFENSE, MANA);
     var notExpectedBlackMage1 = new BlackMage("Not Black Mage", turns, CharacterClass.BLACK_MAGE, LIFE, DEFENSE, MANA);
     var notExpectedBlackMage2 = new BlackMage(BLACK_MAGE_NAME, turns, CharacterClass.WHITE_MAGE, LIFE, DEFENSE, MANA);
     var notExpectedBlackMage3 = new BlackMage(BLACK_MAGE_NAME, turns, CharacterClass.BLACK_MAGE, LIFE + 1, DEFENSE, MANA);
@@ -36,6 +37,9 @@ public class BlackMageTest extends PlayerCharacterTest {
     assertEquals(testBlackMage, testBlackMage);
     assertEquals(expectedBlackMage, testBlackMage);
     assertEquals(expectedBlackMage.hashCode(),testBlackMage.hashCode());
+    otherWeaponBlackMage.equipKnife(testKnife);
+    assertNotEquals(otherWeaponBlackMage, testBlackMage);
+    assertNotEquals(otherWeaponBlackMage.hashCode(), testBlackMage.hashCode());
     assertNotEquals(notExpectedBlackMage1, testBlackMage);
     assertNotEquals(notExpectedBlackMage1.hashCode(), testBlackMage.hashCode());
     assertNotEquals(notExpectedBlackMage2, testBlackMage);

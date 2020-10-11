@@ -32,6 +32,7 @@ public class ThiefTest extends PlayerCharacterTest {
   @Test
   void constructorTest() {
     var expectedThief = new Thief(THIEF_NAME, turns, CharacterClass.THIEF, LIFE, DEFENSE);
+    var otherWeaponThief = new Thief(THIEF_NAME, turns, CharacterClass.THIEF, LIFE, DEFENSE);
     var notExpectedThief1 = new Thief("Not Thief", turns, CharacterClass.BLACK_MAGE, LIFE, DEFENSE);
     var notExpectedThief2 = new Thief(THIEF_NAME, turns, CharacterClass.KNIGHT, LIFE, DEFENSE);
     var notExpectedThief3 = new Thief(THIEF_NAME, turns, CharacterClass.THIEF, LIFE + 1, DEFENSE);
@@ -40,6 +41,9 @@ public class ThiefTest extends PlayerCharacterTest {
     assertEquals(testThief, testThief);
     assertEquals(expectedThief, testThief);
     assertEquals(expectedThief.hashCode(),testThief.hashCode());
+    otherWeaponThief.equipBow(testBow);
+    assertNotEquals(otherWeaponThief, testThief);
+    assertNotEquals(otherWeaponThief.hashCode(), testThief.hashCode());
     assertNotEquals(notExpectedThief1, testThief);
     assertNotEquals(notExpectedThief1.hashCode(), testThief.hashCode());
     assertNotEquals(notExpectedThief2, testThief);

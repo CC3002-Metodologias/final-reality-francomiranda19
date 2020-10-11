@@ -60,12 +60,13 @@ public class Thief extends PlayerCharacter {
     return getName().equals(thief.getName())
             && getCharacterClass() == thief.getCharacterClass()
             && getLifePoints() == thief.getLifePoints()
-            && getDefense() == thief.getDefense();
+            && getDefense() == thief.getDefense()
+            && getEquippedWeapon() == thief.getEquippedWeapon();
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(getName(), getCharacterClass(), getLifePoints(), getDefense());
+    return Objects.hash(getName(), getCharacterClass(), getLifePoints(), getDefense(), getEquippedWeapon());
   }
 
 }

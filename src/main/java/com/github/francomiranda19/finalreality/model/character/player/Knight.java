@@ -61,12 +61,13 @@ public class Knight extends PlayerCharacter {
     return getName().equals(knight.getName())
             && getCharacterClass() == knight.getCharacterClass()
             && getLifePoints() == knight.getLifePoints()
-            && getDefense() == knight.getDefense();
+            && getDefense() == knight.getDefense()
+            && getEquippedWeapon() == knight.getEquippedWeapon();
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(getName(), getCharacterClass(), getLifePoints(), getDefense());
+    return Objects.hash(getName(), getCharacterClass(), getLifePoints(), getDefense(), getEquippedWeapon());
   }
 
 }

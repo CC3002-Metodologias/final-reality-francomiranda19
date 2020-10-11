@@ -28,6 +28,7 @@ public class KnightTest extends PlayerCharacterTest {
   @Test
   void constructorTest() {
     var expectedKnight = new Knight(KNIGHT_NAME, turns, CharacterClass.KNIGHT, LIFE, DEFENSE);
+    var otherWeaponKnight = new Knight(KNIGHT_NAME, turns, CharacterClass.KNIGHT, LIFE, DEFENSE);
     var notExpectedKnight1 = new Knight("Not Black Mage", turns, CharacterClass.BLACK_MAGE, LIFE, DEFENSE);
     var notExpectedKnight2 = new Knight(KNIGHT_NAME, turns, CharacterClass.ENGINEER, LIFE, DEFENSE);
     var notExpectedKnight3 = new Knight(KNIGHT_NAME, turns, CharacterClass.KNIGHT, LIFE + 1, DEFENSE);
@@ -36,6 +37,9 @@ public class KnightTest extends PlayerCharacterTest {
     assertEquals(testKnight, testKnight);
     assertEquals(expectedKnight, testKnight);
     assertEquals(expectedKnight.hashCode(),testKnight.hashCode());
+    otherWeaponKnight.equipAxe(testAxe);
+    assertNotEquals(otherWeaponKnight, testKnight);
+    assertNotEquals(otherWeaponKnight.hashCode(), testKnight.hashCode());
     assertNotEquals(notExpectedKnight1, testKnight);
     assertNotEquals(notExpectedKnight1.hashCode(), testKnight.hashCode());
     assertNotEquals(notExpectedKnight2, testKnight);

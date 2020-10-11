@@ -55,12 +55,13 @@ public class Engineer extends PlayerCharacter {
     return getName().equals(engineer.getName())
             && getCharacterClass() == engineer.getCharacterClass()
             && getLifePoints() == engineer.getLifePoints()
-            && getDefense() == engineer.getDefense();
+            && getDefense() == engineer.getDefense()
+            && getEquippedWeapon() == engineer.getEquippedWeapon();
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(getName(), getCharacterClass(), getLifePoints(), getDefense());
+    return Objects.hash(getName(), getCharacterClass(), getLifePoints(), getDefense(), getEquippedWeapon());
   }
 
 }

@@ -2,45 +2,55 @@ package com.github.cc3002.finalreality.model.character;
 
 import com.github.francomiranda19.finalreality.model.character.Enemy;
 import com.github.francomiranda19.finalreality.model.character.player.CharacterClass;
+import com.github.francomiranda19.finalreality.model.character.player.Engineer;
 import com.github.francomiranda19.finalreality.model.character.player.PlayerCharacter;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 public class EnemyTest extends AbstractCharacterTest {
-
-  private static final String ENEMY_NAME = "Goblin";
-  private static final int LIFE = 100;
-  private static final int DEFENSE = 30;
+  private static final String ENEMY_NAME = "Test Enemy";
+  private Enemy testEnemy;
   private static final int ATTACK = 15;
-  private Enemy enemy;
 
   @BeforeEach
   void setUp() {
-    basicSetUp();
+    super.basicSetUp();
 
-    enemy = new Enemy(ENEMY_NAME, 10, turns, LIFE, DEFENSE, ATTACK);
-    testCharacters.add(new Enemy(ENEMY_NAME, 10, turns, LIFE, DEFENSE, ATTACK));
+    testEnemy = new Enemy(ENEMY_NAME, 10, turns, LIFE, DEFENSE, ATTACK);
+    testCharacters.add(testEnemy);
   }
 
   @Test
   void constructorTest() {
-    checkConstruction(new Enemy(ENEMY_NAME, 10, turns, LIFE, DEFENSE, ATTACK),
-        testCharacters.get(0),
-        new Enemy(ENEMY_NAME, 11, turns, LIFE, DEFENSE, ATTACK),
-        new PlayerCharacter(ENEMY_NAME, turns, CharacterClass.THIEF, LIFE, DEFENSE));
-  }
+    var expectedEnemy = new Enemy(ENEMY_NAME, 10, turns, LIFE, DEFENSE, ATTACK);
+    var notExpectedEnemy1 = new Enemy("Not Enemy", 10, turns, LIFE, DEFENSE, ATTACK);
+    var notExpectedEnemy2 = new Enemy(ENEMY_NAME, 15, turns, LIFE, DEFENSE, ATTACK);
+    var notExpectedEnemy3 = new Enemy(ENEMY_NAME, 10, turns, LIFE + 1, DEFENSE, ATTACK);
+    var notExpectedEnemy4 = new Enemy(ENEMY_NAME, 10, turns, LIFE, DEFENSE + 1, ATTACK);
+    var notExpectedEnemy5 = new Enemy(ENEMY_NAME, 10, turns, LIFE, DEFENSE, ATTACK + 1);
 
-  @Test
-  void equalsHashTest() {
-    assertEquals(enemy, enemy);
+    assertEquals(testEnemy, testEnemy);
+    assertEquals(expectedEnemy, testEnemy);
+    assertEquals(expectedEnemy.hashCode(), testEnemy.hashCode());
+    assertNotEquals(notExpectedEnemy1, testEnemy);
+    assertNotEquals(notExpectedEnemy1.hashCode(), testEnemy.hashCode());
+    assertNotEquals(notExpectedEnemy2, testEnemy);
+    assertNotEquals(notExpectedEnemy2.hashCode(), testEnemy.hashCode());
+    assertNotEquals(notExpectedEnemy3, testEnemy);
+    assertNotEquals(notExpectedEnemy3.hashCode(), testEnemy.hashCode());
+    assertNotEquals(notExpectedEnemy4, testEnemy);
+    assertNotEquals(notExpectedEnemy4.hashCode(), testEnemy.hashCode());
+    assertNotEquals(notExpectedEnemy5, testEnemy);
+    assertNotEquals(notExpectedEnemy5.hashCode(), testEnemy.hashCode());
+    assertFalse(testEnemy.equals(new Engineer("Not Knight", turns, CharacterClass.ENGINEER, LIFE, DEFENSE)));
   }
 
   @Test
   void attackTest() {
-    Enemy enemy = new Enemy(ENEMY_NAME, 10, turns, LIFE, DEFENSE, ATTACK);
-    assertEquals(15, enemy.getAttack());
+    assertEquals(ATTACK, testEnemy.getAttack());
+    assertNotEquals(ATTACK + 1, testEnemy.getAttack());
   }
 }

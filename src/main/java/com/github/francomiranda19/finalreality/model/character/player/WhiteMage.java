@@ -45,10 +45,11 @@ public class WhiteMage extends AbstractMage {
             && getCharacterClass() == whiteMage.getCharacterClass()
             && getLifePoints() == whiteMage.getLifePoints()
             && getDefense() == whiteMage.getDefense()
-            && getMana() == whiteMage.getMana();
+            && getMana() == whiteMage.getMana()
+            && getEquippedWeapon() == whiteMage.getEquippedWeapon();
   }
 
   @Override
-  public int hashCode() { return Objects.hash(getName(), getCharacterClass(), getLifePoints(), getDefense(), getMana()); }
+  public int hashCode() { return Objects.hash(getName(), getCharacterClass(), getLifePoints(), getDefense(), getMana(), getEquippedWeapon()); }
 
 }

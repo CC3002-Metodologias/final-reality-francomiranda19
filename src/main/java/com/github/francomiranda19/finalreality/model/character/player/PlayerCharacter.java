@@ -48,12 +48,13 @@ public class PlayerCharacter extends AbstractCharacter {
     return getName().equals(playerCharacter.getName())
             && getCharacterClass() == playerCharacter.getCharacterClass()
             && getLifePoints() == playerCharacter.getLifePoints()
-            && getDefense() == playerCharacter.getDefense();
+            && getDefense() == playerCharacter.getDefense()
+            && getEquippedWeapon() == playerCharacter.getEquippedWeapon();
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(getName(), getCharacterClass(), getLifePoints(), getDefense());
+    return Objects.hash(getName(), getCharacterClass(), getLifePoints(), getDefense(), getEquippedWeapon());
   }
 
   @Override

@@ -25,6 +25,7 @@ public class EngineerTest extends PlayerCharacterTest {
   @Test
   void constructorTest() {
     var expectedEngineer = new Engineer(ENGINEER_NAME, turns, CharacterClass.ENGINEER, LIFE, DEFENSE);
+    var otherWeaponEngineer = new Engineer(ENGINEER_NAME, turns, CharacterClass.ENGINEER, LIFE, DEFENSE);
     var notExpectedEngineer1 = new Engineer("Not Engineer", turns, CharacterClass.ENGINEER, LIFE, DEFENSE);
     var notExpectedEngineer2 = new Engineer(ENGINEER_NAME, turns, CharacterClass.THIEF, LIFE, DEFENSE);
     var notExpectedEngineer3 = new Engineer(ENGINEER_NAME, turns, CharacterClass.ENGINEER, LIFE + 1, DEFENSE);
@@ -33,6 +34,9 @@ public class EngineerTest extends PlayerCharacterTest {
     assertEquals(testEngineer, testEngineer);
     assertEquals(expectedEngineer, testEngineer);
     assertEquals(expectedEngineer.hashCode(),testEngineer.hashCode());
+    otherWeaponEngineer.equipAxe(testAxe);
+    assertNotEquals(otherWeaponEngineer, testEngineer);
+    assertNotEquals(otherWeaponEngineer.hashCode(), testEngineer.hashCode());
     assertNotEquals(notExpectedEngineer1, testEngineer);
     assertNotEquals(notExpectedEngineer1.hashCode(), testEngineer.hashCode());
     assertNotEquals(notExpectedEngineer2, testEngineer);

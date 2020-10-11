@@ -91,7 +91,6 @@ public class PlayerCharacterTest extends AbstractCharacterTest {
                   : CharacterClass.THIEF, LIFE, DEFENSE));
       assertNotEquals(character, enemy);
     }
-
   }
 
   @Test
