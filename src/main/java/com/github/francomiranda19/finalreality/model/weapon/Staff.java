@@ -1,5 +1,7 @@
 package com.github.francomiranda19.finalreality.model.weapon;
 
+import java.util.Objects;
+
 public class Staff extends Weapon {
   private final int magicDamage;
 
@@ -18,5 +20,26 @@ public class Staff extends Weapon {
   }
 
   public int getMagicDamage() { return magicDamage; }
+
+  @Override
+  public boolean equals(final Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (!(o instanceof Staff)) {
+      return false;
+    }
+    final Staff staff = (Staff) o;
+    return getName().equals(staff.getName()) &&
+            getDamage() == staff.getDamage() &&
+            getWeight() == staff.getWeight() &&
+            getType() == staff.getType() &&
+            getMagicDamage() == staff.getMagicDamage();
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(getName(), getDamage(), getWeight(), getType(), getMagicDamage());
+  }
 
 }
