@@ -47,6 +47,11 @@ public class Weapon implements IWeapon {
     return weaponType;
   }
 
+  /**
+   * Checks if two Weapons are equal.
+   *
+   * @param o to check object.
+   */
   @Override
   public boolean equals(final Object o) {
     if (this == o) {
@@ -62,6 +67,9 @@ public class Weapon implements IWeapon {
             && getWeaponType() == weapon.getWeaponType();
   }
 
+  /**
+   * Hash function of the weapon.
+   */
   @Override
   public int hashCode() {
     return Objects.hash(getName(), getDamage(), getWeight(), getWeaponType());

@@ -3,7 +3,6 @@ package com.github.cc3002.finalreality.model.weapon;
 import com.github.francomiranda19.finalreality.model.character.ICharacter;
 import com.github.francomiranda19.finalreality.model.character.player.CharacterClass;
 import com.github.francomiranda19.finalreality.model.character.player.Knight;
-import com.github.francomiranda19.finalreality.model.character.player.PlayerCharacter;
 import com.github.francomiranda19.finalreality.model.weapon.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

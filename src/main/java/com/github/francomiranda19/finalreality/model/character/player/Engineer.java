@@ -1,15 +1,17 @@
 package com.github.francomiranda19.finalreality.model.character.player;
 
 import com.github.francomiranda19.finalreality.model.character.ICharacter;
-import com.github.francomiranda19.finalreality.model.weapon.Axe;
-import com.github.francomiranda19.finalreality.model.weapon.Bow;
 import com.github.francomiranda19.finalreality.model.weapon.Weapon;
-import com.github.francomiranda19.finalreality.model.weapon.WeaponType;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Objects;
 import java.util.concurrent.BlockingQueue;
 
+/**
+ * A class that holds all the information of a single engineer of the game.
+ *
+ * @author Franco Miranda Oyarzún
+ */
 public class Engineer extends PlayerCharacter {
   /**
    * Creates a new character.
@@ -43,6 +45,11 @@ public class Engineer extends PlayerCharacter {
     this.equippedWeapon = bow;
   }
 
+  /**
+   * Checks if two Engineers are equal.
+   *
+   * @param o to check object.
+   */
   @Override
   public boolean equals(final Object o) {
     if (this == o) {
@@ -59,6 +66,9 @@ public class Engineer extends PlayerCharacter {
             && getEquippedWeapon() == engineer.getEquippedWeapon();
   }
 
+  /**
+   * Hash function of the engineer.
+   */
   @Override
   public int hashCode() {
     return Objects.hash(getName(), getCharacterClass(), getLifePoints(), getDefense(), getEquippedWeapon());

@@ -2,6 +2,11 @@ package com.github.francomiranda19.finalreality.model.weapon;
 
 import java.util.Objects;
 
+/**
+ * A class that holds all the information of a Staff.
+ *
+ * @author Franco Miranda Oyarzún
+ */
 public class Staff extends Weapon {
   private final int magicDamage;
 
@@ -19,8 +24,16 @@ public class Staff extends Weapon {
     this.magicDamage = magicDamage;
   }
 
+  /**
+   * Returns the staffs' magic damage.
+   */
   public int getMagicDamage() { return magicDamage; }
 
+  /**
+   * Checks if two Staffs are equal.
+   *
+   * @param o to check object.
+   */
   @Override
   public boolean equals(final Object o) {
     if (this == o) {
@@ -37,6 +50,9 @@ public class Staff extends Weapon {
             && getMagicDamage() == staff.getMagicDamage();
   }
 
+  /**
+   * Hash funciton of the Staff.
+   */
   @Override
   public int hashCode() {
     return Objects.hash(getName(), getDamage(), getWeight(), getWeaponType(), getMagicDamage());

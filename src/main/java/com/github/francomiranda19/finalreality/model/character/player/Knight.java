@@ -3,10 +3,14 @@ package com.github.francomiranda19.finalreality.model.character.player;
 import com.github.francomiranda19.finalreality.model.character.ICharacter;
 import com.github.francomiranda19.finalreality.model.weapon.*;
 import org.jetbrains.annotations.NotNull;
-
 import java.util.Objects;
 import java.util.concurrent.BlockingQueue;
 
+/**
+ * A class that holds all the information of a single knight of the game.
+ *
+ * @author Franco Miranda Oyarzún
+ */
 public class Knight extends PlayerCharacter {
   /**
    * Creates a new character.
@@ -49,6 +53,11 @@ public class Knight extends PlayerCharacter {
     this.equippedWeapon = knife;
   }
 
+  /**
+   * Checks if two Knights are equal.
+   *
+   * @param o to check object.
+   */
   @Override
   public boolean equals(final Object o) {
     if (this == o) {
@@ -65,6 +74,9 @@ public class Knight extends PlayerCharacter {
             && getEquippedWeapon() == knight.getEquippedWeapon();
   }
 
+  /**
+   * Hash function of the Knight.
+   */
   @Override
   public int hashCode() {
     return Objects.hash(getName(), getCharacterClass(), getLifePoints(), getDefense(), getEquippedWeapon());

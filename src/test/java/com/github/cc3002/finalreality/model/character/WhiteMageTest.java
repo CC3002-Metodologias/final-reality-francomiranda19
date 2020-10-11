@@ -2,11 +2,9 @@ package com.github.cc3002.finalreality.model.character;
 
 import com.github.francomiranda19.finalreality.model.character.player.BlackMage;
 import com.github.francomiranda19.finalreality.model.character.player.CharacterClass;
-import com.github.francomiranda19.finalreality.model.character.player.Thief;
 import com.github.francomiranda19.finalreality.model.character.player.WhiteMage;
 import com.github.francomiranda19.finalreality.model.weapon.Axe;
 import com.github.francomiranda19.finalreality.model.weapon.Knife;
-import com.github.francomiranda19.finalreality.model.weapon.Weapon;
 import com.github.francomiranda19.finalreality.model.weapon.WeaponType;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

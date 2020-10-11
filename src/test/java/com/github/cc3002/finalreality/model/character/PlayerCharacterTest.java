@@ -1,11 +1,6 @@
 package com.github.cc3002.finalreality.model.character;
 
-import com.github.francomiranda19.finalreality.model.character.Enemy;
 import com.github.francomiranda19.finalreality.model.character.player.*;
-
-import java.util.EnumMap;
-import java.util.Map;
-
 import com.github.francomiranda19.finalreality.model.weapon.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

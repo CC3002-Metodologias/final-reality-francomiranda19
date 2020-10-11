@@ -6,7 +6,6 @@ import java.util.Objects;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
-
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -36,6 +35,11 @@ public class PlayerCharacter extends AbstractCharacter {
     super(turnsQueue, name, characterClass, lifePoints, defense);
   }
 
+  /**
+   * Checks if two Player Characters are equal.
+   *
+   * @param o to check object.
+   */
   @Override
   public boolean equals(final Object o) {
     if (this == o) {
@@ -51,6 +55,9 @@ public class PlayerCharacter extends AbstractCharacter {
             && getDefense() == playerCharacter.getDefense();
   }
 
+  /**
+   * Hash function of the Player Character.
+   */
   @Override
   public int hashCode() {
     return Objects.hash(getName(), getCharacterClass(), getLifePoints(), getDefense());
