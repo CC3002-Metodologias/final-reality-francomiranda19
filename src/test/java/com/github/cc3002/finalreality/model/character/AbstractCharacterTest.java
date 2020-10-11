@@ -31,37 +31,15 @@ public abstract class AbstractCharacterTest {
 
   protected static final int LIFE = 100;
   protected static final int DEFENSE = 30;
-  protected static final int ATTACK = 15;
   protected static final int MANA = 50;
 
-  /**protected static final String BLACK_MAGE_NAME = "Vivi";
-  protected static final String KNIGHT_NAME = "Adelbert";
-  protected static final String WHITE_MAGE_NAME = "Eiko";
-  protected static final String ENGINEER_NAME = "Cid";
-  protected static final String THIEF_NAME = "Zidane";
-  protected Map<CharacterClass, String> characterNames;
-  protected final int LIFE = 100;
-  protected final int DEFENSE = 30;
-  protected final int ATTACK = 15;
-
-  protected Axe testAxe;
-  protected Bow testBow;
-  protected Knife testKnife;
-  protected Staff testStaff;
-  protected Sword testSword;
-
-  protected static final String AXE_NAME = "Test Axe";
-  protected static final String STAFF_NAME = "Test Staff";
-  protected static final String SWORD_NAME = "Test Sword";
-  protected static final String BOW_NAME = "Test Bow";
-  protected static final String KNIFE_NAME = "Test Knife";
-  protected final int DAMAGE = 15;
-  protected final int SPEED = 10;*/
-
+  /**
+   * Setup method.
+   */
   @BeforeEach
   void basicSetUp() {
     turns = new LinkedBlockingQueue<>();
-    testWeapon = new Weapon("Test", 15, 10, WeaponType.AXE);
+    testWeapon = new Weapon("Test Weapon", 15, 10, WeaponType.AXE);
     testCharacters = new ArrayList<>();
   }
 

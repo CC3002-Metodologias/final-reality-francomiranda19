@@ -9,19 +9,32 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * Set of tests for the {@code Engineer} class.
+ *
+ * @author Franco Miranda Oyarzún
+ * @see Engineer
+ */
 public class EngineerTest extends PlayerCharacterTest {
   private static final String ENGINEER_NAME = "Test Engineer";
   private Engineer testEngineer;
   private Axe testAxe;
   private Bow testBow;
 
+  /**
+   * Setup method.
+   */
   @BeforeEach
   void setUp() {
     testEngineer = new Engineer(ENGINEER_NAME, turns, CharacterClass.ENGINEER, LIFE, DEFENSE);
     testAxe = new Axe("Test Axe", 20, 10, WeaponType.AXE);
     testBow = new Bow("Test Bow", 25, 10, WeaponType.BOW);
+    super.basicSetUp();
   }
 
+  /**
+   * Checks that the class' constructor and equals method works properly.
+   */
   @Test
   void constructorTest() {
     var expectedEngineer = new Engineer(ENGINEER_NAME, turns, CharacterClass.ENGINEER, LIFE, DEFENSE);
@@ -48,6 +61,9 @@ public class EngineerTest extends PlayerCharacterTest {
     assertFalse(testEngineer.equals(new Thief("Not Engineer", turns, CharacterClass.ENGINEER, LIFE, DEFENSE)));
   }
 
+  /**
+   * Checks if the engineer equips an Axe.
+   */
   @Test
   void equipAxeTest() {
     assertNull(testEngineer.getEquippedWeapon());
@@ -56,6 +72,9 @@ public class EngineerTest extends PlayerCharacterTest {
     assertNotEquals(testBow, testEngineer.getEquippedWeapon());
   }
 
+  /**
+   * Checks if the engineer equips a Bow.
+   */
   @Test
   void equipBowTest() {
     testEngineer.equipBow(testBow);

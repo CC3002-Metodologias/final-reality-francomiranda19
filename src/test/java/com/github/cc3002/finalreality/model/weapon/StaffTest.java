@@ -1,24 +1,33 @@
 package com.github.cc3002.finalreality.model.weapon;
 
-import com.github.francomiranda19.finalreality.model.weapon.Axe;
-import com.github.francomiranda19.finalreality.model.weapon.Bow;
-import com.github.francomiranda19.finalreality.model.weapon.Staff;
-import com.github.francomiranda19.finalreality.model.weapon.WeaponType;
+import com.github.francomiranda19.finalreality.model.weapon.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
+/**
+ * Set of tests for the {@code Staff} class.
+ *
+ * @author Franco Miranda Oyarzún
+ * @see Staff
+ */
 public class StaffTest extends WeaponTest {
   private static final String STAFF_NAME = "Test Staff";
   private Staff testStaff;
 
+  /**
+   * Setup method.
+   */
   @BeforeEach
   void setUp() {
     testStaff = new Staff(STAFF_NAME, DAMAGE, WEIGHT, WeaponType.STAFF, MAGIC_DAMAGE);
   }
 
+  /**
+   * Checks that the class' constructor and equals method works properly.
+   */
   @Test
   void constructorTest() {
     var expectedStaff = new Staff(STAFF_NAME, DAMAGE, WEIGHT, WeaponType.STAFF, MAGIC_DAMAGE);
@@ -44,6 +53,9 @@ public class StaffTest extends WeaponTest {
     assertFalse(testStaff.equals(new Axe("Not Staff", DAMAGE, WEIGHT, WeaponType.AXE)));
   }
 
+  /**
+   * Checks if the staffs' magicDamage is correct.
+   */
   @Test
   void magicDamageTest() {
     assertEquals(MAGIC_DAMAGE, testStaff.getMagicDamage());

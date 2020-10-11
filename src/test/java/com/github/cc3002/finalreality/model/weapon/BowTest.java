@@ -7,15 +7,27 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
+/**
+ * Set of tests for the {@code Bow} class.
+ *
+ * @author Franco Miranda Oyarzún
+ * @see Bow
+ */
 public class BowTest extends WeaponTest {
   private static final String BOW_NAME = "Test Bow";
   private Bow testBow;
 
+  /**
+   * Setup method.
+   */
   @BeforeEach
   void setUp() {
     testBow = new Bow(BOW_NAME, DAMAGE, WEIGHT, WeaponType.BOW);
   }
 
+  /**
+   * Checks that the class' constructor and equals method works properly.
+   */
   @Test
   void constructorTest() {
     var expectedBow = new Bow(BOW_NAME, DAMAGE, WEIGHT, WeaponType.BOW);

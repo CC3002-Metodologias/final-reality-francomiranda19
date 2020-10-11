@@ -7,15 +7,27 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
+/**
+ * Set of tests for the {@code Sword} class.
+ *
+ * @author Franco Miranda Oyarzún
+ * @see Sword
+ */
 public class SwordTest extends WeaponTest {
   private static final String SWORD_NAME = "Test Sword";
   private Sword testSword;
 
+  /**
+   * Setup method.
+   */
   @BeforeEach
   void setUp() {
     testSword = new Sword(SWORD_NAME, DAMAGE, WEIGHT, WeaponType.SWORD);
   }
 
+  /**
+   * Checks that the class' constructor and equals method works properly.
+   */
   @Test
   void constructorTest() {
     var expectedSword = new Sword(SWORD_NAME, DAMAGE, WEIGHT, WeaponType.SWORD);

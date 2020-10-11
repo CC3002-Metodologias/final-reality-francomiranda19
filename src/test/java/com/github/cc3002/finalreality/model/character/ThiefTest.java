@@ -1,9 +1,6 @@
 package com.github.cc3002.finalreality.model.character;
 
-import com.github.francomiranda19.finalreality.model.character.player.CharacterClass;
-import com.github.francomiranda19.finalreality.model.character.player.Engineer;
-import com.github.francomiranda19.finalreality.model.character.player.Knight;
-import com.github.francomiranda19.finalreality.model.character.player.Thief;
+import com.github.francomiranda19.finalreality.model.character.player.*;
 import com.github.francomiranda19.finalreality.model.weapon.Bow;
 import com.github.francomiranda19.finalreality.model.weapon.Staff;
 import com.github.francomiranda19.finalreality.model.weapon.Sword;
@@ -14,6 +11,12 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
+/**
+ * Set of tests for the {@code Thief} class.
+ *
+ * @author Franco Miranda Oyarzún
+ * @see Thief
+ */
 public class ThiefTest extends PlayerCharacterTest {
   private static final String THIEF_NAME = "Test Thief";
   private Thief testThief;
@@ -21,14 +24,21 @@ public class ThiefTest extends PlayerCharacterTest {
   private Staff testStaff;
   private Bow testBow;
 
+  /**
+   * Setup method.
+   */
   @BeforeEach
   void setUp() {
     testThief = new Thief(THIEF_NAME, turns, CharacterClass.THIEF, LIFE, DEFENSE);
     testSword = new Sword("Test Sword", 15, 10, WeaponType.SWORD);
     testStaff = new Staff("Test Staff", 20, 10, WeaponType.STAFF, 20);
     testBow = new Bow("Test Bow", 15, 10, WeaponType.BOW);
+    super.basicSetUp();
   }
 
+  /**
+   * Checks that the class' constructor and equals method works properly.
+   */
   @Test
   void constructorTest() {
     var expectedThief = new Thief(THIEF_NAME, turns, CharacterClass.THIEF, LIFE, DEFENSE);
@@ -55,6 +65,9 @@ public class ThiefTest extends PlayerCharacterTest {
     assertFalse(testThief.equals(new Knight("Not Thief", turns, CharacterClass.KNIGHT, LIFE, DEFENSE)));
   }
 
+  /**
+   * Checks if the thief equips a Sword.
+   */
   @Test
   void equipSwordTest() {
     assertNull(testThief.getEquippedWeapon());
@@ -64,6 +77,9 @@ public class ThiefTest extends PlayerCharacterTest {
     assertNotEquals(testBow, testThief.getEquippedWeapon());
   }
 
+  /**
+   * Checks if the thief equips a Staff.
+   */
   @Test
   void equipStaffTest() {
     testThief.equipStaff(testStaff);
@@ -72,6 +88,9 @@ public class ThiefTest extends PlayerCharacterTest {
     assertNotEquals(testBow, testThief.getEquippedWeapon());
   }
 
+  /**
+   * Checks if the thief equips a Bow.
+   */
   @Test
   void equipBowTest() {
     testThief.equipBow(testBow);

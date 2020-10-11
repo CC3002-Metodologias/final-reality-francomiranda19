@@ -10,6 +10,12 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * Set of tests for the {@code Knight} class.
+ *
+ * @author Franco Miranda Oyarzún
+ * @see Knight
+ */
 public class KnightTest extends PlayerCharacterTest {
   private static final String KNIGHT_NAME = "Test Knight";
   private Knight testKnight;
@@ -17,14 +23,21 @@ public class KnightTest extends PlayerCharacterTest {
   private Axe testAxe;
   private Knife testKnife;
 
+  /**
+   * Setup method.
+   */
   @BeforeEach
   void setUp() {
     testKnight = new Knight(KNIGHT_NAME, turns, CharacterClass.KNIGHT, LIFE, DEFENSE);
     testSword = new Sword("Test Sword", 15, 10, WeaponType.SWORD);
     testAxe = new Axe("Test Axe", 12, 10, WeaponType.AXE);
     testKnife = new Knife("Test Knife", 10, 10, WeaponType.KNIFE);
+    super.basicSetUp();
   }
 
+  /**
+   * Checks that the class' constructor and equals method works properly.
+   */
   @Test
   void constructorTest() {
     var expectedKnight = new Knight(KNIGHT_NAME, turns, CharacterClass.KNIGHT, LIFE, DEFENSE);
@@ -51,6 +64,9 @@ public class KnightTest extends PlayerCharacterTest {
     assertFalse(testKnight.equals(new Engineer("Not Knight", turns, CharacterClass.ENGINEER, LIFE, DEFENSE)));
   }
 
+  /**
+   * Checks if the knight equips a Sword.
+   */
   @Test
   void equipSwordTest() {
     assertNull(testKnight.getEquippedWeapon());
@@ -60,6 +76,9 @@ public class KnightTest extends PlayerCharacterTest {
     assertNotEquals(testKnife, testKnight.getEquippedWeapon());
   }
 
+  /**
+   * Checks if the knight equips an Axe.
+   */
   @Test
   void equipAxeTest() {
     testKnight.equipAxe(testAxe);
@@ -68,6 +87,9 @@ public class KnightTest extends PlayerCharacterTest {
     assertNotEquals(testKnife, testKnight.getEquippedWeapon());
   }
 
+  /**
+   * Checks if the knight equips a Knife.
+   */
   @Test
   void equipKnifeTest() {
     testKnight.equipKnife(testKnife);

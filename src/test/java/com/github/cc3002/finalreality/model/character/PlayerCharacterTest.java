@@ -13,66 +13,24 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
- * Set of tests for the {@code GameCharacter} class.
+ * Set of tests for the {@code PlayerCharacter} class.
  *
  * @author Ignacio Slater Muñoz.
  * @author Franco Miranda Oyarzún
  * @see PlayerCharacter
  */
 public class PlayerCharacterTest extends AbstractCharacterTest {
-  protected static final String BLACK_MAGE_NAME = "Vivi";
-  protected static final String KNIGHT_NAME = "Adelbert";
-  protected static final String WHITE_MAGE_NAME = "Eiko";
-  protected static final String ENGINEER_NAME = "Cid";
-  protected static final String THIEF_NAME = "Zidane";
-  /**
-  protected Engineer engineer;
-  protected Knight knight;
-  protected Thief thief;
-  protected BlackMage blackMage;
-  protected WhiteMage whiteMage;
 
-  protected static final String AXE_NAME = "Test Axe";
-  protected static final String STAFF_NAME = "Test Staff";
-  protected static final String SWORD_NAME = "Test Sword";
-  protected static final String BOW_NAME = "Test Bow";
-  protected static final String KNIFE_NAME = "Test Knife";
-  protected static final int DAMAGE = 15;
-  protected static final int SPEED = 10;
-  private static final int MAGIC_DAMAGE = 40;*/
-
-  protected Map<CharacterClass, String> characterNames;
-  protected static final int LIFE = 100;
-  protected static final int DEFENSE = 30;
-  protected static final int ATTACK = 15;
-  protected static final int MANA = 50;
+  private static final String PLAYER_CHARACTER_NAME = "Test Player Character";
+  private PlayerCharacter testPlayerCharacter;
 
   /**
    * Setup method.
-   * Creates a new character named Vivi with 10 speed and links it to a turn queue.
    */
   @BeforeEach
   void setUp() {
+    testPlayerCharacter = new PlayerCharacter(PLAYER_CHARACTER_NAME, turns, CharacterClass.KNIGHT, LIFE, DEFENSE);
     super.basicSetUp();
-    /**
-    engineer = new Engineer(ENGINEER_NAME, turns, CharacterClass.ENGINEER, LIFE, DEFENSE);
-    knight = new Knight(KNIGHT_NAME, turns, CharacterClass.KNIGHT, LIFE, DEFENSE);
-    thief = new Thief(THIEF_NAME, turns, CharacterClass.THIEF, LIFE, DEFENSE);
-    blackMage = new BlackMage(BLACK_MAGE_NAME, turns, CharacterClass.BLACK_MAGE, LIFE, DEFENSE, MANA);
-    whiteMage = new WhiteMage(WHITE_MAGE_NAME, turns, CharacterClass.WHITE_MAGE, LIFE, DEFENSE, MANA); */
-
-    characterNames = new EnumMap<>(CharacterClass.class);
-    characterNames.put(CharacterClass.BLACK_MAGE, BLACK_MAGE_NAME);
-    characterNames.put(CharacterClass.KNIGHT, KNIGHT_NAME);
-    characterNames.put(CharacterClass.WHITE_MAGE, WHITE_MAGE_NAME);
-    characterNames.put(CharacterClass.ENGINEER, ENGINEER_NAME);
-    characterNames.put(CharacterClass.THIEF, THIEF_NAME);
-
-    for (var characterClass :
-        characterNames.keySet()) {
-      testCharacters.add(
-          new PlayerCharacter(characterNames.get(characterClass), turns, characterClass, LIFE, DEFENSE));
-    }
   }
 
   /**
@@ -80,19 +38,29 @@ public class PlayerCharacterTest extends AbstractCharacterTest {
    */
   @Test
   void constructorTest() {
-    var enemy = new Enemy("Enemy", 10, turns, LIFE, DEFENSE, ATTACK);
-    for (var character : testCharacters) {
-      var characterClass = character.getCharacterClass();
-      var characterName = characterNames.get(characterClass);
-      checkConstruction(new PlayerCharacter(characterName, turns, characterClass, LIFE, DEFENSE), character,
-          new PlayerCharacter("Test", turns, characterClass, LIFE, DEFENSE),
-          new PlayerCharacter(characterName, turns,
-              characterClass == CharacterClass.THIEF ? CharacterClass.BLACK_MAGE
-                  : CharacterClass.THIEF, LIFE, DEFENSE));
-      assertNotEquals(character, enemy);
-    }
+    var expectedPlayerCharacter = new PlayerCharacter(PLAYER_CHARACTER_NAME, turns, CharacterClass.KNIGHT, LIFE, DEFENSE);
+    var notExpectedPlayerCharacter1 = new PlayerCharacter("Not Player Character", turns, CharacterClass.KNIGHT, LIFE, DEFENSE);
+    var notExpectedPlayerCharacter2 = new PlayerCharacter(PLAYER_CHARACTER_NAME, turns, CharacterClass.ENGINEER, LIFE, DEFENSE);
+    var notExpectedPlayerCharacter3 = new PlayerCharacter(PLAYER_CHARACTER_NAME, turns, CharacterClass.KNIGHT, LIFE + 1, DEFENSE);
+    var notExpectedPlayerCharacter4 = new PlayerCharacter(PLAYER_CHARACTER_NAME, turns, CharacterClass.KNIGHT, LIFE, DEFENSE + 1);
+
+    assertEquals(testPlayerCharacter, testPlayerCharacter);
+    assertEquals(expectedPlayerCharacter, testPlayerCharacter);
+    assertEquals(expectedPlayerCharacter.hashCode(), testPlayerCharacter.hashCode());
+    assertNotEquals(notExpectedPlayerCharacter1, testPlayerCharacter);
+    assertNotEquals(notExpectedPlayerCharacter1.hashCode(), testPlayerCharacter.hashCode());
+    assertNotEquals(notExpectedPlayerCharacter2, testPlayerCharacter);
+    assertNotEquals(notExpectedPlayerCharacter2.hashCode(), testPlayerCharacter.hashCode());
+    assertNotEquals(notExpectedPlayerCharacter3, testPlayerCharacter);
+    assertNotEquals(notExpectedPlayerCharacter3.hashCode(), testPlayerCharacter.hashCode());
+    assertNotEquals(notExpectedPlayerCharacter4, testPlayerCharacter);
+    assertNotEquals(notExpectedPlayerCharacter4.hashCode(), testPlayerCharacter.hashCode());
+    assertFalse(testPlayerCharacter.equals(new Weapon("Not Player Character", 20, 10, WeaponType.AXE)));
   }
 
+  /**
+   * Checks if the characters' life points are correct.
+   */
   @Test
   void lifePointsTest() {
     for (var character : testCharacters) {
@@ -100,6 +68,9 @@ public class PlayerCharacterTest extends AbstractCharacterTest {
     }
   }
 
+  /**
+   * Checks if the characters' defense points are correct.
+   */
   @Test
   void defenseTest() {
     for (var character : testCharacters) {

@@ -1,24 +1,33 @@
 package com.github.cc3002.finalreality.model.weapon;
 
-import com.github.francomiranda19.finalreality.model.weapon.Bow;
-import com.github.francomiranda19.finalreality.model.weapon.Knife;
-import com.github.francomiranda19.finalreality.model.weapon.Sword;
-import com.github.francomiranda19.finalreality.model.weapon.WeaponType;
+import com.github.francomiranda19.finalreality.model.weapon.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
+/**
+ * Set of tests for the {@code Knife} class.
+ *
+ * @author Franco Miranda Oyarzún
+ * @see Knife
+ */
 public class KnifeTest extends WeaponTest {
   private static final String KNIFE_NAME = "Test Knife";
   private Knife testKnife;
 
+  /**
+   * Setup method.
+   */
   @BeforeEach
   void setUp() {
     testKnife = new Knife(KNIFE_NAME, DAMAGE, WEIGHT, WeaponType.KNIFE);
   }
 
+  /**
+   * Checks that the class' constructor and equals method works properly.
+   */
   @Test
   void constructorTest() {
     var expectedKnife = new Knife(KNIFE_NAME, DAMAGE, WEIGHT, WeaponType.KNIFE);

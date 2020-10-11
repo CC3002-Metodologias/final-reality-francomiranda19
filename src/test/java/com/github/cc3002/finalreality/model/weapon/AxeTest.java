@@ -6,15 +6,27 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * Set of tests for the {@code Axe} class.
+ *
+ * @author Franco Miranda Oyarzún
+ * @see Axe
+ */
 public class AxeTest extends WeaponTest {
   private static final String AXE_NAME = "Test Axe";
   private Axe testAxe;
 
+  /**
+   * Setup method.
+   */
   @BeforeEach
   void setUp() {
     testAxe = new Axe(AXE_NAME, DAMAGE, WEIGHT, WeaponType.AXE);
   }
 
+  /**
+   * Checks that the class' constructor and equals method works properly.
+   */
   @Test
   void constructorTest() {
     var expectedAxe = new Axe(AXE_NAME, DAMAGE, WEIGHT, WeaponType.AXE);

@@ -10,19 +10,30 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
+/**
+ * Set of tests for the {@code Enemy} class.
+ *
+ * @author Franco Miranda Oyarzún
+ * @see Enemy
+ */
 public class EnemyTest extends AbstractCharacterTest {
   private static final String ENEMY_NAME = "Test Enemy";
   private Enemy testEnemy;
   private static final int ATTACK = 15;
 
+  /**
+   * Setup method.
+   */
   @BeforeEach
   void setUp() {
-    super.basicSetUp();
-
     testEnemy = new Enemy(ENEMY_NAME, 10, turns, LIFE, DEFENSE, ATTACK);
     testCharacters.add(testEnemy);
+    super.basicSetUp();
   }
 
+  /**
+   * Checks that the class' constructor and equals method works properly.
+   */
   @Test
   void constructorTest() {
     var expectedEnemy = new Enemy(ENEMY_NAME, 10, turns, LIFE, DEFENSE, ATTACK);
@@ -48,6 +59,9 @@ public class EnemyTest extends AbstractCharacterTest {
     assertFalse(testEnemy.equals(new Engineer("Not Knight", turns, CharacterClass.ENGINEER, LIFE, DEFENSE)));
   }
 
+  /**
+   * Checks if the attack of the enemy is correct.
+   */
   @Test
   void attackTest() {
     assertEquals(ATTACK, testEnemy.getAttack());
