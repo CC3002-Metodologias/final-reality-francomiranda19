@@ -13,6 +13,7 @@ import java.util.Map;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -27,6 +28,11 @@ public abstract class AbstractCharacterTest {
   protected BlockingQueue<ICharacter> turns;
   protected List<ICharacter> testCharacters;
   protected Weapon testWeapon;
+
+  protected static final int LIFE = 100;
+  protected static final int DEFENSE = 30;
+  protected static final int ATTACK = 15;
+  protected static final int MANA = 50;
 
   /**protected static final String BLACK_MAGE_NAME = "Vivi";
   protected static final String KNIGHT_NAME = "Adelbert";
@@ -51,6 +57,13 @@ public abstract class AbstractCharacterTest {
   protected static final String KNIFE_NAME = "Test Knife";
   protected final int DAMAGE = 15;
   protected final int SPEED = 10;*/
+
+  @BeforeEach
+  void basicSetUp() {
+    turns = new LinkedBlockingQueue<>();
+    testWeapon = new Weapon("Test", 15, 10, WeaponType.AXE);
+    testCharacters = new ArrayList<>();
+  }
 
   /**
    * Checks that the character waits the appropriate amount of time for it's turn.
@@ -78,7 +91,7 @@ public abstract class AbstractCharacterTest {
     character.equip(testWeapon);
   }*/
 
-  protected void checkConstruction(final ICharacter expectedCharacter,
+  void checkConstruction(final ICharacter expectedCharacter,
       final ICharacter testEqualCharacter,
       final ICharacter sameClassDifferentCharacter,
       final ICharacter differentClassCharacter) {
@@ -86,11 +99,5 @@ public abstract class AbstractCharacterTest {
     assertNotEquals(sameClassDifferentCharacter, testEqualCharacter);
     assertNotEquals(testEqualCharacter, differentClassCharacter);
     assertEquals(expectedCharacter.hashCode(), testEqualCharacter.hashCode());
-  }
-
-  protected void basicSetUp() {
-    turns = new LinkedBlockingQueue<>();
-    testWeapon = new Weapon("Test", 15, 10, WeaponType.AXE);
-    testCharacters = new ArrayList<>();
   }
 }

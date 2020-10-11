@@ -25,14 +25,14 @@ public class Sword extends Weapon {
       return false;
     }
     final Sword sword = (Sword) o;
-    return getName().equals(sword.getName()) &&
-            getDamage() == sword.getDamage() &&
-            getWeight() == sword.getWeight() &&
-            getType() == sword.getType();
+    return getName().equals(sword.getName())
+            && getDamage() == sword.getDamage()
+            && getWeight() == sword.getWeight()
+            && getWeaponType() == sword.getWeaponType();
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(getName(), getDamage(), getWeight(), getType());
+    return Objects.hash(getName(), getDamage(), getWeight(), getWeaponType());
   }
 }

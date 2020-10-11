@@ -4,6 +4,7 @@ import com.github.francomiranda19.finalreality.model.character.ICharacter;
 import com.github.francomiranda19.finalreality.model.weapon.*;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Objects;
 import java.util.concurrent.BlockingQueue;
 
 public class Thief extends PlayerCharacter {
@@ -25,7 +26,7 @@ public class Thief extends PlayerCharacter {
    *
    * @param sword the character will equip this weapon
    */
-  public void equipSword(Sword sword) {
+  public void equipSword(Weapon sword) {
     this.equippedWeapon = sword;
   }
 
@@ -34,7 +35,7 @@ public class Thief extends PlayerCharacter {
    *
    * @param staff the character will equip this weapon
    */
-  public void equipStaff(Staff staff) {
+  public void equipStaff(Weapon staff) {
     this.equippedWeapon = staff;
   }
 
@@ -43,8 +44,28 @@ public class Thief extends PlayerCharacter {
    *
    * @param bow the character will equip this weapon
    */
-  public void equipBow(Bow bow) {
+  public void equipBow(Weapon bow) {
     this.equippedWeapon = bow;
+  }
+
+  @Override
+  public boolean equals(final Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (!(o instanceof Thief)) {
+      return false;
+    }
+    final Thief thief = (Thief) o;
+    return getName().equals(thief.getName())
+            && getCharacterClass() == thief.getCharacterClass()
+            && getLifePoints() == thief.getLifePoints()
+            && getDefense() == thief.getDefense();
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(getName(), getCharacterClass(), getLifePoints(), getDefense());
   }
 
 }

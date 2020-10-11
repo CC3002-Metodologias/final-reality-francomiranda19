@@ -7,6 +7,7 @@ import com.github.francomiranda19.finalreality.model.weapon.Weapon;
 import com.github.francomiranda19.finalreality.model.weapon.WeaponType;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Objects;
 import java.util.concurrent.BlockingQueue;
 
 public class Engineer extends PlayerCharacter {
@@ -19,7 +20,8 @@ public class Engineer extends PlayerCharacter {
    * @param lifePoints     the character's life points
    * @param defense        the character's defense
    */
-  public Engineer(@NotNull String name, @NotNull BlockingQueue<ICharacter> turnsQueue, CharacterClass characterClass, int lifePoints, int defense) {
+  public Engineer(@NotNull String name, @NotNull BlockingQueue<ICharacter> turnsQueue, CharacterClass characterClass,
+                  int lifePoints, int defense) {
     super(name, turnsQueue, characterClass, lifePoints, defense);
   }
 
@@ -28,7 +30,7 @@ public class Engineer extends PlayerCharacter {
    *
    * @param axe the character will equip this weapon
    */
-  public void equipAxe(Axe axe) {
+  public void equipAxe(Weapon axe) {
     this.equippedWeapon = axe;
   }
 
@@ -37,8 +39,28 @@ public class Engineer extends PlayerCharacter {
    *
    * @param bow the character will equip this weapon
    */
-  public void equipBow(Bow bow) {
+  public void equipBow(Weapon bow) {
     this.equippedWeapon = bow;
+  }
+
+  @Override
+  public boolean equals(final Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (!(o instanceof Engineer)) {
+      return false;
+    }
+    final Engineer engineer = (Engineer) o;
+    return getName().equals(engineer.getName())
+            && getCharacterClass() == engineer.getCharacterClass()
+            && getLifePoints() == engineer.getLifePoints()
+            && getDefense() == engineer.getDefense();
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(getName(), getCharacterClass(), getLifePoints(), getDefense());
   }
 
 }

@@ -31,15 +31,9 @@ public class PlayerCharacter extends AbstractCharacter {
    * @param defense
    *     the character's defense
    */
-  public PlayerCharacter(@NotNull String name, @NotNull BlockingQueue<ICharacter> turnsQueue,
-                         final CharacterClass characterClass,
+  public PlayerCharacter(@NotNull String name, @NotNull BlockingQueue<ICharacter> turnsQueue, final CharacterClass characterClass,
                          int lifePoints, int defense) {
     super(turnsQueue, name, characterClass, lifePoints, defense);
-  }
-
-  @Override
-  public int hashCode() {
-    return Objects.hash(getName(), getCharacterClass(), getLifePoints(), getDefense());
   }
 
   @Override
@@ -50,11 +44,16 @@ public class PlayerCharacter extends AbstractCharacter {
     if (!(o instanceof PlayerCharacter)) {
       return false;
     }
-    final PlayerCharacter that = (PlayerCharacter) o;
-    return getName().equals(that.getName())
-            && getCharacterClass() == that.getCharacterClass()
-            && getLifePoints() == that.getLifePoints()
-            && getDefense() == that.getDefense();
+    final PlayerCharacter playerCharacter = (PlayerCharacter) o;
+    return getName().equals(playerCharacter.getName())
+            && getCharacterClass() == playerCharacter.getCharacterClass()
+            && getLifePoints() == playerCharacter.getLifePoints()
+            && getDefense() == playerCharacter.getDefense();
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(getName(), getCharacterClass(), getLifePoints(), getDefense());
   }
 
   @Override

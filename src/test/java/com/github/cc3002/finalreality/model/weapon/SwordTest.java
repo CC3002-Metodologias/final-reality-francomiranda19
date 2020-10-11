@@ -36,7 +36,6 @@ public class SwordTest extends WeaponTest {
     assertNotEquals(notExpectedSword4, testSword);
     assertNotEquals(notExpectedSword4.hashCode(), testSword.hashCode());
     assertFalse(testSword.equals(new Bow("Not Sword", DAMAGE, WEIGHT, WeaponType.BOW)));
-
   }
 
 }

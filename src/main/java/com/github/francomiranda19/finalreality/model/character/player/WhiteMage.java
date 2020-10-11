@@ -1,10 +1,12 @@
 package com.github.francomiranda19.finalreality.model.character.player;
 
 import com.github.francomiranda19.finalreality.model.character.ICharacter;
+import com.github.francomiranda19.finalreality.model.weapon.Knife;
 import com.github.francomiranda19.finalreality.model.weapon.Weapon;
 import com.github.francomiranda19.finalreality.model.weapon.WeaponType;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Objects;
 import java.util.concurrent.BlockingQueue;
 
 public class WhiteMage extends AbstractMage {
@@ -29,5 +31,24 @@ public class WhiteMage extends AbstractMage {
   public void equipKnife(Weapon knife) {
       this.equippedWeapon = knife;
   }
+
+  @Override
+  public boolean equals(final Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (!(o instanceof WhiteMage)) {
+      return false;
+    }
+    final WhiteMage whiteMage = (WhiteMage) o;
+    return getName().equals(whiteMage.getName())
+            && getCharacterClass() == whiteMage.getCharacterClass()
+            && getLifePoints() == whiteMage.getLifePoints()
+            && getDefense() == whiteMage.getDefense()
+            && getMana() == whiteMage.getMana();
+  }
+
+  @Override
+  public int hashCode() { return Objects.hash(getName(), getCharacterClass(), getLifePoints(), getDefense(), getMana()); }
 
 }
