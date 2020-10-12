@@ -2,11 +2,15 @@ package com.github.francomiranda19.finalreality.model.character.player;
 
 import com.github.francomiranda19.finalreality.model.character.ICharacter;
 import com.github.francomiranda19.finalreality.model.weapon.Weapon;
-import com.github.francomiranda19.finalreality.model.weapon.WeaponType;
 import org.jetbrains.annotations.NotNull;
-
+import java.util.Objects;
 import java.util.concurrent.BlockingQueue;
 
+/**
+ * A class that holds all the information of a single white mage of the game.
+ *
+ * @author Franco Miranda Oyarzún
+ */
 public class WhiteMage extends AbstractMage {
   /**
    * Creates a new character.
@@ -29,5 +33,33 @@ public class WhiteMage extends AbstractMage {
   public void equipKnife(Weapon knife) {
       this.equippedWeapon = knife;
   }
+
+  /**
+   * Checks if two White Mages are equal.
+   *
+   * @param o to check object.
+   */
+  @Override
+  public boolean equals(final Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (!(o instanceof WhiteMage)) {
+      return false;
+    }
+    final WhiteMage whiteMage = (WhiteMage) o;
+    return getName().equals(whiteMage.getName())
+            && getCharacterClass() == whiteMage.getCharacterClass()
+            && getLifePoints() == whiteMage.getLifePoints()
+            && getDefense() == whiteMage.getDefense()
+            && getMana() == whiteMage.getMana()
+            && getEquippedWeapon() == whiteMage.getEquippedWeapon();
+  }
+
+  /**
+   * Hash function of the White Mage.
+   */
+  @Override
+  public int hashCode() { return Objects.hash(getName(), getCharacterClass(), getLifePoints(), getDefense(), getMana(), getEquippedWeapon()); }
 
 }

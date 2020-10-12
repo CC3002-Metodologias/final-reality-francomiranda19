@@ -26,6 +26,6 @@ public interface IWeapon {
   /**
    * Returns this weapon's type.
    */
-  WeaponType getType();
+  WeaponType getWeaponType();
 
 }

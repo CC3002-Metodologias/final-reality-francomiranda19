@@ -2,11 +2,15 @@ package com.github.francomiranda19.finalreality.model.character.player;
 
 import com.github.francomiranda19.finalreality.model.character.ICharacter;
 import com.github.francomiranda19.finalreality.model.weapon.Weapon;
-import com.github.francomiranda19.finalreality.model.weapon.WeaponType;
 import org.jetbrains.annotations.NotNull;
-
+import java.util.Objects;
 import java.util.concurrent.BlockingQueue;
 
+/**
+ * A class that holds all the information of a single black mage of the game.
+ *
+ * @author Franco Miranda Oyarzún
+ */
 public class BlackMage extends AbstractMage{
   /**
    * Creates a new character.
@@ -17,7 +21,8 @@ public class BlackMage extends AbstractMage{
    * @param lifePoints     the character's life points
    * @param defense        the character's defense
    */
-  public BlackMage(@NotNull String name, @NotNull BlockingQueue<ICharacter> turnsQueue, CharacterClass characterClass, int lifePoints, int defense, int mana) {
+  public BlackMage(@NotNull String name, @NotNull BlockingQueue<ICharacter> turnsQueue, CharacterClass characterClass,
+                   int lifePoints, int defense, int mana) {
     super(name, turnsQueue, characterClass, lifePoints, defense, mana);
   }
 
@@ -38,5 +43,33 @@ public class BlackMage extends AbstractMage{
   public void equipStaff(Weapon staff) {
     this.equippedWeapon = staff;
   }
+
+  /**
+   * Checks if two Black Mages are equal.
+   *
+   * @param o to check object.
+   */
+  @Override
+  public boolean equals(final Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (!(o instanceof BlackMage)) {
+      return false;
+    }
+    final BlackMage blackMage = (BlackMage) o;
+    return getName().equals(blackMage.getName())
+            && getCharacterClass() == blackMage.getCharacterClass()
+            && getLifePoints() == blackMage.getLifePoints()
+            && getDefense() == blackMage.getDefense()
+            && getMana() == blackMage.getMana()
+            && getEquippedWeapon() == blackMage.getEquippedWeapon();
+  }
+
+  /**
+   * Hash function of the black mage.
+   */
+  @Override
+  public int hashCode() { return Objects.hash(getName(), getCharacterClass(), getLifePoints(), getDefense(), getMana(), getEquippedWeapon()); }
 
 }

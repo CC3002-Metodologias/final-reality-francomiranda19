@@ -13,19 +13,18 @@ public class Weapon implements IWeapon {
   private final String name;
   private final int damage;
   private final int weight;
-  private final WeaponType type;
+  private final WeaponType weaponType;
 
   /**
    * Creates a weapon with a name, a base damage, weight and its type.
    *
    * @see WeaponType
    */
-  public Weapon(final String name, final int damage, final int weight,
-      final WeaponType type) {
+  public Weapon(final String name, final int damage, final int weight, final WeaponType weaponType) {
     this.name = name;
     this.damage = damage;
     this.weight = weight;
-    this.type = type;
+    this.weaponType = weaponType;
   }
 
   @Override
@@ -44,10 +43,15 @@ public class Weapon implements IWeapon {
   }
 
   @Override
-  public WeaponType getType() {
-    return type;
+  public WeaponType getWeaponType() {
+    return weaponType;
   }
 
+  /**
+   * Checks if two Weapons are equal.
+   *
+   * @param o to check object.
+   */
   @Override
   public boolean equals(final Object o) {
     if (this == o) {
@@ -57,14 +61,17 @@ public class Weapon implements IWeapon {
       return false;
     }
     final Weapon weapon = (Weapon) o;
-    return getDamage() == weapon.getDamage() &&
-        getWeight() == weapon.getWeight() &&
-        getName().equals(weapon.getName()) &&
-        getType() == weapon.getType();
+    return getName().equals(weapon.getName())
+            && getDamage() == weapon.getDamage()
+            && getWeight() == weapon.getWeight()
+            && getWeaponType() == weapon.getWeaponType();
   }
 
+  /**
+   * Hash function of the weapon.
+   */
   @Override
   public int hashCode() {
-    return Objects.hash(getName(), getDamage(), getWeight(), getType());
+    return Objects.hash(getName(), getDamage(), getWeight(), getWeaponType());
   }
 }

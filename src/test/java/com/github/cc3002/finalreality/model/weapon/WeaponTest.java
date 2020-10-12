@@ -1,54 +1,65 @@
 package com.github.cc3002.finalreality.model.weapon;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
-import com.github.francomiranda19.finalreality.model.weapon.Weapon;
-import com.github.francomiranda19.finalreality.model.weapon.WeaponType;
+import com.github.francomiranda19.finalreality.model.character.ICharacter;
+import com.github.francomiranda19.finalreality.model.character.player.CharacterClass;
+import com.github.francomiranda19.finalreality.model.character.player.Knight;
+import com.github.francomiranda19.finalreality.model.weapon.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-class WeaponTest {
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.LinkedBlockingQueue;
 
-  private static final String AXE_NAME = "Test Axe";
-  private static final String STAFF_NAME = "Test Staff";
-  private static final String SWORD_NAME = "Test Sword";
-  private static final String BOW_NAME = "Test Bow";
-  private static final String KNIFE_NAME = "Test Knife";
-  private static final int DAMAGE = 15;
-  private static final int SPEED = 10;
+import static org.junit.jupiter.api.Assertions.*;
 
-  private Weapon testAxe;
-  private Weapon testStaff;
-  private Weapon testSword;
-  private Weapon testBow;
-  private Weapon testKnife;
+/**
+ * Set of tests for the {@code Weapon} class.
+ *
+ * @author Franco Miranda Oyarzún
+ * @see Weapon
+ */
+public class WeaponTest {
+  private BlockingQueue<ICharacter> turns;
 
+  protected static final int DAMAGE = 15;
+  protected static final int WEIGHT = 10;
+  protected static final int MAGIC_DAMAGE = 40;
+
+  private static final String WEAPON_NAME = "Test Weapon";
+  private Weapon testWeapon;
+
+  /**
+   * Setup method.
+   */
   @BeforeEach
   void setUp() {
-    testAxe = new Weapon(AXE_NAME, DAMAGE, SPEED, WeaponType.AXE);
-    testStaff = new Weapon(STAFF_NAME, DAMAGE, SPEED, WeaponType.STAFF);
-    testSword = new Weapon(SWORD_NAME, DAMAGE, SPEED, WeaponType.SWORD);
-    testBow = new Weapon(BOW_NAME, DAMAGE, SPEED, WeaponType.BOW);
-    testKnife = new Weapon(KNIFE_NAME, DAMAGE, SPEED, WeaponType.KNIFE);
+    testWeapon = new Weapon(WEAPON_NAME, DAMAGE, WEIGHT, WeaponType.SWORD);
+    turns = new LinkedBlockingQueue<>();
   }
 
+  /**
+   * Checks that the class' constructor and equals method works properly.
+   */
   @Test
   void constructorTest() {
-    var expectedAxe = new Weapon(AXE_NAME, DAMAGE, SPEED, WeaponType.AXE);
-    var expectedStaff = new Weapon(STAFF_NAME, DAMAGE, SPEED, WeaponType.STAFF);
-    var expectedSword = new Weapon(SWORD_NAME, DAMAGE, SPEED, WeaponType.SWORD);
-    var expectedBow = new Weapon(BOW_NAME, DAMAGE, SPEED, WeaponType.BOW);
-    var expectedKnife = new Weapon(KNIFE_NAME, DAMAGE, SPEED, WeaponType.KNIFE);
+    var expectedWeapon = new Weapon(WEAPON_NAME, DAMAGE, WEIGHT, WeaponType.SWORD);
+    var notExpectedWeapon1 = new Weapon("Not Weapon", DAMAGE, WEIGHT, WeaponType.SWORD);
+    var notExpectedWeapon2 = new Weapon(WEAPON_NAME, 23, WEIGHT, WeaponType.SWORD);
+    var notExpectedWeapon3 = new Weapon(WEAPON_NAME, DAMAGE, 12, WeaponType.SWORD);
+    var notExpectedWeapon4 = new Weapon(WEAPON_NAME, DAMAGE, WEIGHT, WeaponType.KNIFE);
 
-    assertEquals(expectedAxe, testAxe);
-    assertEquals(expectedAxe.hashCode(), testAxe.hashCode());
-    assertEquals(expectedStaff, testStaff);
-    assertEquals(expectedStaff.hashCode(), testStaff.hashCode());
-    assertEquals(expectedSword, testSword);
-    assertEquals(expectedSword.hashCode(), testSword.hashCode());
-    assertEquals(expectedBow, testBow);
-    assertEquals(expectedBow.hashCode(), testBow.hashCode());
-    assertEquals(expectedKnife, testKnife);
-    assertEquals(expectedKnife.hashCode(), testKnife.hashCode());
+    assertEquals(testWeapon, testWeapon);
+    assertEquals(expectedWeapon, testWeapon);
+    assertEquals(expectedWeapon.hashCode(), testWeapon.hashCode());
+    assertNotEquals(notExpectedWeapon1, testWeapon);
+    assertNotEquals(notExpectedWeapon1.hashCode(), testWeapon.hashCode());
+    assertNotEquals(notExpectedWeapon2, testWeapon);
+    assertNotEquals(notExpectedWeapon2.hashCode(), testWeapon.hashCode());
+    assertNotEquals(notExpectedWeapon3, testWeapon);
+    assertNotEquals(notExpectedWeapon3.hashCode(), testWeapon.hashCode());
+    assertNotEquals(notExpectedWeapon4, testWeapon);
+    assertNotEquals(notExpectedWeapon4.hashCode(), testWeapon.hashCode());
+    assertFalse(testWeapon.equals(new Knight("Not Weapon", turns, CharacterClass.KNIGHT, 100, 40)));
   }
+
 }

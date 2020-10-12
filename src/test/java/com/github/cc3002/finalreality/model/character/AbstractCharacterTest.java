@@ -1,23 +1,25 @@
 package com.github.cc3002.finalreality.model.character;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
-
+import com.github.francomiranda19.finalreality.model.character.Enemy;
 import com.github.francomiranda19.finalreality.model.character.ICharacter;
-import com.github.francomiranda19.finalreality.model.weapon.Weapon;
-import com.github.francomiranda19.finalreality.model.weapon.WeaponType;
+import com.github.francomiranda19.finalreality.model.character.player.CharacterClass;
+import com.github.francomiranda19.finalreality.model.character.player.Knight;
+import com.github.francomiranda19.finalreality.model.weapon.*;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
-import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Abstract class containing the common tests for all the types of characters.
  *
  * @author Ignacio Slater Muñoz.
- * @author <Your name>
+ * @author Franco Miranda Oyarzún
  * @see ICharacter
  */
 public abstract class AbstractCharacterTest {
@@ -26,45 +28,46 @@ public abstract class AbstractCharacterTest {
   protected List<ICharacter> testCharacters;
   protected Weapon testWeapon;
 
+  protected static final int LIFE = 100;
+  protected static final int DEFENSE = 30;
+  protected static final int MANA = 50;
+
+  /**
+   * Setup method.
+   */
+  @BeforeEach
+  void basicSetUp() {
+    turns = new LinkedBlockingQueue<>();
+    testWeapon = new Weapon("Test Weapon", 15, 10, WeaponType.AXE);
+    testCharacters = new ArrayList<>();
+
+    Enemy testEnemy = new Enemy("Test Enemy", 10, turns, 100, 30, 15);
+    Knight testKnight = new Knight("Test Knight", turns, CharacterClass.KNIGHT, LIFE, DEFENSE);
+    testKnight.equipAxe(testWeapon);
+    testCharacters.add(testKnight);
+    testCharacters.add(testEnemy);
+  }
+
   /**
    * Checks that the character waits the appropriate amount of time for it's turn.
    */
   @Test
   void waitTurnTest() {
-    Assertions.assertTrue(turns.isEmpty());
-    tryToEquip(testCharacters.get(0));
-    testCharacters.get(0).waitTurn();
-    try {
-      // Thread.sleep is not accurate so this values may be changed to adjust the
-      // acceptable error margin.
-      // We're testing that the character waits approximately 1 second.
-      Thread.sleep(900);
-      Assertions.assertEquals(0, turns.size());
-      Thread.sleep(200);
-      Assertions.assertEquals(1, turns.size());
-      Assertions.assertEquals(testCharacters.get(0), turns.peek());
-    } catch (InterruptedException e) {
-      e.printStackTrace();
+    assertTrue(turns.isEmpty());
+    for (int i = 0; i < testCharacters.size(); i++) {
+      testCharacters.get(i).waitTurn();
+      try {
+        // Thread.sleep is not accurate so this values may be changed to adjust the
+        // acceptable error margin.
+        // We're testing that the character waits approximately 1 second.
+        Thread.sleep(900);
+        assertEquals(i, turns.size());
+        Thread.sleep(200);
+        assertEquals(i + 1, turns.size());
+        assertEquals(testCharacters.get(0), turns.peek());
+      } catch (InterruptedException e) {
+        e.printStackTrace();
+      }
     }
-  }
-
-  private void tryToEquip(ICharacter character) {
-    character.equip(testWeapon);
-  }
-
-  protected void checkConstruction(final ICharacter expectedCharacter,
-      final ICharacter testEqualCharacter,
-      final ICharacter sameClassDifferentCharacter,
-      final ICharacter differentClassCharacter) {
-    assertEquals(expectedCharacter, testEqualCharacter);
-    assertNotEquals(sameClassDifferentCharacter, testEqualCharacter);
-    assertNotEquals(testEqualCharacter, differentClassCharacter);
-    assertEquals(expectedCharacter.hashCode(), testEqualCharacter.hashCode());
-  }
-
-  protected void basicSetUp() {
-    turns = new LinkedBlockingQueue<>();
-    testWeapon = new Weapon("Test", 15, 10, WeaponType.AXE);
-    testCharacters = new ArrayList<>();
   }
 }
