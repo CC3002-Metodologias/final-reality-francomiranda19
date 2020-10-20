@@ -19,15 +19,17 @@ public abstract class AbstractCharacter implements ICharacter {
   private final CharacterClass characterClass;
   protected Weapon equippedWeapon = null;
   protected ScheduledExecutorService scheduledExecutor;
-  private final int lifePoints;
+  private final int maxLife;
+  private int currentLife;
   private final int defense;
 
   protected AbstractCharacter(@NotNull BlockingQueue<ICharacter> turnsQueue,
-      @NotNull String name, CharacterClass characterClass, int lifePoints, int defense) {
+                              @NotNull String name, CharacterClass characterClass, int maxLife, int defense) {
     this.turnsQueue = turnsQueue;
     this.name = name;
     this.characterClass = characterClass;
-    this.lifePoints = lifePoints;
+    this.maxLife = maxLife;
+    this.currentLife = maxLife;
     this.defense = defense;
   }
 
@@ -49,9 +51,20 @@ public abstract class AbstractCharacter implements ICharacter {
   public CharacterClass getCharacterClass() { return characterClass; }
 
   @Override
-  public int getLifePoints() { return lifePoints; }
+  public int getMaxLife() { return maxLife; }
 
   @Override
   public int getDefense() { return defense; }
+
+  @Override
+  public int getCurrentLife() { return currentLife; }
+
+  @Override
+  public void receiveDamage(int attack, int defense) {
+    int damage = attack - defense;
+    if (damage >= 0) {
+      this.currentLife -= damage;
+    }
+  }
 
 }

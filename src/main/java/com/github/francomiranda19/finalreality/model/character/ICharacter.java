@@ -34,13 +34,26 @@ public interface ICharacter {
   CharacterClass getCharacterClass();
 
   /**
-   * Returns this character's life points.
+   * Returns this character's maximum life.
    */
-  int getLifePoints();
+  int getMaxLife();
 
   /**
    * Returns this character's defense.
    */
   int getDefense();
+
+  /**
+   * Returns this characters current life.
+   */
+  int getCurrentLife();
+
+  /**
+   * Updates this character's current life when it receives damage.
+   *
+   * @param attack attack of the attacking character
+   * @param defense defense of the attacked character
+   */
+  void receiveDamage(int attack, int defense);
 
 }

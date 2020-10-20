@@ -18,11 +18,11 @@ public class Thief extends PlayerCharacter {
    * @param name           the character's name
    * @param turnsQueue     the queue with the characters waiting for their turn
    * @param characterClass the class of this character
-   * @param lifePoints     the character's life points
+   * @param maxLife        the character's maximum life
    * @param defense        the character's defense
    */
-  public Thief(@NotNull String name, @NotNull BlockingQueue<ICharacter> turnsQueue, CharacterClass characterClass, int lifePoints, int defense) {
-    super(name, turnsQueue, characterClass, lifePoints, defense);
+  public Thief(@NotNull String name, @NotNull BlockingQueue<ICharacter> turnsQueue, CharacterClass characterClass, int maxLife, int defense) {
+    super(name, turnsQueue, characterClass, maxLife, defense);
   }
 
   /**
@@ -31,7 +31,9 @@ public class Thief extends PlayerCharacter {
    * @param sword the character will equip this weapon
    */
   public void equipSword(Weapon sword) {
-    this.equippedWeapon = sword;
+    if (this.getCurrentLife() > 0) {
+      this.equippedWeapon = sword;
+    }
   }
 
   /**
@@ -40,7 +42,9 @@ public class Thief extends PlayerCharacter {
    * @param staff the character will equip this weapon
    */
   public void equipStaff(Weapon staff) {
-    this.equippedWeapon = staff;
+    if (this.getCurrentLife() > 0) {
+      this.equippedWeapon = staff;
+    }
   }
 
   /**
@@ -49,7 +53,9 @@ public class Thief extends PlayerCharacter {
    * @param bow the character will equip this weapon
    */
   public void equipBow(Weapon bow) {
-    this.equippedWeapon = bow;
+    if (this.getCurrentLife() > 0) {
+      this.equippedWeapon = bow;
+    }
   }
 
   /**
@@ -68,7 +74,7 @@ public class Thief extends PlayerCharacter {
     final Thief thief = (Thief) o;
     return getName().equals(thief.getName())
             && getCharacterClass() == thief.getCharacterClass()
-            && getLifePoints() == thief.getLifePoints()
+            && getMaxLife() == thief.getMaxLife()
             && getDefense() == thief.getDefense()
             && getEquippedWeapon() == thief.getEquippedWeapon();
   }
@@ -78,7 +84,7 @@ public class Thief extends PlayerCharacter {
    */
   @Override
   public int hashCode() {
-    return Objects.hash(getName(), getCharacterClass(), getLifePoints(), getDefense(), getEquippedWeapon());
+    return Objects.hash(getName(), getCharacterClass(), getMaxLife(), getDefense(), getEquippedWeapon());
   }
 
 }

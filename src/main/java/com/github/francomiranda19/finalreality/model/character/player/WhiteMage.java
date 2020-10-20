@@ -18,11 +18,11 @@ public class WhiteMage extends AbstractMage {
    * @param name           the character's name
    * @param turnsQueue     the queue with the characters waiting for their turn
    * @param characterClass the class of this character
-   * @param lifePoints     the character's life points
+   * @param maxLife        the character's maximum life
    * @param defense        the character's defense
    */
-  public WhiteMage(@NotNull String name, @NotNull BlockingQueue<ICharacter> turnsQueue, CharacterClass characterClass, int lifePoints, int defense, int mana) {
-    super(name, turnsQueue, characterClass, lifePoints, defense, mana);
+  public WhiteMage(@NotNull String name, @NotNull BlockingQueue<ICharacter> turnsQueue, CharacterClass characterClass, int maxLife, int defense, int mana) {
+    super(name, turnsQueue, characterClass, maxLife, defense, mana);
   }
 
   /**
@@ -31,7 +31,9 @@ public class WhiteMage extends AbstractMage {
    * @param knife the character will equip this weapon
    */
   public void equipKnife(Weapon knife) {
+    if (this.getCurrentLife() > 0) {
       this.equippedWeapon = knife;
+    }
   }
 
   /**
@@ -50,7 +52,7 @@ public class WhiteMage extends AbstractMage {
     final WhiteMage whiteMage = (WhiteMage) o;
     return getName().equals(whiteMage.getName())
             && getCharacterClass() == whiteMage.getCharacterClass()
-            && getLifePoints() == whiteMage.getLifePoints()
+            && getMaxLife() == whiteMage.getMaxLife()
             && getDefense() == whiteMage.getDefense()
             && getMana() == whiteMage.getMana()
             && getEquippedWeapon() == whiteMage.getEquippedWeapon();
@@ -60,6 +62,6 @@ public class WhiteMage extends AbstractMage {
    * Hash function of the White Mage.
    */
   @Override
-  public int hashCode() { return Objects.hash(getName(), getCharacterClass(), getLifePoints(), getDefense(), getMana(), getEquippedWeapon()); }
+  public int hashCode() { return Objects.hash(getName(), getCharacterClass(), getMaxLife(), getDefense(), getMana(), getEquippedWeapon()); }
 
 }

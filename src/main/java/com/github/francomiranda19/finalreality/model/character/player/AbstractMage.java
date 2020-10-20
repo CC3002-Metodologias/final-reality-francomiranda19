@@ -18,12 +18,12 @@ public class AbstractMage extends PlayerCharacter {
    * @param name           the character's name
    * @param turnsQueue     the queue with the characters waiting for their turn
    * @param characterClass the class of this character
-   * @param lifePoints     the character's life points
+   * @param maxLife        the character's maximum life
    * @param defense        the character's defense
    */
   public AbstractMage(@NotNull String name, @NotNull BlockingQueue<ICharacter> turnsQueue, CharacterClass characterClass,
-                      int lifePoints, int defense, int mana) {
-    super(name, turnsQueue, characterClass, lifePoints, defense);
+                      int maxLife, int defense, int mana) {
+    super(name, turnsQueue, characterClass, maxLife, defense);
     this.mana = mana;
   }
 

@@ -1,5 +1,6 @@
 package com.github.francomiranda19.finalreality.model.character.player;
 
+import com.github.francomiranda19.finalreality.model.character.Enemy;
 import com.github.francomiranda19.finalreality.model.character.ICharacter;
 import com.github.francomiranda19.finalreality.model.weapon.Weapon;
 import org.jetbrains.annotations.NotNull;
@@ -19,12 +20,12 @@ public class Engineer extends PlayerCharacter {
    * @param name           the character's name
    * @param turnsQueue     the queue with the characters waiting for their turn
    * @param characterClass the class of this character
-   * @param lifePoints     the character's life points
+   * @param maxLife        the character's maximum life
    * @param defense        the character's defense
    */
   public Engineer(@NotNull String name, @NotNull BlockingQueue<ICharacter> turnsQueue, CharacterClass characterClass,
-                  int lifePoints, int defense) {
-    super(name, turnsQueue, characterClass, lifePoints, defense);
+                  int maxLife, int defense) {
+    super(name, turnsQueue, characterClass, maxLife, defense);
   }
 
   /**
@@ -33,7 +34,9 @@ public class Engineer extends PlayerCharacter {
    * @param axe the character will equip this weapon
    */
   public void equipAxe(Weapon axe) {
-    this.equippedWeapon = axe;
+    if (this.getCurrentLife() > 0) {
+      this.equippedWeapon = axe;
+    }
   }
 
   /**
@@ -42,7 +45,9 @@ public class Engineer extends PlayerCharacter {
    * @param bow the character will equip this weapon
    */
   public void equipBow(Weapon bow) {
-    this.equippedWeapon = bow;
+    if (this.getCurrentLife() > 0) {
+      this.equippedWeapon = bow;
+    }
   }
 
   /**
@@ -61,7 +66,7 @@ public class Engineer extends PlayerCharacter {
     final Engineer engineer = (Engineer) o;
     return getName().equals(engineer.getName())
             && getCharacterClass() == engineer.getCharacterClass()
-            && getLifePoints() == engineer.getLifePoints()
+            && getMaxLife() == engineer.getMaxLife()
             && getDefense() == engineer.getDefense()
             && getEquippedWeapon() == engineer.getEquippedWeapon();
   }
@@ -71,7 +76,7 @@ public class Engineer extends PlayerCharacter {
    */
   @Override
   public int hashCode() {
-    return Objects.hash(getName(), getCharacterClass(), getLifePoints(), getDefense(), getEquippedWeapon());
+    return Objects.hash(getName(), getCharacterClass(), getMaxLife(), getDefense(), getEquippedWeapon());
   }
 
 }

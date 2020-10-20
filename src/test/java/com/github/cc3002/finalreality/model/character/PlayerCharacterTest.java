@@ -50,26 +50,6 @@ public class PlayerCharacterTest extends AbstractCharacterTest {
     assertNotEquals(notExpectedPlayerCharacter3.hashCode(), testPlayerCharacter.hashCode());
     assertNotEquals(notExpectedPlayerCharacter4, testPlayerCharacter);
     assertNotEquals(notExpectedPlayerCharacter4.hashCode(), testPlayerCharacter.hashCode());
-    assertFalse(testPlayerCharacter.equals(new Weapon("Not Player Character", 20, 10, WeaponType.AXE)));
-  }
-
-  /**
-   * Checks if the characters' life points are correct.
-   */
-  @Test
-  void lifePointsTest() {
-    for (var character : testCharacters) {
-      assertEquals(LIFE, character.getLifePoints());
-    }
-  }
-
-  /**
-   * Checks if the characters' defense points are correct.
-   */
-  @Test
-  void defenseTest() {
-    for (var character : testCharacters) {
-      assertEquals(DEFENSE, character.getDefense());
-    }
+    assertNotEquals(testPlayerCharacter, new Weapon("Not Player Character", 20, 10, WeaponType.AXE));
   }
 }

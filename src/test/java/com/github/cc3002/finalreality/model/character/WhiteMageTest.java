@@ -1,5 +1,6 @@
 package com.github.cc3002.finalreality.model.character;
 
+import com.github.francomiranda19.finalreality.model.character.Enemy;
 import com.github.francomiranda19.finalreality.model.character.player.BlackMage;
 import com.github.francomiranda19.finalreality.model.character.player.CharacterClass;
 import com.github.francomiranda19.finalreality.model.character.player.WhiteMage;
@@ -19,7 +20,8 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 public class WhiteMageTest extends PlayerCharacterTest {
   private static final String WHITE_MAGE_NAME = "Test White Mage";
-  private WhiteMage testWhiteMage;
+  private WhiteMage testWhiteMage, testDefensiveWhiteMage, testDeadWhiteMage;
+  private Enemy testEnemy, testDeadEnemy;
   private Knife testKnife;
   private Axe testAxe;
 
@@ -29,6 +31,10 @@ public class WhiteMageTest extends PlayerCharacterTest {
   @BeforeEach
   void setUp() {
     testWhiteMage = new WhiteMage(WHITE_MAGE_NAME, turns, CharacterClass.WHITE_MAGE, LIFE, DEFENSE, MANA);
+    testDefensiveWhiteMage = new WhiteMage("Test Defensive White Mage", turns, CharacterClass.WHITE_MAGE, LIFE, 80, MANA);
+    testDeadWhiteMage = new WhiteMage("Test Dead White Mage", turns, CharacterClass.WHITE_MAGE, 0, DEFENSE, MANA);
+    testEnemy = new Enemy("Test Enemy", 10, turns, LIFE, DEFENSE, 15);
+    testDeadEnemy = new Enemy("Test Dead Enemy", 10, turns, 0, DEFENSE, 15);
     testKnife = new Knife("Test Knife", 20, 10, WeaponType.KNIFE);
     testAxe = new Axe("Test Axe", 15, 10, WeaponType.AXE);
     super.basicSetUp();
@@ -63,7 +69,7 @@ public class WhiteMageTest extends PlayerCharacterTest {
     assertNotEquals(notExpectedWhiteMage4.hashCode(), testWhiteMage.hashCode());
     assertNotEquals(notExpectedWhiteMage5, testWhiteMage);
     assertNotEquals(notExpectedWhiteMage5.hashCode(), testWhiteMage.hashCode());
-    assertFalse(testWhiteMage.equals(new BlackMage("Not White Mage", turns, CharacterClass.BLACK_MAGE, LIFE, DEFENSE, MANA)));
+    assertNotEquals(testWhiteMage, new BlackMage("Not White Mage", turns, CharacterClass.BLACK_MAGE, LIFE, DEFENSE, MANA));
   }
 
   /**
@@ -75,15 +81,25 @@ public class WhiteMageTest extends PlayerCharacterTest {
     testWhiteMage.equipKnife(testKnife);
     assertEquals(testKnife, testWhiteMage.getEquippedWeapon());
     assertNotEquals(testAxe, testWhiteMage.getEquippedWeapon());
+
+    testDeadWhiteMage.equipKnife(testKnife);
+    assertNull(testDeadWhiteMage.getEquippedWeapon());
   }
 
   /**
-   * Checks if the mana of the white mage is correct.
+   * Checks if the attacks from an enemy to a white mage are correct.
    */
   @Test
-  void manaTest() {
-    assertEquals(MANA, testWhiteMage.getMana());
-    assertNotEquals(MANA + 2, testWhiteMage.getMana());
-  }
+  void attackTest() {
+    assertEquals(100, testDefensiveWhiteMage.getCurrentLife());
+    testEnemy.attack(testDefensiveWhiteMage);
+    assertEquals(100, testDefensiveWhiteMage.getCurrentLife());
 
+    assertEquals(100, testWhiteMage.getCurrentLife());
+    testEnemy.attack(testWhiteMage);
+    assertEquals(95, testWhiteMage.getCurrentLife());
+
+    testDeadEnemy.attack(testWhiteMage);
+    assertEquals(95, testWhiteMage.getCurrentLife());
+  }
 }

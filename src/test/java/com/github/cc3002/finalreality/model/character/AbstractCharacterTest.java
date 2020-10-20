@@ -29,7 +29,7 @@ public abstract class AbstractCharacterTest {
   protected Weapon testWeapon;
 
   protected static final int LIFE = 100;
-  protected static final int DEFENSE = 30;
+  protected static final int DEFENSE = 10;
   protected static final int MANA = 50;
 
   /**
@@ -41,7 +41,7 @@ public abstract class AbstractCharacterTest {
     testWeapon = new Weapon("Test Weapon", 15, 10, WeaponType.AXE);
     testCharacters = new ArrayList<>();
 
-    Enemy testEnemy = new Enemy("Test Enemy", 10, turns, 100, 30, 15);
+    Enemy testEnemy = new Enemy("Test Enemy", 10, turns, LIFE, DEFENSE, 15);
     Knight testKnight = new Knight("Test Knight", turns, CharacterClass.KNIGHT, LIFE, DEFENSE);
     testKnight.equipAxe(testWeapon);
     testCharacters.add(testKnight);

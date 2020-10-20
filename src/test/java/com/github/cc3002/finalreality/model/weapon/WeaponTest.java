@@ -59,7 +59,7 @@ public class WeaponTest {
     assertNotEquals(notExpectedWeapon3.hashCode(), testWeapon.hashCode());
     assertNotEquals(notExpectedWeapon4, testWeapon);
     assertNotEquals(notExpectedWeapon4.hashCode(), testWeapon.hashCode());
-    assertFalse(testWeapon.equals(new Knight("Not Weapon", turns, CharacterClass.KNIGHT, 100, 40)));
+    assertNotEquals(testWeapon, new Knight("Not Weapon", turns, CharacterClass.KNIGHT, 100, 40));
   }
 
 }

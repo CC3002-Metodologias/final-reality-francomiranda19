@@ -47,7 +47,7 @@ public class KnifeTest extends WeaponTest {
     assertNotEquals(notExpectedKnife3.hashCode(), testKnife.hashCode());
     assertNotEquals(notExpectedKnife4, testKnife);
     assertNotEquals(notExpectedKnife4.hashCode(), testKnife.hashCode());
-    assertFalse(testKnife.equals(new Sword("Not Knife", DAMAGE, WEIGHT, WeaponType.SWORD)));
+    assertNotEquals(testKnife, new Sword("Not Knife", DAMAGE, WEIGHT, WeaponType.SWORD));
   }
 
 }

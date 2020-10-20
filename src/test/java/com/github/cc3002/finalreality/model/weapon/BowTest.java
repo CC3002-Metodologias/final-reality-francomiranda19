@@ -47,7 +47,7 @@ public class BowTest extends WeaponTest {
     assertNotEquals(notExpectedBow3.hashCode(), testBow.hashCode());
     assertNotEquals(notExpectedBow4, testBow);
     assertNotEquals(notExpectedBow4.hashCode(), testBow.hashCode());
-    assertFalse(testBow.equals(new Staff("Not Bow", DAMAGE, WEIGHT, WeaponType.STAFF, MAGIC_DAMAGE)));
+    assertNotEquals(testBow, new Staff("Not Bow", DAMAGE, WEIGHT, WeaponType.STAFF, MAGIC_DAMAGE));
   }
 
 }
