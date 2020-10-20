@@ -6,6 +6,7 @@ import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
+import com.github.francomiranda19.finalreality.model.character.player.PlayerCharacter;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -24,8 +25,8 @@ public class Enemy extends AbstractCharacter {
    * play.
    */
   public Enemy(@NotNull final String name, final int weight,
-      @NotNull final BlockingQueue<ICharacter> turnsQueue, int lifePoints, int defense, int attack) {
-    super(turnsQueue, name, CharacterClass.ENEMY, lifePoints, defense);
+      @NotNull final BlockingQueue<ICharacter> turnsQueue, int maxLife, int defense, int attack) {
+    super(turnsQueue, name, CharacterClass.ENEMY, maxLife, defense);
     this.weight = weight;
     this.attack = attack;
   }
@@ -43,6 +44,17 @@ public class Enemy extends AbstractCharacter {
   public int getAttack() { return attack; }
 
   /**
+   * Decreases the player character's life.
+   *
+   * @param playerCharacter who is going to be attacked
+   */
+  public void attack(PlayerCharacter playerCharacter) {
+    if (this.getCurrentLife() > 0) {
+      playerCharacter.receiveDamage(this.getAttack(), playerCharacter.getDefense());
+    }
+  }
+
+  /**
    * Checks if two enemies are equal.
    *
    * @param o to check object.
@@ -58,7 +70,7 @@ public class Enemy extends AbstractCharacter {
     final Enemy enemy = (Enemy) o;
     return getName().equals(enemy.getName())
             && getWeight() == enemy.getWeight()
-            && getLifePoints() == enemy.getLifePoints()
+            && getMaxLife() == enemy.getMaxLife()
             && getDefense() == enemy.getDefense()
             && getAttack() == enemy.getAttack();
   }
@@ -68,7 +80,7 @@ public class Enemy extends AbstractCharacter {
    */
   @Override
   public int hashCode() {
-    return Objects.hash(getName(), getWeight(), getLifePoints(), getDefense(), getAttack());
+    return Objects.hash(getName(), getWeight(), getMaxLife(), getDefense(), getAttack());
   }
 
   @Override

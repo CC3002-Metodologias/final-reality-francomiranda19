@@ -46,6 +46,6 @@ public class AxeTest extends WeaponTest {
     assertNotEquals(notExpectedAxe3.hashCode(), testAxe.hashCode());
     assertNotEquals(notExpectedAxe4, testAxe);
     assertNotEquals(notExpectedAxe4.hashCode(), testAxe.hashCode());
-    assertFalse(testAxe.equals(new Bow("Not Axe", DAMAGE, WEIGHT, WeaponType.BOW)));
+    assertNotEquals(testAxe, new Bow("Not Axe", DAMAGE, WEIGHT, WeaponType.BOW));
   }
 }

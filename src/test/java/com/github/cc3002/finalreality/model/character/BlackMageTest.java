@@ -1,5 +1,6 @@
 package com.github.cc3002.finalreality.model.character;
 
+import com.github.francomiranda19.finalreality.model.character.Enemy;
 import com.github.francomiranda19.finalreality.model.character.player.BlackMage;
 import com.github.francomiranda19.finalreality.model.character.player.CharacterClass;
 import com.github.francomiranda19.finalreality.model.character.player.WhiteMage;
@@ -19,7 +20,8 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 public class BlackMageTest extends PlayerCharacterTest {
   private static final String BLACK_MAGE_NAME = "Test Black Mage";
-  private BlackMage testBlackMage;
+  private BlackMage testBlackMage, testDefensiveBlackMage, testDeadBlackMage;
+  private Enemy testEnemy, testDeadEnemy;
   private Knife testKnife;
   private Staff testStaff;
 
@@ -29,6 +31,10 @@ public class BlackMageTest extends PlayerCharacterTest {
   @BeforeEach
   void setUp() {
     testBlackMage = new BlackMage(BLACK_MAGE_NAME, turns, CharacterClass.BLACK_MAGE, LIFE, DEFENSE, MANA);
+    testDefensiveBlackMage = new BlackMage("Test Defensive Black Mage", turns, CharacterClass.BLACK_MAGE, LIFE, 80, MANA);
+    testDeadBlackMage = new BlackMage("Test Dead Black Mage", turns, CharacterClass.BLACK_MAGE, 0, DEFENSE, MANA);
+    testEnemy = new Enemy("Test Enemy", 10, turns, LIFE, DEFENSE, 15);
+    testDeadEnemy = new Enemy("Test Dead Enemy", 10, turns, 0, DEFENSE, 15);
     testKnife = new Knife("Test Knife", 15, 10, WeaponType.KNIFE);
     testStaff = new Staff("Test Staff", 20, 10, WeaponType.STAFF, 30);
     super.basicSetUp();
@@ -63,7 +69,7 @@ public class BlackMageTest extends PlayerCharacterTest {
     assertNotEquals(notExpectedBlackMage4.hashCode(), testBlackMage.hashCode());
     assertNotEquals(notExpectedBlackMage5, testBlackMage);
     assertNotEquals(notExpectedBlackMage5.hashCode(), testBlackMage.hashCode());
-    assertFalse(testBlackMage.equals(new WhiteMage("Not Black Mage", turns, CharacterClass.WHITE_MAGE, LIFE, DEFENSE, MANA)));
+    assertNotEquals(testBlackMage, new WhiteMage("Not Black Mage", turns, CharacterClass.WHITE_MAGE, LIFE, DEFENSE, MANA));
   }
 
   /**
@@ -75,6 +81,9 @@ public class BlackMageTest extends PlayerCharacterTest {
     testBlackMage.equipKnife(testKnife);
     assertEquals(testKnife, testBlackMage.getEquippedWeapon());
     assertNotEquals(testStaff, testBlackMage.getEquippedWeapon());
+
+    testDeadBlackMage.equipKnife(testKnife);
+    assertNull(testDeadBlackMage.getEquippedWeapon());
   }
 
   /**
@@ -85,15 +94,26 @@ public class BlackMageTest extends PlayerCharacterTest {
     testBlackMage.equipStaff(testStaff);
     assertEquals(testStaff, testBlackMage.getEquippedWeapon());
     assertNotEquals(testKnife, testBlackMage.getEquippedWeapon());
+
+    testDeadBlackMage.equipStaff(testStaff);
+    assertNull(testDeadBlackMage.getEquippedWeapon());
   }
 
   /**
-   * Checks if the mana of the black mage is correct.
+   * Checks if the attacks from an enemy to a black mage are correct.
    */
   @Test
-  void manaTest() {
-    assertEquals(MANA, testBlackMage.getMana());
-    assertNotEquals(MANA + 2, testBlackMage.getMana());
+  void attackTest() {
+    assertEquals(100, testDefensiveBlackMage.getCurrentLife());
+    testEnemy.attack(testDefensiveBlackMage);
+    assertEquals(100, testDefensiveBlackMage.getCurrentLife());
+
+    assertEquals(100, testBlackMage.getCurrentLife());
+    testEnemy.attack(testBlackMage);
+    assertEquals(95, testBlackMage.getCurrentLife());
+    
+    testDeadEnemy.attack(testBlackMage);
+    assertEquals(95, testBlackMage.getCurrentLife());
   }
 
 }

@@ -1,5 +1,6 @@
 package com.github.cc3002.finalreality.model.character;
 
+import com.github.francomiranda19.finalreality.model.character.Enemy;
 import com.github.francomiranda19.finalreality.model.character.player.*;
 import com.github.francomiranda19.finalreality.model.weapon.Bow;
 import com.github.francomiranda19.finalreality.model.weapon.Staff;
@@ -19,7 +20,8 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
  */
 public class ThiefTest extends PlayerCharacterTest {
   private static final String THIEF_NAME = "Test Thief";
-  private Thief testThief;
+  private Thief testThief, testDefensiveThief, testDeadThief;
+  private Enemy testEnemy, testDeadEnemy;
   private Sword testSword;
   private Staff testStaff;
   private Bow testBow;
@@ -30,6 +32,10 @@ public class ThiefTest extends PlayerCharacterTest {
   @BeforeEach
   void setUp() {
     testThief = new Thief(THIEF_NAME, turns, CharacterClass.THIEF, LIFE, DEFENSE);
+    testDefensiveThief = new Thief("Test Defensive Thief", turns, CharacterClass.THIEF, LIFE, 80);
+    testDeadThief = new Thief("Test Dead Thief", turns, CharacterClass.THIEF, 0, DEFENSE);
+    testEnemy = new Enemy("Test Enemy", 10, turns, LIFE, DEFENSE, 15);
+    testDeadEnemy = new Enemy("Test Dead Enemy", 10, turns, 0, DEFENSE, 15);
     testSword = new Sword("Test Sword", 15, 10, WeaponType.SWORD);
     testStaff = new Staff("Test Staff", 20, 10, WeaponType.STAFF, 20);
     testBow = new Bow("Test Bow", 15, 10, WeaponType.BOW);
@@ -62,7 +68,7 @@ public class ThiefTest extends PlayerCharacterTest {
     assertNotEquals(notExpectedThief3.hashCode(), testThief.hashCode());
     assertNotEquals(notExpectedThief4, testThief);
     assertNotEquals(notExpectedThief4.hashCode(), testThief.hashCode());
-    assertFalse(testThief.equals(new Knight("Not Thief", turns, CharacterClass.KNIGHT, LIFE, DEFENSE)));
+    assertNotEquals(testThief, new Knight("Not Thief", turns, CharacterClass.KNIGHT, LIFE, DEFENSE));
   }
 
   /**
@@ -75,6 +81,9 @@ public class ThiefTest extends PlayerCharacterTest {
     assertEquals(testSword, testThief.getEquippedWeapon());
     assertNotEquals(testStaff, testThief.getEquippedWeapon());
     assertNotEquals(testBow, testThief.getEquippedWeapon());
+
+    testDeadThief.equipSword(testSword);
+    assertNull(testDeadThief.getEquippedWeapon());
   }
 
   /**
@@ -86,6 +95,9 @@ public class ThiefTest extends PlayerCharacterTest {
     assertEquals(testStaff, testThief.getEquippedWeapon());
     assertNotEquals(testSword, testThief.getEquippedWeapon());
     assertNotEquals(testBow, testThief.getEquippedWeapon());
+
+    testDeadThief.equipStaff(testStaff);
+    assertNull(testDeadThief.getEquippedWeapon());
   }
 
   /**
@@ -97,5 +109,25 @@ public class ThiefTest extends PlayerCharacterTest {
     assertEquals(testBow, testThief.getEquippedWeapon());
     assertNotEquals(testSword, testThief.getEquippedWeapon());
     assertNotEquals(testStaff, testThief.getEquippedWeapon());
+
+    testDeadThief.equipBow(testBow);
+    assertNull(testDeadThief.getEquippedWeapon());
+  }
+
+  /**
+   * Checks if the attacks from an enemy to a thief are correct.
+   */
+  @Test
+  void attackTest() {
+    assertEquals(100, testDefensiveThief.getCurrentLife());
+    testEnemy.attack(testDefensiveThief);
+    assertEquals(100, testDefensiveThief.getCurrentLife());
+
+    assertEquals(100, testThief.getCurrentLife());
+    testEnemy.attack(testThief);
+    assertEquals(95, testThief.getCurrentLife());
+
+    testDeadEnemy.attack(testThief);
+    assertEquals(95, testThief.getCurrentLife());
   }
 }

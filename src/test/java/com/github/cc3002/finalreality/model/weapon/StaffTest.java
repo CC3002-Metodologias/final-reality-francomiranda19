@@ -50,7 +50,7 @@ public class StaffTest extends WeaponTest {
     assertNotEquals(notExpectedStaff4.hashCode(), testStaff.hashCode());
     assertNotEquals(notExpectedStaff5, testStaff);
     assertNotEquals(notExpectedStaff5.hashCode(), testStaff.hashCode());
-    assertFalse(testStaff.equals(new Axe("Not Staff", DAMAGE, WEIGHT, WeaponType.AXE)));
+    assertNotEquals(testStaff, new Axe("Not Staff", DAMAGE, WEIGHT, WeaponType.AXE));
   }
 
   /**

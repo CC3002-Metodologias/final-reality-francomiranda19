@@ -18,12 +18,12 @@ public class Knight extends PlayerCharacter {
    * @param name           the character's name
    * @param turnsQueue     the queue with the characters waiting for their turn
    * @param characterClass the class of this character
-   * @param lifePoints     the character's life points
+   * @param maxLife        the character's maximum life
    * @param defense        the character's defense
    */
   public Knight(@NotNull String name, @NotNull BlockingQueue<ICharacter> turnsQueue, CharacterClass characterClass,
-                int lifePoints, int defense) {
-    super(name, turnsQueue, characterClass, lifePoints, defense);
+                int maxLife, int defense) {
+    super(name, turnsQueue, characterClass, maxLife, defense);
   }
 
   /**
@@ -32,7 +32,9 @@ public class Knight extends PlayerCharacter {
    * @param sword the character will equip this weapon
    */
   public void equipSword(Weapon sword) {
-    this.equippedWeapon = sword;
+    if (this.getCurrentLife() > 0) {
+      this.equippedWeapon = sword;
+    }
   }
 
   /**
@@ -41,7 +43,9 @@ public class Knight extends PlayerCharacter {
    * @param axe the character will equip this weapon
    */
   public void equipAxe(Weapon axe) {
-    this.equippedWeapon = axe;
+    if (this.getCurrentLife() > 0) {
+      this.equippedWeapon = axe;
+    }
   }
 
   /**
@@ -50,7 +54,9 @@ public class Knight extends PlayerCharacter {
    * @param knife the character will equip this weapon
    */
   public void equipKnife(Weapon knife) {
-    this.equippedWeapon = knife;
+    if (this.getCurrentLife() > 0) {
+      this.equippedWeapon = knife;
+    }
   }
 
   /**
@@ -69,7 +75,7 @@ public class Knight extends PlayerCharacter {
     final Knight knight = (Knight) o;
     return getName().equals(knight.getName())
             && getCharacterClass() == knight.getCharacterClass()
-            && getLifePoints() == knight.getLifePoints()
+            && getMaxLife() == knight.getMaxLife()
             && getDefense() == knight.getDefense()
             && getEquippedWeapon() == knight.getEquippedWeapon();
   }
@@ -79,7 +85,7 @@ public class Knight extends PlayerCharacter {
    */
   @Override
   public int hashCode() {
-    return Objects.hash(getName(), getCharacterClass(), getLifePoints(), getDefense(), getEquippedWeapon());
+    return Objects.hash(getName(), getCharacterClass(), getMaxLife(), getDefense(), getEquippedWeapon());
   }
 
 }
