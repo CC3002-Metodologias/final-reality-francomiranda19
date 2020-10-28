@@ -30,7 +30,7 @@ public class Thief extends PlayerCharacter {
    *
    * @param sword the character will equip this weapon
    */
-  public void equipSword(Weapon sword) {
+  public void equipSword(Sword sword) {
     if (this.getCurrentLife() > 0) {
       this.equippedWeapon = sword;
     }
@@ -41,7 +41,7 @@ public class Thief extends PlayerCharacter {
    *
    * @param staff the character will equip this weapon
    */
-  public void equipStaff(Weapon staff) {
+  public void equipStaff(Staff staff) {
     if (this.getCurrentLife() > 0) {
       this.equippedWeapon = staff;
     }
@@ -52,7 +52,7 @@ public class Thief extends PlayerCharacter {
    *
    * @param bow the character will equip this weapon
    */
-  public void equipBow(Weapon bow) {
+  public void equipBow(Bow bow) {
     if (this.getCurrentLife() > 0) {
       this.equippedWeapon = bow;
     }

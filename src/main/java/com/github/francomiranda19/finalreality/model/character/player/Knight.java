@@ -31,7 +31,7 @@ public class Knight extends PlayerCharacter {
    *
    * @param sword the character will equip this weapon
    */
-  public void equipSword(Weapon sword) {
+  public void equipSword(Sword sword) {
     if (this.getCurrentLife() > 0) {
       this.equippedWeapon = sword;
     }
@@ -42,7 +42,7 @@ public class Knight extends PlayerCharacter {
    *
    * @param axe the character will equip this weapon
    */
-  public void equipAxe(Weapon axe) {
+  public void equipAxe(Axe axe) {
     if (this.getCurrentLife() > 0) {
       this.equippedWeapon = axe;
     }
@@ -53,7 +53,7 @@ public class Knight extends PlayerCharacter {
    *
    * @param knife the character will equip this weapon
    */
-  public void equipKnife(Weapon knife) {
+  public void equipKnife(Knife knife) {
     if (this.getCurrentLife() > 0) {
       this.equippedWeapon = knife;
     }

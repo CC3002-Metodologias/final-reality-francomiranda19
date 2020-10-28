@@ -26,7 +26,7 @@ public abstract class AbstractCharacterTest {
 
   protected BlockingQueue<ICharacter> turns;
   protected List<ICharacter> testCharacters;
-  protected Weapon testWeapon;
+  protected Axe testWeapon;
 
   protected static final int LIFE = 100;
   protected static final int DEFENSE = 10;
@@ -38,7 +38,7 @@ public abstract class AbstractCharacterTest {
   @BeforeEach
   void basicSetUp() {
     turns = new LinkedBlockingQueue<>();
-    testWeapon = new Weapon("Test Weapon", 15, 10, WeaponType.AXE);
+    testWeapon = new Axe("Test Weapon", 15, 10, WeaponType.AXE);
     testCharacters = new ArrayList<>();
 
     Enemy testEnemy = new Enemy("Test Enemy", 10, turns, LIFE, DEFENSE, 15);
