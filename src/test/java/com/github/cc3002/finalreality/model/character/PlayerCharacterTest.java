@@ -50,6 +50,6 @@ public class PlayerCharacterTest extends AbstractCharacterTest {
     assertNotEquals(notExpectedPlayerCharacter3.hashCode(), testPlayerCharacter.hashCode());
     assertNotEquals(notExpectedPlayerCharacter4, testPlayerCharacter);
     assertNotEquals(notExpectedPlayerCharacter4.hashCode(), testPlayerCharacter.hashCode());
-    assertNotEquals(testPlayerCharacter, new Weapon("Not Player Character", 20, 10, WeaponType.AXE));
+    assertNotEquals(testPlayerCharacter, new Axe("Not Player Character", 20, 10, WeaponType.AXE));
   }
 }

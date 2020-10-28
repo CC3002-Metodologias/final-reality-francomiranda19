@@ -1,7 +1,8 @@
 package com.github.francomiranda19.finalreality.model.character.player;
 
 import com.github.francomiranda19.finalreality.model.character.ICharacter;
-import com.github.francomiranda19.finalreality.model.weapon.Weapon;
+import com.github.francomiranda19.finalreality.model.weapon.Knife;
+import com.github.francomiranda19.finalreality.model.weapon.Staff;
 import org.jetbrains.annotations.NotNull;
 import java.util.Objects;
 import java.util.concurrent.BlockingQueue;
@@ -31,7 +32,7 @@ public class BlackMage extends AbstractMage{
    *
    * @param knife the character will equip this weapon
    */
-  public void equipKnife(Weapon knife) {
+  public void equipKnife(Knife knife) {
     if (this.getCurrentLife() > 0) {
       this.equippedWeapon = knife;
     }
@@ -42,7 +43,7 @@ public class BlackMage extends AbstractMage{
    *
    * @param staff the character will equip this weapon
    */
-  public void equipStaff(Weapon staff) {
+  public void equipStaff(Staff staff) {
     if (this.getCurrentLife() > 0) {
       this.equippedWeapon = staff;
     }

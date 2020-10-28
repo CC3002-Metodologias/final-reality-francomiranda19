@@ -1,7 +1,7 @@
 package com.github.francomiranda19.finalreality.model.character.player;
 
 import com.github.francomiranda19.finalreality.model.character.ICharacter;
-import com.github.francomiranda19.finalreality.model.weapon.Weapon;
+import com.github.francomiranda19.finalreality.model.weapon.Knife;
 import org.jetbrains.annotations.NotNull;
 import java.util.Objects;
 import java.util.concurrent.BlockingQueue;
@@ -30,7 +30,7 @@ public class WhiteMage extends AbstractMage {
    *
    * @param knife the character will equip this weapon
    */
-  public void equipKnife(Weapon knife) {
+  public void equipKnife(Knife knife) {
     if (this.getCurrentLife() > 0) {
       this.equippedWeapon = knife;
     }

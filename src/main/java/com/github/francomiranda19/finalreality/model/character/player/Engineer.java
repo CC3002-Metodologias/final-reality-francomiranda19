@@ -1,8 +1,8 @@
 package com.github.francomiranda19.finalreality.model.character.player;
 
-import com.github.francomiranda19.finalreality.model.character.Enemy;
 import com.github.francomiranda19.finalreality.model.character.ICharacter;
-import com.github.francomiranda19.finalreality.model.weapon.Weapon;
+import com.github.francomiranda19.finalreality.model.weapon.Axe;
+import com.github.francomiranda19.finalreality.model.weapon.Bow;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Objects;
@@ -33,7 +33,7 @@ public class Engineer extends PlayerCharacter {
    *
    * @param axe the character will equip this weapon
    */
-  public void equipAxe(Weapon axe) {
+  public void equipAxe(Axe axe) {
     if (this.getCurrentLife() > 0) {
       this.equippedWeapon = axe;
     }
@@ -44,7 +44,7 @@ public class Engineer extends PlayerCharacter {
    *
    * @param bow the character will equip this weapon
    */
-  public void equipBow(Weapon bow) {
+  public void equipBow(Bow bow) {
     if (this.getCurrentLife() > 0) {
       this.equippedWeapon = bow;
     }
