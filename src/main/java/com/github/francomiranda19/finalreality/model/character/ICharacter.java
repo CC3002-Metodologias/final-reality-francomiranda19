@@ -1,7 +1,7 @@
 package com.github.francomiranda19.finalreality.model.character;
 
 import com.github.francomiranda19.finalreality.model.character.player.CharacterClass;
-import com.github.francomiranda19.finalreality.model.weapon.Weapon;
+import com.github.francomiranda19.finalreality.model.weapon.IWeapon;
 
 /**
  * This represents a character from the game.
@@ -26,7 +26,7 @@ public interface ICharacter {
   /**
    * Return this character's equipped weapon.
    */
-  Weapon getEquippedWeapon();
+  IWeapon getEquippedWeapon();
 
   /**
    * Returns this character's class.

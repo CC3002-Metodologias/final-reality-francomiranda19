@@ -8,23 +8,19 @@ import java.util.Objects;
  * @author Ignacio Slater Muñoz.
  * @author Franco Miranda Oyarzún
  */
-public class Weapon implements IWeapon {
+public abstract class AbstractWeapon implements IWeapon {
 
   private final String name;
   private final int damage;
   private final int weight;
-  private final WeaponType weaponType;
 
   /**
    * Creates a weapon with a name, a base damage, weight and its type.
-   *
-   * @see WeaponType
    */
-  public Weapon(final String name, final int damage, final int weight, final WeaponType weaponType) {
+  public AbstractWeapon(final String name, final int damage, final int weight) {
     this.name = name;
     this.damage = damage;
     this.weight = weight;
-    this.weaponType = weaponType;
   }
 
   @Override
@@ -42,11 +38,6 @@ public class Weapon implements IWeapon {
     return weight;
   }
 
-  @Override
-  public WeaponType getWeaponType() {
-    return weaponType;
-  }
-
   /**
    * Checks if two Weapons are equal.
    *
@@ -57,14 +48,13 @@ public class Weapon implements IWeapon {
     if (this == o) {
       return true;
     }
-    if (!(o instanceof Weapon)) {
+    if (!(o instanceof AbstractWeapon)) {
       return false;
     }
-    final Weapon weapon = (Weapon) o;
+    final AbstractWeapon weapon = (AbstractWeapon) o;
     return getName().equals(weapon.getName())
             && getDamage() == weapon.getDamage()
-            && getWeight() == weapon.getWeight()
-            && getWeaponType() == weapon.getWeaponType();
+            && getWeight() == weapon.getWeight();
   }
 
   /**
@@ -72,6 +62,6 @@ public class Weapon implements IWeapon {
    */
   @Override
   public int hashCode() {
-    return Objects.hash(getName(), getDamage(), getWeight(), getWeaponType());
+    return Objects.hash(getName(), getDamage(), getWeight());
   }
 }

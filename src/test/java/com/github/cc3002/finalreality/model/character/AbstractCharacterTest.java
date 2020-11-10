@@ -38,7 +38,7 @@ public abstract class AbstractCharacterTest {
   @BeforeEach
   void basicSetUp() {
     turns = new LinkedBlockingQueue<>();
-    testWeapon = new Axe("Test Weapon", 15, 10, WeaponType.AXE);
+    testWeapon = new Axe("Test Weapon", 15, 10);
     testCharacters = new ArrayList<>();
 
     Enemy testEnemy = new Enemy("Test Enemy", 10, turns, LIFE, DEFENSE, 15);

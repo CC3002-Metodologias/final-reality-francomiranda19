@@ -1,6 +1,7 @@
 package com.github.cc3002.finalreality.model.character;
 
-import com.github.francomiranda19.finalreality.model.character.player.*;
+import com.github.francomiranda19.finalreality.model.character.player.CharacterClass;
+import com.github.francomiranda19.finalreality.model.character.player.PlayerCharacter;
 import com.github.francomiranda19.finalreality.model.weapon.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -50,6 +51,6 @@ public class PlayerCharacterTest extends AbstractCharacterTest {
     assertNotEquals(notExpectedPlayerCharacter3.hashCode(), testPlayerCharacter.hashCode());
     assertNotEquals(notExpectedPlayerCharacter4, testPlayerCharacter);
     assertNotEquals(notExpectedPlayerCharacter4.hashCode(), testPlayerCharacter.hashCode());
-    assertNotEquals(testPlayerCharacter, new Axe("Not Player Character", 20, 10, WeaponType.AXE));
+    assertNotEquals(testPlayerCharacter, new Axe("Not Player Character", 20, 10));
   }
 }

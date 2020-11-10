@@ -1,11 +1,12 @@
 package com.github.cc3002.finalreality.model.character;
 
 import com.github.francomiranda19.finalreality.model.character.Enemy;
-import com.github.francomiranda19.finalreality.model.character.player.*;
+import com.github.francomiranda19.finalreality.model.character.player.CharacterClass;
+import com.github.francomiranda19.finalreality.model.character.player.Knight;
+import com.github.francomiranda19.finalreality.model.character.player.Thief;
 import com.github.francomiranda19.finalreality.model.weapon.Bow;
 import com.github.francomiranda19.finalreality.model.weapon.Staff;
 import com.github.francomiranda19.finalreality.model.weapon.Sword;
-import com.github.francomiranda19.finalreality.model.weapon.WeaponType;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -36,9 +37,9 @@ public class ThiefTest extends PlayerCharacterTest {
     testDeadThief = new Thief("Test Dead Thief", turns, CharacterClass.THIEF, 0, DEFENSE);
     testEnemy = new Enemy("Test Enemy", 10, turns, LIFE, DEFENSE, 15);
     testDeadEnemy = new Enemy("Test Dead Enemy", 10, turns, 0, DEFENSE, 15);
-    testSword = new Sword("Test Sword", 15, 10, WeaponType.SWORD);
-    testStaff = new Staff("Test Staff", 20, 10, WeaponType.STAFF, 20);
-    testBow = new Bow("Test Bow", 15, 10, WeaponType.BOW);
+    testSword = new Sword("Test Sword", 15, 10);
+    testStaff = new Staff("Test Staff", 20, 10, 20);
+    testBow = new Bow("Test Bow", 15, 10);
     super.basicSetUp();
   }
 

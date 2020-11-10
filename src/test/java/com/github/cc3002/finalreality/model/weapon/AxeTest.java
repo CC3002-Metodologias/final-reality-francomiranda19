@@ -12,28 +12,27 @@ import static org.junit.jupiter.api.Assertions.*;
  * @author Franco Miranda Oyarzún
  * @see Axe
  */
-public class AxeTest extends WeaponTest {
+public class AxeTest {
   private static final String AXE_NAME = "Test Axe";
   private Axe testAxe;
+  private static final int DAMAGE = 15;
+  private static final int WEIGHT = 10;
 
   /**
    * Setup method.
    */
   @BeforeEach
-  void setUp() {
-    testAxe = new Axe(AXE_NAME, DAMAGE, WEIGHT, WeaponType.AXE);
-  }
+  void setUp() { testAxe = new Axe(AXE_NAME, DAMAGE, WEIGHT); }
 
   /**
    * Checks that the class' constructor and equals method works properly.
    */
   @Test
   void constructorTest() {
-    var expectedAxe = new Axe(AXE_NAME, DAMAGE, WEIGHT, WeaponType.AXE);
-    var notExpectedAxe1 = new Axe("Not Axe", DAMAGE, WEIGHT, WeaponType.AXE);
-    var notExpectedAxe2 = new Axe(AXE_NAME, 57, WEIGHT, WeaponType.AXE);
-    var notExpectedAxe3 = new Axe(AXE_NAME, DAMAGE, 9, WeaponType.AXE);
-    var notExpectedAxe4 = new Axe(AXE_NAME, DAMAGE, WEIGHT, WeaponType.BOW);
+    var expectedAxe = new Axe(AXE_NAME, DAMAGE, WEIGHT);
+    var notExpectedAxe1 = new Axe("Not Axe", DAMAGE, WEIGHT);
+    var notExpectedAxe2 = new Axe(AXE_NAME, 57, WEIGHT);
+    var notExpectedAxe3 = new Axe(AXE_NAME, DAMAGE, 9);
 
     assertEquals(testAxe, testAxe);
     assertEquals(expectedAxe, testAxe);
@@ -44,8 +43,6 @@ public class AxeTest extends WeaponTest {
     assertNotEquals(notExpectedAxe2.hashCode(), testAxe.hashCode());
     assertNotEquals(notExpectedAxe3, testAxe);
     assertNotEquals(notExpectedAxe3.hashCode(), testAxe.hashCode());
-    assertNotEquals(notExpectedAxe4, testAxe);
-    assertNotEquals(notExpectedAxe4.hashCode(), testAxe.hashCode());
-    assertNotEquals(testAxe, new Bow("Not Axe", DAMAGE, WEIGHT, WeaponType.BOW));
+    assertNotEquals(testAxe, new Bow("Not Axe", DAMAGE, WEIGHT));
   }
 }

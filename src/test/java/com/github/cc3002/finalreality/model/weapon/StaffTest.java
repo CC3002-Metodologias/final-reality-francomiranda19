@@ -13,16 +13,19 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
  * @author Franco Miranda Oyarzún
  * @see Staff
  */
-public class StaffTest extends WeaponTest {
+public class StaffTest {
   private static final String STAFF_NAME = "Test Staff";
   private Staff testStaff;
+  protected static final int DAMAGE = 15;
+  protected static final int WEIGHT = 10;
+  protected static final int MAGIC_DAMAGE = 40;
 
   /**
    * Setup method.
    */
   @BeforeEach
   void setUp() {
-    testStaff = new Staff(STAFF_NAME, DAMAGE, WEIGHT, WeaponType.STAFF, MAGIC_DAMAGE);
+    testStaff = new Staff(STAFF_NAME, DAMAGE, WEIGHT, MAGIC_DAMAGE);
   }
 
   /**
@@ -30,12 +33,11 @@ public class StaffTest extends WeaponTest {
    */
   @Test
   void constructorTest() {
-    var expectedStaff = new Staff(STAFF_NAME, DAMAGE, WEIGHT, WeaponType.STAFF, MAGIC_DAMAGE);
-    var notExpectedStaff1 = new Staff("Not Staff", DAMAGE, WEIGHT, WeaponType.STAFF, MAGIC_DAMAGE);
-    var notExpectedStaff2 = new Staff(STAFF_NAME, 32, WEIGHT, WeaponType.STAFF, MAGIC_DAMAGE);
-    var notExpectedStaff3 = new Staff(STAFF_NAME, DAMAGE, 12, WeaponType.STAFF, MAGIC_DAMAGE);
-    var notExpectedStaff4 = new Staff(STAFF_NAME, DAMAGE, WEIGHT, WeaponType.KNIFE, MAGIC_DAMAGE);
-    var notExpectedStaff5 = new Staff(STAFF_NAME, DAMAGE, WEIGHT, WeaponType.STAFF, 5);
+    var expectedStaff = new Staff(STAFF_NAME, DAMAGE, WEIGHT, MAGIC_DAMAGE);
+    var notExpectedStaff1 = new Staff("Not Staff", DAMAGE, WEIGHT, MAGIC_DAMAGE);
+    var notExpectedStaff2 = new Staff(STAFF_NAME, 32, WEIGHT, MAGIC_DAMAGE);
+    var notExpectedStaff3 = new Staff(STAFF_NAME, DAMAGE, 12, MAGIC_DAMAGE);
+    var notExpectedStaff4 = new Staff(STAFF_NAME, DAMAGE, WEIGHT, 5);
 
     assertEquals(testStaff, testStaff);
     assertEquals(expectedStaff, testStaff);
@@ -48,9 +50,7 @@ public class StaffTest extends WeaponTest {
     assertNotEquals(notExpectedStaff3.hashCode(), testStaff.hashCode());
     assertNotEquals(notExpectedStaff4, testStaff);
     assertNotEquals(notExpectedStaff4.hashCode(), testStaff.hashCode());
-    assertNotEquals(notExpectedStaff5, testStaff);
-    assertNotEquals(notExpectedStaff5.hashCode(), testStaff.hashCode());
-    assertNotEquals(testStaff, new Axe("Not Staff", DAMAGE, WEIGHT, WeaponType.AXE));
+    assertNotEquals(testStaff, new Axe("Not Staff", DAMAGE, WEIGHT));
   }
 
   /**

@@ -6,7 +6,6 @@ import com.github.francomiranda19.finalreality.model.character.player.CharacterC
 import com.github.francomiranda19.finalreality.model.character.player.WhiteMage;
 import com.github.francomiranda19.finalreality.model.weapon.Axe;
 import com.github.francomiranda19.finalreality.model.weapon.Knife;
-import com.github.francomiranda19.finalreality.model.weapon.WeaponType;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -35,8 +34,8 @@ public class WhiteMageTest extends PlayerCharacterTest {
     testDeadWhiteMage = new WhiteMage("Test Dead White Mage", turns, CharacterClass.WHITE_MAGE, 0, DEFENSE, MANA);
     testEnemy = new Enemy("Test Enemy", 10, turns, LIFE, DEFENSE, 15);
     testDeadEnemy = new Enemy("Test Dead Enemy", 10, turns, 0, DEFENSE, 15);
-    testKnife = new Knife("Test Knife", 20, 10, WeaponType.KNIFE);
-    testAxe = new Axe("Test Axe", 15, 10, WeaponType.AXE);
+    testKnife = new Knife("Test Knife", 20, 10);
+    testAxe = new Axe("Test Axe", 15, 10);
     super.basicSetUp();
   }
 

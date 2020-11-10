@@ -5,7 +5,6 @@ import com.github.francomiranda19.finalreality.model.character.player.CharacterC
 import com.github.francomiranda19.finalreality.model.character.player.Engineer;
 import com.github.francomiranda19.finalreality.model.character.player.Knight;
 import com.github.francomiranda19.finalreality.model.weapon.Sword;
-import com.github.francomiranda19.finalreality.model.weapon.WeaponType;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -77,11 +76,11 @@ public class EnemyTest extends AbstractCharacterTest {
     testPlayerCharacter.attack(testEnemy);
     assertEquals(100, testEnemy.getCurrentLife());
 
-    testPlayerCharacter.equipSword(new Sword("Test Sword", 20, 10, WeaponType.SWORD));
+    testPlayerCharacter.equipSword(new Sword("Test Sword", 20, 10));
     testPlayerCharacter.attack(testEnemy);
     assertEquals(90, testEnemy.getCurrentLife());
 
-    testDeadPlayerCharacter.equipSword(new Sword("Test Sword", 20, 10, WeaponType.SWORD));
+    testDeadPlayerCharacter.equipSword(new Sword("Test Sword", 20, 10));
     testDeadPlayerCharacter.attack(testEnemy);
     assertEquals(90, testEnemy.getCurrentLife());
   }

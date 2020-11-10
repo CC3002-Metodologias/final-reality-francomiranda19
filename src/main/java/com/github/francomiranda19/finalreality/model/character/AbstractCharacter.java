@@ -17,7 +17,7 @@ public abstract class AbstractCharacter implements ICharacter {
   protected final BlockingQueue<ICharacter> turnsQueue;
   protected final String name;
   private final CharacterClass characterClass;
-  protected Weapon equippedWeapon = null;
+  protected IWeapon equippedWeapon = null;
   protected ScheduledExecutorService scheduledExecutor;
   private final int maxLife;
   private int currentLife;
@@ -45,7 +45,7 @@ public abstract class AbstractCharacter implements ICharacter {
   public String getName() { return name; }
 
   @Override
-  public Weapon getEquippedWeapon() { return equippedWeapon; }
+  public IWeapon getEquippedWeapon() { return equippedWeapon; }
 
   @Override
   public CharacterClass getCharacterClass() { return characterClass; }

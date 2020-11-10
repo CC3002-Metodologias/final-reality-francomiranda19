@@ -1,10 +1,11 @@
 package com.github.cc3002.finalreality.model.character;
 
 import com.github.francomiranda19.finalreality.model.character.Enemy;
-import com.github.francomiranda19.finalreality.model.character.player.*;
+import com.github.francomiranda19.finalreality.model.character.player.CharacterClass;
+import com.github.francomiranda19.finalreality.model.character.player.Engineer;
+import com.github.francomiranda19.finalreality.model.character.player.Thief;
 import com.github.francomiranda19.finalreality.model.weapon.Axe;
 import com.github.francomiranda19.finalreality.model.weapon.Bow;
-import com.github.francomiranda19.finalreality.model.weapon.WeaponType;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -33,8 +34,8 @@ public class EngineerTest extends PlayerCharacterTest {
     testDeadEngineer = new Engineer("Test Dead Engineer", turns, CharacterClass.ENGINEER, 0, DEFENSE);
     testEnemy = new Enemy("Test Enemy", 10, turns, LIFE, DEFENSE, 15);
     testDeadEnemy = new Enemy("Test Dead Enemy", 10, turns, 0, DEFENSE, 15);
-    testAxe = new Axe("Test Axe", 20, 10, WeaponType.AXE);
-    testBow = new Bow("Test Bow", 25, 10, WeaponType.BOW);
+    testAxe = new Axe("Test Axe", 20, 10);
+    testBow = new Bow("Test Bow", 25, 10);
     super.basicSetUp();
   }
 

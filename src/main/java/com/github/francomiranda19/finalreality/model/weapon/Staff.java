@@ -7,7 +7,7 @@ import java.util.Objects;
  *
  * @author Franco Miranda Oyarzún
  */
-public class Staff extends Weapon {
+public class Staff extends AbstractWeapon {
   private final int magicDamage;
 
   /**
@@ -16,11 +16,9 @@ public class Staff extends Weapon {
    * @param name This weapon's name
    * @param damage This weapon's damage.
    * @param weight This weapon's weight.
-   * @param type This weapon's type.
-   * @see WeaponType
    */
-  public Staff(String name, int damage, int weight, WeaponType type, int magicDamage) {
-    super(name, damage, weight, type);
+  public Staff(String name, int damage, int weight, int magicDamage) {
+    super(name, damage, weight);
     this.magicDamage = magicDamage;
   }
 
@@ -36,26 +34,15 @@ public class Staff extends Weapon {
    */
   @Override
   public boolean equals(final Object o) {
-    if (this == o) {
-      return true;
-    }
-    if (!(o instanceof Staff)) {
-      return false;
-    }
-    final Staff staff = (Staff) o;
-    return getName().equals(staff.getName())
-            && getDamage() == staff.getDamage()
-            && getWeight() == staff.getWeight()
-            && getWeaponType() == staff.getWeaponType()
-            && getMagicDamage() == staff.getMagicDamage();
+    return o instanceof Staff && getMagicDamage() == ((Staff) o).getMagicDamage() && super.equals(o);
   }
 
   /**
-   * Hash funciton of the Staff.
+   * Hash function of the Staff.
    */
   @Override
   public int hashCode() {
-    return Objects.hash(getName(), getDamage(), getWeight(), getWeaponType(), getMagicDamage());
+    return Objects.hash(super.hashCode(), getMagicDamage(), Staff.class);
   }
 
 }
