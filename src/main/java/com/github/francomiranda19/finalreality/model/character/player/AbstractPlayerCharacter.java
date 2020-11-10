@@ -7,6 +7,8 @@ import java.util.Objects;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
+
+import com.github.francomiranda19.finalreality.model.weapon.IWeapon;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -15,7 +17,7 @@ import org.jetbrains.annotations.NotNull;
  * @author Ignacio Slater Muñoz.
  * @author Franco Miranda Oyarzún
  */
-public class PlayerCharacter extends AbstractCharacter {
+public abstract class AbstractPlayerCharacter extends AbstractCharacter implements IPlayerCharacter {
 
   /**
    * Creates a new character.
@@ -24,28 +26,24 @@ public class PlayerCharacter extends AbstractCharacter {
    *     the character's name
    * @param turnsQueue
    *     the queue with the characters waiting for their turn
-   * @param characterClass
-   *     the class of this character
    * @param maxLife
    *     the character's maximum life
    * @param defense
    *     the character's defense
    */
-  public PlayerCharacter(@NotNull String name, @NotNull BlockingQueue<ICharacter> turnsQueue, final CharacterClass characterClass,
+  public AbstractPlayerCharacter(@NotNull String name, @NotNull BlockingQueue<ICharacter> turnsQueue,
                          int maxLife, int defense) {
-    super(turnsQueue, name, characterClass, maxLife, defense);
+    super(turnsQueue, name, maxLife, defense);
   }
 
-  /**
-   * Decreases the enemy's life.
-   *
-   * @param enemy who is going to be attacked.
-   */
   public void attack(Enemy enemy) {
     if (this.getCurrentLife() > 0 && this.getEquippedWeapon() != null) {
       enemy.receiveDamage(this.getEquippedWeapon().getDamage(), enemy.getDefense());
     }
   }
+
+  @Override
+  public IWeapon getEquippedWeapon() { return equippedWeapon; }
 
   /**
    * Checks if two Player Characters are equal.
@@ -57,14 +55,14 @@ public class PlayerCharacter extends AbstractCharacter {
     if (this == o) {
       return true;
     }
-    if (!(o instanceof PlayerCharacter)) {
+    if (!(o instanceof AbstractPlayerCharacter)) {
       return false;
     }
-    final PlayerCharacter playerCharacter = (PlayerCharacter) o;
+    final AbstractPlayerCharacter playerCharacter = (AbstractPlayerCharacter) o;
     return getName().equals(playerCharacter.getName())
-            && getCharacterClass() == playerCharacter.getCharacterClass()
             && getMaxLife() == playerCharacter.getMaxLife()
-            && getDefense() == playerCharacter.getDefense();
+            && getDefense() == playerCharacter.getDefense()
+            && getEquippedWeapon() == playerCharacter.getEquippedWeapon();
   }
 
   /**
@@ -72,7 +70,7 @@ public class PlayerCharacter extends AbstractCharacter {
    */
   @Override
   public int hashCode() {
-    return Objects.hash(getName(), getCharacterClass(), getMaxLife(), getDefense());
+    return Objects.hash(getName(), getMaxLife(), getDefense(), getEquippedWeapon());
   }
 
   @Override

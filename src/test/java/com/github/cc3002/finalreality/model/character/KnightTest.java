@@ -1,9 +1,8 @@
 package com.github.cc3002.finalreality.model.character;
 
 import com.github.francomiranda19.finalreality.model.character.Enemy;
-import com.github.francomiranda19.finalreality.model.character.player.CharacterClass;
-import com.github.francomiranda19.finalreality.model.character.player.Engineer;
-import com.github.francomiranda19.finalreality.model.character.player.Knight;
+import com.github.francomiranda19.finalreality.model.character.player.classes.Engineer;
+import com.github.francomiranda19.finalreality.model.character.player.classes.Knight;
 import com.github.francomiranda19.finalreality.model.weapon.Axe;
 import com.github.francomiranda19.finalreality.model.weapon.Knife;
 import com.github.francomiranda19.finalreality.model.weapon.Sword;
@@ -18,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * @author Franco Miranda Oyarzún
  * @see Knight
  */
-public class KnightTest extends PlayerCharacterTest {
+public class KnightTest extends AbstractCharacterTest {
   private static final String KNIGHT_NAME = "Test Knight";
   private Knight testKnight, testDefensiveKnight, testDeadKnight;
   private Enemy testEnemy, testDeadEnemy;
@@ -31,9 +30,9 @@ public class KnightTest extends PlayerCharacterTest {
    */
   @BeforeEach
   void setUp() {
-    testKnight = new Knight(KNIGHT_NAME, turns, CharacterClass.KNIGHT, LIFE, DEFENSE);
-    testDefensiveKnight = new Knight("Test Defensive Knight", turns, CharacterClass.KNIGHT, LIFE, 80);
-    testDeadKnight = new Knight("Test Dead Knight", turns, CharacterClass.KNIGHT, 0, DEFENSE);
+    testKnight = new Knight(KNIGHT_NAME, turns, LIFE, DEFENSE);
+    testDefensiveKnight = new Knight("Test Defensive Knight", turns, LIFE, 80);
+    testDeadKnight = new Knight("Test Dead Knight", turns, 0, DEFENSE);
     testEnemy = new Enemy("Test Enemy", 10, turns, LIFE, DEFENSE, 15);
     testDeadEnemy = new Enemy("Test Dead Enemy", 10, turns, 0, DEFENSE, 15);
     testSword = new Sword("Test Sword", 15, 10);
@@ -47,12 +46,11 @@ public class KnightTest extends PlayerCharacterTest {
    */
   @Test
   void constructorTest() {
-    var expectedKnight = new Knight(KNIGHT_NAME, turns, CharacterClass.KNIGHT, LIFE, DEFENSE);
-    var otherWeaponKnight = new Knight(KNIGHT_NAME, turns, CharacterClass.KNIGHT, LIFE, DEFENSE);
-    var notExpectedKnight1 = new Knight("Not Black Mage", turns, CharacterClass.BLACK_MAGE, LIFE, DEFENSE);
-    var notExpectedKnight2 = new Knight(KNIGHT_NAME, turns, CharacterClass.ENGINEER, LIFE, DEFENSE);
-    var notExpectedKnight3 = new Knight(KNIGHT_NAME, turns, CharacterClass.KNIGHT, LIFE + 1, DEFENSE);
-    var notExpectedKnight4 = new Knight(KNIGHT_NAME, turns, CharacterClass.KNIGHT, LIFE, DEFENSE + 1);
+    var expectedKnight = new Knight(KNIGHT_NAME, turns, LIFE, DEFENSE);
+    var otherWeaponKnight = new Knight(KNIGHT_NAME, turns, LIFE, DEFENSE);
+    var notExpectedKnight1 = new Knight("Not Black Mage", turns, LIFE, DEFENSE);
+    var notExpectedKnight2 = new Knight(KNIGHT_NAME, turns, LIFE + 1, DEFENSE);
+    var notExpectedKnight3 = new Knight(KNIGHT_NAME, turns, LIFE, DEFENSE + 1);
 
     assertEquals(testKnight, testKnight);
     assertEquals(expectedKnight, testKnight);
@@ -66,9 +64,7 @@ public class KnightTest extends PlayerCharacterTest {
     assertNotEquals(notExpectedKnight2.hashCode(), testKnight.hashCode());
     assertNotEquals(notExpectedKnight3, testKnight);
     assertNotEquals(notExpectedKnight3.hashCode(), testKnight.hashCode());
-    assertNotEquals(notExpectedKnight4, testKnight);
-    assertNotEquals(notExpectedKnight4.hashCode(), testKnight.hashCode());
-    assertNotEquals(testKnight, new Engineer("Not Knight", turns, CharacterClass.ENGINEER, LIFE, DEFENSE));
+    assertNotEquals(testKnight, new Engineer("Not Knight", turns, LIFE, DEFENSE));
   }
 
   /**

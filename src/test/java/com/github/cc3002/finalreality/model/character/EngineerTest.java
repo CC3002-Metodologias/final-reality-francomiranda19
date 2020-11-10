@@ -1,9 +1,8 @@
 package com.github.cc3002.finalreality.model.character;
 
 import com.github.francomiranda19.finalreality.model.character.Enemy;
-import com.github.francomiranda19.finalreality.model.character.player.CharacterClass;
-import com.github.francomiranda19.finalreality.model.character.player.Engineer;
-import com.github.francomiranda19.finalreality.model.character.player.Thief;
+import com.github.francomiranda19.finalreality.model.character.player.classes.Engineer;
+import com.github.francomiranda19.finalreality.model.character.player.classes.Thief;
 import com.github.francomiranda19.finalreality.model.weapon.Axe;
 import com.github.francomiranda19.finalreality.model.weapon.Bow;
 import org.junit.jupiter.api.BeforeEach;
@@ -17,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * @author Franco Miranda Oyarzún
  * @see Engineer
  */
-public class EngineerTest extends PlayerCharacterTest {
+public class EngineerTest extends AbstractCharacterTest {
   private static final String ENGINEER_NAME = "Test Engineer";
   private Engineer testEngineer, testDefensiveEngineer, testDeadEngineer;
   private Enemy testEnemy, testDeadEnemy;
@@ -29,9 +28,9 @@ public class EngineerTest extends PlayerCharacterTest {
    */
   @BeforeEach
   void setUp() {
-    testEngineer = new Engineer(ENGINEER_NAME, turns, CharacterClass.ENGINEER, LIFE, DEFENSE);
-    testDefensiveEngineer = new Engineer("Test Defensive Engineer", turns, CharacterClass.ENGINEER, LIFE, 80);
-    testDeadEngineer = new Engineer("Test Dead Engineer", turns, CharacterClass.ENGINEER, 0, DEFENSE);
+    testEngineer = new Engineer(ENGINEER_NAME, turns, LIFE, DEFENSE);
+    testDefensiveEngineer = new Engineer("Test Defensive Engineer", turns, LIFE, 80);
+    testDeadEngineer = new Engineer("Test Dead Engineer", turns, 0, DEFENSE);
     testEnemy = new Enemy("Test Enemy", 10, turns, LIFE, DEFENSE, 15);
     testDeadEnemy = new Enemy("Test Dead Enemy", 10, turns, 0, DEFENSE, 15);
     testAxe = new Axe("Test Axe", 20, 10);
@@ -44,12 +43,11 @@ public class EngineerTest extends PlayerCharacterTest {
    */
   @Test
   void constructorTest() {
-    var expectedEngineer = new Engineer(ENGINEER_NAME, turns, CharacterClass.ENGINEER, LIFE, DEFENSE);
-    var otherWeaponEngineer = new Engineer(ENGINEER_NAME, turns, CharacterClass.ENGINEER, LIFE, DEFENSE);
-    var notExpectedEngineer1 = new Engineer("Not Engineer", turns, CharacterClass.ENGINEER, LIFE, DEFENSE);
-    var notExpectedEngineer2 = new Engineer(ENGINEER_NAME, turns, CharacterClass.THIEF, LIFE, DEFENSE);
-    var notExpectedEngineer3 = new Engineer(ENGINEER_NAME, turns, CharacterClass.ENGINEER, LIFE + 1, DEFENSE);
-    var notExpectedEngineer4 = new Engineer(ENGINEER_NAME, turns, CharacterClass.ENGINEER, LIFE, DEFENSE + 1);
+    var expectedEngineer = new Engineer(ENGINEER_NAME, turns, LIFE, DEFENSE);
+    var otherWeaponEngineer = new Engineer(ENGINEER_NAME, turns, LIFE, DEFENSE);
+    var notExpectedEngineer1 = new Engineer("Not Engineer", turns, LIFE, DEFENSE);
+    var notExpectedEngineer2 = new Engineer(ENGINEER_NAME, turns, LIFE + 1, DEFENSE);
+    var notExpectedEngineer3 = new Engineer(ENGINEER_NAME, turns, LIFE, DEFENSE + 1);
 
     assertEquals(testEngineer, testEngineer);
     assertEquals(expectedEngineer, testEngineer);
@@ -63,9 +61,7 @@ public class EngineerTest extends PlayerCharacterTest {
     assertNotEquals(notExpectedEngineer2.hashCode(), testEngineer.hashCode());
     assertNotEquals(notExpectedEngineer3, testEngineer);
     assertNotEquals(notExpectedEngineer3.hashCode(), testEngineer.hashCode());
-    assertNotEquals(notExpectedEngineer4, testEngineer);
-    assertNotEquals(notExpectedEngineer4.hashCode(), testEngineer.hashCode());
-    assertNotEquals(testEngineer, new Thief("Not Engineer", turns, CharacterClass.ENGINEER, LIFE, DEFENSE));
+    assertNotEquals(testEngineer, new Thief("Not Engineer", turns, LIFE, DEFENSE));
   }
 
   /**

@@ -1,9 +1,13 @@
 ChangeLog
 =========
 
+Version 3.0
+-----------
+- (B.1) Corrected the design of the application and tests
+
 Version 2.0
 -----------
-- (B.5) Created tests for every feature
+- (RC.1) Created tests for every feature
 - (B.4) Created new equals and hashCode methods
 - (B.3) Created methods to equip each type of weapon
 - (B.2) Created more classes and interfaces for the characters and weapons

@@ -1,9 +1,8 @@
 package com.github.cc3002.finalreality.model.character;
 
 import com.github.francomiranda19.finalreality.model.character.Enemy;
-import com.github.francomiranda19.finalreality.model.character.player.CharacterClass;
-import com.github.francomiranda19.finalreality.model.character.player.Knight;
-import com.github.francomiranda19.finalreality.model.character.player.Thief;
+import com.github.francomiranda19.finalreality.model.character.player.classes.Knight;
+import com.github.francomiranda19.finalreality.model.character.player.classes.Thief;
 import com.github.francomiranda19.finalreality.model.weapon.Bow;
 import com.github.francomiranda19.finalreality.model.weapon.Staff;
 import com.github.francomiranda19.finalreality.model.weapon.Sword;
@@ -19,7 +18,7 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
  * @author Franco Miranda Oyarzún
  * @see Thief
  */
-public class ThiefTest extends PlayerCharacterTest {
+public class ThiefTest extends AbstractCharacterTest {
   private static final String THIEF_NAME = "Test Thief";
   private Thief testThief, testDefensiveThief, testDeadThief;
   private Enemy testEnemy, testDeadEnemy;
@@ -32,9 +31,9 @@ public class ThiefTest extends PlayerCharacterTest {
    */
   @BeforeEach
   void setUp() {
-    testThief = new Thief(THIEF_NAME, turns, CharacterClass.THIEF, LIFE, DEFENSE);
-    testDefensiveThief = new Thief("Test Defensive Thief", turns, CharacterClass.THIEF, LIFE, 80);
-    testDeadThief = new Thief("Test Dead Thief", turns, CharacterClass.THIEF, 0, DEFENSE);
+    testThief = new Thief(THIEF_NAME, turns, LIFE, DEFENSE);
+    testDefensiveThief = new Thief("Test Defensive Thief", turns, LIFE, 80);
+    testDeadThief = new Thief("Test Dead Thief", turns, 0, DEFENSE);
     testEnemy = new Enemy("Test Enemy", 10, turns, LIFE, DEFENSE, 15);
     testDeadEnemy = new Enemy("Test Dead Enemy", 10, turns, 0, DEFENSE, 15);
     testSword = new Sword("Test Sword", 15, 10);
@@ -48,12 +47,11 @@ public class ThiefTest extends PlayerCharacterTest {
    */
   @Test
   void constructorTest() {
-    var expectedThief = new Thief(THIEF_NAME, turns, CharacterClass.THIEF, LIFE, DEFENSE);
-    var otherWeaponThief = new Thief(THIEF_NAME, turns, CharacterClass.THIEF, LIFE, DEFENSE);
-    var notExpectedThief1 = new Thief("Not Thief", turns, CharacterClass.BLACK_MAGE, LIFE, DEFENSE);
-    var notExpectedThief2 = new Thief(THIEF_NAME, turns, CharacterClass.KNIGHT, LIFE, DEFENSE);
-    var notExpectedThief3 = new Thief(THIEF_NAME, turns, CharacterClass.THIEF, LIFE + 1, DEFENSE);
-    var notExpectedThief4 = new Thief(THIEF_NAME, turns, CharacterClass.THIEF, LIFE, DEFENSE + 1);
+    var expectedThief = new Thief(THIEF_NAME, turns, LIFE, DEFENSE);
+    var otherWeaponThief = new Thief(THIEF_NAME, turns, LIFE, DEFENSE);
+    var notExpectedThief1 = new Thief("Not Thief", turns, LIFE, DEFENSE);
+    var notExpectedThief2 = new Thief(THIEF_NAME, turns, LIFE + 1, DEFENSE);
+    var notExpectedThief3 = new Thief(THIEF_NAME, turns, LIFE, DEFENSE + 1);
 
     assertEquals(testThief, testThief);
     assertEquals(expectedThief, testThief);
@@ -67,9 +65,7 @@ public class ThiefTest extends PlayerCharacterTest {
     assertNotEquals(notExpectedThief2.hashCode(), testThief.hashCode());
     assertNotEquals(notExpectedThief3, testThief);
     assertNotEquals(notExpectedThief3.hashCode(), testThief.hashCode());
-    assertNotEquals(notExpectedThief4, testThief);
-    assertNotEquals(notExpectedThief4.hashCode(), testThief.hashCode());
-    assertNotEquals(testThief, new Knight("Not Thief", turns, CharacterClass.KNIGHT, LIFE, DEFENSE));
+    assertNotEquals(testThief, new Knight("Not Thief", turns, LIFE, DEFENSE));
   }
 
   /**

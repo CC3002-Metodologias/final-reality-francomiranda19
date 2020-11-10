@@ -1,9 +1,8 @@
 package com.github.cc3002.finalreality.model.character;
 
 import com.github.francomiranda19.finalreality.model.character.Enemy;
-import com.github.francomiranda19.finalreality.model.character.player.CharacterClass;
-import com.github.francomiranda19.finalreality.model.character.player.Engineer;
-import com.github.francomiranda19.finalreality.model.character.player.Knight;
+import com.github.francomiranda19.finalreality.model.character.player.classes.Engineer;
+import com.github.francomiranda19.finalreality.model.character.player.classes.Knight;
 import com.github.francomiranda19.finalreality.model.weapon.Sword;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -30,8 +29,8 @@ public class EnemyTest extends AbstractCharacterTest {
   void setUp() {
     testEnemy = new Enemy(ENEMY_NAME, 10, turns, LIFE, DEFENSE, ATTACK);
     testDefensiveEnemy = new Enemy("Test Defensive Enemy", 10, turns, LIFE, 80, ATTACK);
-    testPlayerCharacter = new Knight("Test Player Character", turns, CharacterClass.KNIGHT, 100, 5);
-    testDeadPlayerCharacter = new Knight("Test Dead Player Character", turns, CharacterClass.KNIGHT, 0, 5);
+    testPlayerCharacter = new Knight("Test Player Character", turns, 100, 5);
+    testDeadPlayerCharacter = new Knight("Test Dead Player Character", turns, 0, 5);
     super.basicSetUp();
   }
 
@@ -60,7 +59,7 @@ public class EnemyTest extends AbstractCharacterTest {
     assertNotEquals(notExpectedEnemy4.hashCode(), testEnemy.hashCode());
     assertNotEquals(notExpectedEnemy5, testEnemy);
     assertNotEquals(notExpectedEnemy5.hashCode(), testEnemy.hashCode());
-    assertNotEquals(testEnemy, new Engineer("Not Knight", turns, CharacterClass.ENGINEER, LIFE, DEFENSE));
+    assertNotEquals(testEnemy, new Engineer("Not Knight", turns, LIFE, DEFENSE));
   }
 
   /**

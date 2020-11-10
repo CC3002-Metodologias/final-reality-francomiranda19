@@ -1,6 +1,7 @@
-package com.github.francomiranda19.finalreality.model.character.player;
+package com.github.francomiranda19.finalreality.model.character.player.classes;
 
 import com.github.francomiranda19.finalreality.model.character.ICharacter;
+import com.github.francomiranda19.finalreality.model.character.player.AbstractMage;
 import com.github.francomiranda19.finalreality.model.weapon.Knife;
 import com.github.francomiranda19.finalreality.model.weapon.Staff;
 import org.jetbrains.annotations.NotNull;
@@ -12,19 +13,18 @@ import java.util.concurrent.BlockingQueue;
  *
  * @author Franco Miranda Oyarzún
  */
-public class BlackMage extends AbstractMage{
+public class BlackMage extends AbstractMage {
   /**
    * Creates a new character.
    *
    * @param name           the character's name
    * @param turnsQueue     the queue with the characters waiting for their turn
-   * @param characterClass the class of this character
    * @param maxLife        the character's maximum life
    * @param defense        the character's defense
    */
-  public BlackMage(@NotNull String name, @NotNull BlockingQueue<ICharacter> turnsQueue, CharacterClass characterClass,
+  public BlackMage(@NotNull String name, @NotNull BlockingQueue<ICharacter> turnsQueue,
                    int maxLife, int defense, int mana) {
-    super(name, turnsQueue, characterClass, maxLife, defense, mana);
+    super(name, turnsQueue, maxLife, defense, mana);
   }
 
   /**
@@ -56,25 +56,13 @@ public class BlackMage extends AbstractMage{
    */
   @Override
   public boolean equals(final Object o) {
-    if (this == o) {
-      return true;
-    }
-    if (!(o instanceof BlackMage)) {
-      return false;
-    }
-    final BlackMage blackMage = (BlackMage) o;
-    return getName().equals(blackMage.getName())
-            && getCharacterClass() == blackMage.getCharacterClass()
-            && getMaxLife() == blackMage.getMaxLife()
-            && getDefense() == blackMage.getDefense()
-            && getMana() == blackMage.getMana()
-            && getEquippedWeapon() == blackMage.getEquippedWeapon();
+    return o instanceof BlackMage && getMana() == ((BlackMage) o).getMana() && super.equals(o);
   }
 
   /**
    * Hash function of the black mage.
    */
   @Override
-  public int hashCode() { return Objects.hash(getName(), getCharacterClass(), getMaxLife(), getDefense(), getMana(), getEquippedWeapon()); }
+  public int hashCode() { return Objects.hash(super.hashCode(), getMana(), Staff.class); }
 
 }
