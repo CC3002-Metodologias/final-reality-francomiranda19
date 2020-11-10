@@ -1,8 +1,5 @@
 package com.github.francomiranda19.finalreality.model.character;
 
-import com.github.francomiranda19.finalreality.model.character.player.CharacterClass;
-import com.github.francomiranda19.finalreality.model.weapon.Weapon;
-
 /**
  * This represents a character from the game.
  * A character can be controlled by the player or by the CPU (an enemy).
@@ -22,16 +19,6 @@ public interface ICharacter {
    * Returns this character's name.
    */
   String getName();
-
-  /**
-   * Return this character's equipped weapon.
-   */
-  Weapon getEquippedWeapon();
-
-  /**
-   * Returns this character's class.
-   */
-  CharacterClass getCharacterClass();
 
   /**
    * Returns this character's maximum life.

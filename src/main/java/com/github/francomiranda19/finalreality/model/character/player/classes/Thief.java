@@ -1,6 +1,7 @@
-package com.github.francomiranda19.finalreality.model.character.player;
+package com.github.francomiranda19.finalreality.model.character.player.classes;
 
 import com.github.francomiranda19.finalreality.model.character.ICharacter;
+import com.github.francomiranda19.finalreality.model.character.player.AbstractPlayerCharacter;
 import com.github.francomiranda19.finalreality.model.weapon.*;
 import org.jetbrains.annotations.NotNull;
 import java.util.Objects;
@@ -11,18 +12,17 @@ import java.util.concurrent.BlockingQueue;
  *
  * @author Franco Miranda Oyarzún
  */
-public class Thief extends PlayerCharacter {
+public class Thief extends AbstractPlayerCharacter {
   /**
    * Creates a new character.
    *
    * @param name           the character's name
    * @param turnsQueue     the queue with the characters waiting for their turn
-   * @param characterClass the class of this character
    * @param maxLife        the character's maximum life
    * @param defense        the character's defense
    */
-  public Thief(@NotNull String name, @NotNull BlockingQueue<ICharacter> turnsQueue, CharacterClass characterClass, int maxLife, int defense) {
-    super(name, turnsQueue, characterClass, maxLife, defense);
+  public Thief(@NotNull String name, @NotNull BlockingQueue<ICharacter> turnsQueue, int maxLife, int defense) {
+    super(name, turnsQueue, maxLife, defense);
   }
 
   /**
@@ -65,18 +65,7 @@ public class Thief extends PlayerCharacter {
    */
   @Override
   public boolean equals(final Object o) {
-    if (this == o) {
-      return true;
-    }
-    if (!(o instanceof Thief)) {
-      return false;
-    }
-    final Thief thief = (Thief) o;
-    return getName().equals(thief.getName())
-            && getCharacterClass() == thief.getCharacterClass()
-            && getMaxLife() == thief.getMaxLife()
-            && getDefense() == thief.getDefense()
-            && getEquippedWeapon() == thief.getEquippedWeapon();
+    return o instanceof Thief && super.equals(o);
   }
 
   /**
@@ -84,7 +73,7 @@ public class Thief extends PlayerCharacter {
    */
   @Override
   public int hashCode() {
-    return Objects.hash(getName(), getCharacterClass(), getMaxLife(), getDefense(), getEquippedWeapon());
+    return Objects.hash(super.hashCode(), Thief.class);
   }
 
 }

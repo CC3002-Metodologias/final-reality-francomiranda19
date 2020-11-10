@@ -1,12 +1,10 @@
 package com.github.cc3002.finalreality.model.character;
 
 import com.github.francomiranda19.finalreality.model.character.Enemy;
-import com.github.francomiranda19.finalreality.model.character.player.BlackMage;
-import com.github.francomiranda19.finalreality.model.character.player.CharacterClass;
-import com.github.francomiranda19.finalreality.model.character.player.WhiteMage;
+import com.github.francomiranda19.finalreality.model.character.player.classes.BlackMage;
+import com.github.francomiranda19.finalreality.model.character.player.classes.WhiteMage;
 import com.github.francomiranda19.finalreality.model.weapon.Axe;
 import com.github.francomiranda19.finalreality.model.weapon.Knife;
-import com.github.francomiranda19.finalreality.model.weapon.WeaponType;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -18,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * @author Franco Miranda Oyarzún
  * @see WhiteMage
  */
-public class WhiteMageTest extends PlayerCharacterTest {
+public class WhiteMageTest extends AbstractCharacterTest {
   private static final String WHITE_MAGE_NAME = "Test White Mage";
   private WhiteMage testWhiteMage, testDefensiveWhiteMage, testDeadWhiteMage;
   private Enemy testEnemy, testDeadEnemy;
@@ -30,13 +28,13 @@ public class WhiteMageTest extends PlayerCharacterTest {
    */
   @BeforeEach
   void setUp() {
-    testWhiteMage = new WhiteMage(WHITE_MAGE_NAME, turns, CharacterClass.WHITE_MAGE, LIFE, DEFENSE, MANA);
-    testDefensiveWhiteMage = new WhiteMage("Test Defensive White Mage", turns, CharacterClass.WHITE_MAGE, LIFE, 80, MANA);
-    testDeadWhiteMage = new WhiteMage("Test Dead White Mage", turns, CharacterClass.WHITE_MAGE, 0, DEFENSE, MANA);
+    testWhiteMage = new WhiteMage(WHITE_MAGE_NAME, turns, LIFE, DEFENSE, MANA);
+    testDefensiveWhiteMage = new WhiteMage("Test Defensive White Mage", turns, LIFE, 80, MANA);
+    testDeadWhiteMage = new WhiteMage("Test Dead White Mage", turns, 0, DEFENSE, MANA);
     testEnemy = new Enemy("Test Enemy", 10, turns, LIFE, DEFENSE, 15);
     testDeadEnemy = new Enemy("Test Dead Enemy", 10, turns, 0, DEFENSE, 15);
-    testKnife = new Knife("Test Knife", 20, 10, WeaponType.KNIFE);
-    testAxe = new Axe("Test Axe", 15, 10, WeaponType.AXE);
+    testKnife = new Knife("Test Knife", 20, 10);
+    testAxe = new Axe("Test Axe", 15, 10);
     super.basicSetUp();
   }
 
@@ -45,13 +43,12 @@ public class WhiteMageTest extends PlayerCharacterTest {
    */
   @Test
   void constructorTest() {
-    var expectedWhiteMage = new WhiteMage(WHITE_MAGE_NAME, turns, CharacterClass.WHITE_MAGE, LIFE, DEFENSE, MANA);
-    var otherWeaponWhiteMage = new WhiteMage(WHITE_MAGE_NAME, turns, CharacterClass.WHITE_MAGE, LIFE, DEFENSE, MANA);
-    var notExpectedWhiteMage1 = new WhiteMage("Not White Mage", turns, CharacterClass.WHITE_MAGE, LIFE, DEFENSE, MANA);
-    var notExpectedWhiteMage2 = new WhiteMage(WHITE_MAGE_NAME, turns, CharacterClass.BLACK_MAGE, LIFE, DEFENSE, MANA);
-    var notExpectedWhiteMage3 = new WhiteMage(WHITE_MAGE_NAME, turns, CharacterClass.WHITE_MAGE, LIFE + 1, DEFENSE, MANA);
-    var notExpectedWhiteMage4 = new WhiteMage(WHITE_MAGE_NAME, turns, CharacterClass.WHITE_MAGE, LIFE, DEFENSE + 1, MANA);
-    var notExpectedWhiteMage5 = new WhiteMage(WHITE_MAGE_NAME, turns, CharacterClass.WHITE_MAGE, LIFE, DEFENSE, MANA + 1);
+    var expectedWhiteMage = new WhiteMage(WHITE_MAGE_NAME, turns, LIFE, DEFENSE, MANA);
+    var otherWeaponWhiteMage = new WhiteMage(WHITE_MAGE_NAME, turns, LIFE, DEFENSE, MANA);
+    var notExpectedWhiteMage1 = new WhiteMage("Not White Mage", turns, LIFE, DEFENSE, MANA);
+    var notExpectedWhiteMage2 = new WhiteMage(WHITE_MAGE_NAME, turns, LIFE + 1, DEFENSE, MANA);
+    var notExpectedWhiteMage3 = new WhiteMage(WHITE_MAGE_NAME, turns, LIFE, DEFENSE + 1, MANA);
+    var notExpectedWhiteMage4 = new WhiteMage(WHITE_MAGE_NAME, turns, LIFE, DEFENSE, MANA + 1);
 
     assertEquals(testWhiteMage, testWhiteMage);
     assertEquals(expectedWhiteMage, testWhiteMage);
@@ -67,9 +64,7 @@ public class WhiteMageTest extends PlayerCharacterTest {
     assertNotEquals(notExpectedWhiteMage3.hashCode(), testWhiteMage.hashCode());
     assertNotEquals(notExpectedWhiteMage4, testWhiteMage);
     assertNotEquals(notExpectedWhiteMage4.hashCode(), testWhiteMage.hashCode());
-    assertNotEquals(notExpectedWhiteMage5, testWhiteMage);
-    assertNotEquals(notExpectedWhiteMage5.hashCode(), testWhiteMage.hashCode());
-    assertNotEquals(testWhiteMage, new BlackMage("Not White Mage", turns, CharacterClass.BLACK_MAGE, LIFE, DEFENSE, MANA));
+    assertNotEquals(testWhiteMage, new BlackMage("Not White Mage", turns, LIFE, DEFENSE, MANA));
   }
 
   /**

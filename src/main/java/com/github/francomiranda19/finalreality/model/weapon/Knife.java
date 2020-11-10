@@ -7,18 +7,16 @@ import java.util.Objects;
  *
  * @author Franco Miranda Oyarzún
  */
-public class Knife extends Weapon {
+public class Knife extends AbstractWeapon {
   /**
    * Creates a weapon with a name, a base damage, weight and its type.
    *
    * @param name This weapon's name
    * @param damage This weapon's damage.
    * @param weight This weapon's weight.
-   * @param type This weapon's type.
-   * @see WeaponType
    */
-  public Knife(String name, int damage, int weight, WeaponType type) {
-    super(name, damage, weight, type);
+  public Knife(String name, int damage, int weight) {
+    super(name, damage, weight);
   }
 
   /**
@@ -28,17 +26,7 @@ public class Knife extends Weapon {
    */
   @Override
   public boolean equals(final Object o) {
-    if (this == o) {
-      return true;
-    }
-    if (!(o instanceof Knife)) {
-      return false;
-    }
-    final Knife knife = (Knife) o;
-    return getName().equals(knife.getName())
-            && getDamage() == knife.getDamage()
-            && getWeight() == knife.getWeight()
-            && getWeaponType() == knife.getWeaponType();
+    return o instanceof Knife && super.equals(o);
   }
 
   /**
@@ -46,6 +34,6 @@ public class Knife extends Weapon {
    */
   @Override
   public int hashCode() {
-    return Objects.hash(getName(), getDamage(), getWeight(), getWeaponType());
+    return Objects.hash(super.hashCode(), Knife.class);
   }
 }

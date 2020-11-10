@@ -1,12 +1,12 @@
 package com.github.francomiranda19.finalreality.model.character;
 
-import com.github.francomiranda19.finalreality.model.character.player.CharacterClass;
+import com.github.francomiranda19.finalreality.model.character.player.AbstractPlayerCharacter;
+
 import java.util.Objects;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
-import com.github.francomiranda19.finalreality.model.character.player.PlayerCharacter;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -15,7 +15,7 @@ import org.jetbrains.annotations.NotNull;
  * @author Ignacio Slater Muñoz
  * @author Franco Miranda Oyarzún
  */
-public class Enemy extends AbstractCharacter {
+public class Enemy extends AbstractCharacter implements IEnemy {
 
   private final int weight;
   private final int attack;
@@ -26,7 +26,7 @@ public class Enemy extends AbstractCharacter {
    */
   public Enemy(@NotNull final String name, final int weight,
       @NotNull final BlockingQueue<ICharacter> turnsQueue, int maxLife, int defense, int attack) {
-    super(turnsQueue, name, CharacterClass.ENEMY, maxLife, defense);
+    super(turnsQueue, name, maxLife, defense);
     this.weight = weight;
     this.attack = attack;
   }
@@ -48,7 +48,7 @@ public class Enemy extends AbstractCharacter {
    *
    * @param playerCharacter who is going to be attacked
    */
-  public void attack(PlayerCharacter playerCharacter) {
+  public void attack(AbstractPlayerCharacter playerCharacter) {
     if (this.getCurrentLife() > 0) {
       playerCharacter.receiveDamage(this.getAttack(), playerCharacter.getDefense());
     }

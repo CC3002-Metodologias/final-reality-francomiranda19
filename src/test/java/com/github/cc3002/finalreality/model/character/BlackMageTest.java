@@ -1,12 +1,10 @@
 package com.github.cc3002.finalreality.model.character;
 
 import com.github.francomiranda19.finalreality.model.character.Enemy;
-import com.github.francomiranda19.finalreality.model.character.player.BlackMage;
-import com.github.francomiranda19.finalreality.model.character.player.CharacterClass;
-import com.github.francomiranda19.finalreality.model.character.player.WhiteMage;
+import com.github.francomiranda19.finalreality.model.character.player.classes.BlackMage;
+import com.github.francomiranda19.finalreality.model.character.player.classes.WhiteMage;
 import com.github.francomiranda19.finalreality.model.weapon.Knife;
 import com.github.francomiranda19.finalreality.model.weapon.Staff;
-import com.github.francomiranda19.finalreality.model.weapon.WeaponType;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -18,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * @author Franco Miranda Oyarzún
  * @see BlackMage
  */
-public class BlackMageTest extends PlayerCharacterTest {
+public class BlackMageTest extends AbstractCharacterTest {
   private static final String BLACK_MAGE_NAME = "Test Black Mage";
   private BlackMage testBlackMage, testDefensiveBlackMage, testDeadBlackMage;
   private Enemy testEnemy, testDeadEnemy;
@@ -30,13 +28,13 @@ public class BlackMageTest extends PlayerCharacterTest {
    */
   @BeforeEach
   void setUp() {
-    testBlackMage = new BlackMage(BLACK_MAGE_NAME, turns, CharacterClass.BLACK_MAGE, LIFE, DEFENSE, MANA);
-    testDefensiveBlackMage = new BlackMage("Test Defensive Black Mage", turns, CharacterClass.BLACK_MAGE, LIFE, 80, MANA);
-    testDeadBlackMage = new BlackMage("Test Dead Black Mage", turns, CharacterClass.BLACK_MAGE, 0, DEFENSE, MANA);
+    testBlackMage = new BlackMage(BLACK_MAGE_NAME, turns, LIFE, DEFENSE, MANA);
+    testDefensiveBlackMage = new BlackMage("Test Defensive Black Mage", turns, LIFE, 80, MANA);
+    testDeadBlackMage = new BlackMage("Test Dead Black Mage", turns, 0, DEFENSE, MANA);
     testEnemy = new Enemy("Test Enemy", 10, turns, LIFE, DEFENSE, 15);
     testDeadEnemy = new Enemy("Test Dead Enemy", 10, turns, 0, DEFENSE, 15);
-    testKnife = new Knife("Test Knife", 15, 10, WeaponType.KNIFE);
-    testStaff = new Staff("Test Staff", 20, 10, WeaponType.STAFF, 30);
+    testKnife = new Knife("Test Knife", 15, 10);
+    testStaff = new Staff("Test Staff", 20, 10, 30);
     super.basicSetUp();
   }
 
@@ -45,13 +43,12 @@ public class BlackMageTest extends PlayerCharacterTest {
    */
   @Test
   void constructorTest() {
-    var expectedBlackMage = new BlackMage(BLACK_MAGE_NAME, turns, CharacterClass.BLACK_MAGE, LIFE, DEFENSE, MANA);
-    var otherWeaponBlackMage = new BlackMage(BLACK_MAGE_NAME, turns, CharacterClass.BLACK_MAGE, LIFE, DEFENSE, MANA);
-    var notExpectedBlackMage1 = new BlackMage("Not Black Mage", turns, CharacterClass.BLACK_MAGE, LIFE, DEFENSE, MANA);
-    var notExpectedBlackMage2 = new BlackMage(BLACK_MAGE_NAME, turns, CharacterClass.WHITE_MAGE, LIFE, DEFENSE, MANA);
-    var notExpectedBlackMage3 = new BlackMage(BLACK_MAGE_NAME, turns, CharacterClass.BLACK_MAGE, LIFE + 1, DEFENSE, MANA);
-    var notExpectedBlackMage4 = new BlackMage(BLACK_MAGE_NAME, turns, CharacterClass.BLACK_MAGE, LIFE, DEFENSE + 1, MANA);
-    var notExpectedBlackMage5 = new BlackMage(BLACK_MAGE_NAME, turns, CharacterClass.BLACK_MAGE, LIFE, DEFENSE, MANA + 1);
+    var expectedBlackMage = new BlackMage(BLACK_MAGE_NAME, turns, LIFE, DEFENSE, MANA);
+    var otherWeaponBlackMage = new BlackMage(BLACK_MAGE_NAME, turns, LIFE, DEFENSE, MANA);
+    var notExpectedBlackMage1 = new BlackMage("Not Black Mage", turns, LIFE, DEFENSE, MANA);
+    var notExpectedBlackMage2 = new BlackMage(BLACK_MAGE_NAME, turns, LIFE + 1, DEFENSE, MANA);
+    var notExpectedBlackMage3 = new BlackMage(BLACK_MAGE_NAME, turns, LIFE, DEFENSE + 1, MANA);
+    var notExpectedBlackMage4 = new BlackMage(BLACK_MAGE_NAME, turns, LIFE, DEFENSE, MANA + 1);
 
     assertEquals(testBlackMage, testBlackMage);
     assertEquals(expectedBlackMage, testBlackMage);
@@ -67,9 +64,7 @@ public class BlackMageTest extends PlayerCharacterTest {
     assertNotEquals(notExpectedBlackMage3.hashCode(), testBlackMage.hashCode());
     assertNotEquals(notExpectedBlackMage4, testBlackMage);
     assertNotEquals(notExpectedBlackMage4.hashCode(), testBlackMage.hashCode());
-    assertNotEquals(notExpectedBlackMage5, testBlackMage);
-    assertNotEquals(notExpectedBlackMage5.hashCode(), testBlackMage.hashCode());
-    assertNotEquals(testBlackMage, new WhiteMage("Not Black Mage", turns, CharacterClass.WHITE_MAGE, LIFE, DEFENSE, MANA));
+    assertNotEquals(testBlackMage, new WhiteMage("Not Black Mage", turns, LIFE, DEFENSE, MANA));
   }
 
   /**

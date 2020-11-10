@@ -13,16 +13,18 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
  * @author Franco Miranda Oyarzún
  * @see Sword
  */
-public class SwordTest extends WeaponTest {
+public class SwordTest {
   private static final String SWORD_NAME = "Test Sword";
   private Sword testSword;
+  private static final int DAMAGE = 15;
+  private static final int WEIGHT = 10;
 
   /**
    * Setup method.
    */
   @BeforeEach
   void setUp() {
-    testSword = new Sword(SWORD_NAME, DAMAGE, WEIGHT, WeaponType.SWORD);
+    testSword = new Sword(SWORD_NAME, DAMAGE, WEIGHT);
   }
 
   /**
@@ -30,11 +32,10 @@ public class SwordTest extends WeaponTest {
    */
   @Test
   void constructorTest() {
-    var expectedSword = new Sword(SWORD_NAME, DAMAGE, WEIGHT, WeaponType.SWORD);
-    var notExpectedSword1 = new Sword("Not Sword", DAMAGE, WEIGHT, WeaponType.SWORD);
-    var notExpectedSword2 = new Sword(SWORD_NAME, 1, WEIGHT, WeaponType.SWORD);
-    var notExpectedSword3 = new Sword(SWORD_NAME, DAMAGE, 2, WeaponType.SWORD);
-    var notExpectedSword4 = new Sword(SWORD_NAME, DAMAGE, WEIGHT, WeaponType.STAFF);
+    var expectedSword = new Sword(SWORD_NAME, DAMAGE, WEIGHT);
+    var notExpectedSword1 = new Sword("Not Sword", DAMAGE, WEIGHT);
+    var notExpectedSword2 = new Sword(SWORD_NAME, 1, WEIGHT);
+    var notExpectedSword3 = new Sword(SWORD_NAME, DAMAGE, 2);
 
     assertEquals(testSword, testSword);
     assertEquals(expectedSword, testSword);
@@ -45,9 +46,7 @@ public class SwordTest extends WeaponTest {
     assertNotEquals(notExpectedSword2.hashCode(), testSword.hashCode());
     assertNotEquals(notExpectedSword3, testSword);
     assertNotEquals(notExpectedSword3.hashCode(), testSword.hashCode());
-    assertNotEquals(notExpectedSword4, testSword);
-    assertNotEquals(notExpectedSword4.hashCode(), testSword.hashCode());
-    assertNotEquals(testSword, new Bow("Not Sword", DAMAGE, WEIGHT, WeaponType.BOW));
+    assertNotEquals(testSword, new Bow("Not Sword", DAMAGE, WEIGHT));
   }
 
 }

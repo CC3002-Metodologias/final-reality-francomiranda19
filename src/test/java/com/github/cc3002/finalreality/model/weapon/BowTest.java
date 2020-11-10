@@ -13,16 +13,18 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
  * @author Franco Miranda Oyarzún
  * @see Bow
  */
-public class BowTest extends WeaponTest {
+public class BowTest {
   private static final String BOW_NAME = "Test Bow";
   private Bow testBow;
+  private static final int DAMAGE = 15;
+  private static final int WEIGHT = 10;
 
   /**
    * Setup method.
    */
   @BeforeEach
   void setUp() {
-    testBow = new Bow(BOW_NAME, DAMAGE, WEIGHT, WeaponType.BOW);
+    testBow = new Bow(BOW_NAME, DAMAGE, WEIGHT);
   }
 
   /**
@@ -30,11 +32,10 @@ public class BowTest extends WeaponTest {
    */
   @Test
   void constructorTest() {
-    var expectedBow = new Bow(BOW_NAME, DAMAGE, WEIGHT, WeaponType.BOW);
-    var notExpectedBow1 = new Bow("Not Bow", DAMAGE, WEIGHT, WeaponType.BOW);
-    var notExpectedBow2 = new Bow(BOW_NAME, 45, WEIGHT, WeaponType.BOW);
-    var notExpectedBow3 = new Bow(BOW_NAME, DAMAGE, 5, WeaponType.BOW);
-    var notExpectedBow4 = new Bow(BOW_NAME, DAMAGE, WEIGHT, WeaponType.AXE);
+    var expectedBow = new Bow(BOW_NAME, DAMAGE, WEIGHT);
+    var notExpectedBow1 = new Bow("Not Bow", DAMAGE, WEIGHT);
+    var notExpectedBow2 = new Bow(BOW_NAME, 45, WEIGHT);
+    var notExpectedBow3 = new Bow(BOW_NAME, DAMAGE, 5);
 
     assertEquals(testBow, testBow);
     assertEquals(expectedBow, testBow);
@@ -45,9 +46,7 @@ public class BowTest extends WeaponTest {
     assertNotEquals(notExpectedBow2.hashCode(), testBow.hashCode());
     assertNotEquals(notExpectedBow3, testBow);
     assertNotEquals(notExpectedBow3.hashCode(), testBow.hashCode());
-    assertNotEquals(notExpectedBow4, testBow);
-    assertNotEquals(notExpectedBow4.hashCode(), testBow.hashCode());
-    assertNotEquals(testBow, new Staff("Not Bow", DAMAGE, WEIGHT, WeaponType.STAFF, MAGIC_DAMAGE));
+    assertNotEquals(testBow, new Knife("Not Bow", DAMAGE, WEIGHT));
   }
 
 }

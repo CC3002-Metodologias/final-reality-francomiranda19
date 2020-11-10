@@ -1,6 +1,7 @@
-package com.github.francomiranda19.finalreality.model.character.player;
+package com.github.francomiranda19.finalreality.model.character.player.classes;
 
 import com.github.francomiranda19.finalreality.model.character.ICharacter;
+import com.github.francomiranda19.finalreality.model.character.player.AbstractPlayerCharacter;
 import com.github.francomiranda19.finalreality.model.weapon.Axe;
 import com.github.francomiranda19.finalreality.model.weapon.Bow;
 import org.jetbrains.annotations.NotNull;
@@ -13,19 +14,18 @@ import java.util.concurrent.BlockingQueue;
  *
  * @author Franco Miranda Oyarzún
  */
-public class Engineer extends PlayerCharacter {
+public class Engineer extends AbstractPlayerCharacter {
   /**
    * Creates a new character.
    *
    * @param name           the character's name
    * @param turnsQueue     the queue with the characters waiting for their turn
-   * @param characterClass the class of this character
    * @param maxLife        the character's maximum life
    * @param defense        the character's defense
    */
-  public Engineer(@NotNull String name, @NotNull BlockingQueue<ICharacter> turnsQueue, CharacterClass characterClass,
+  public Engineer(@NotNull String name, @NotNull BlockingQueue<ICharacter> turnsQueue,
                   int maxLife, int defense) {
-    super(name, turnsQueue, characterClass, maxLife, defense);
+    super(name, turnsQueue, maxLife, defense);
   }
 
   /**
@@ -57,18 +57,7 @@ public class Engineer extends PlayerCharacter {
    */
   @Override
   public boolean equals(final Object o) {
-    if (this == o) {
-      return true;
-    }
-    if (!(o instanceof Engineer)) {
-      return false;
-    }
-    final Engineer engineer = (Engineer) o;
-    return getName().equals(engineer.getName())
-            && getCharacterClass() == engineer.getCharacterClass()
-            && getMaxLife() == engineer.getMaxLife()
-            && getDefense() == engineer.getDefense()
-            && getEquippedWeapon() == engineer.getEquippedWeapon();
+    return o instanceof Engineer && super.equals(o);
   }
 
   /**
@@ -76,7 +65,7 @@ public class Engineer extends PlayerCharacter {
    */
   @Override
   public int hashCode() {
-    return Objects.hash(getName(), getCharacterClass(), getMaxLife(), getDefense(), getEquippedWeapon());
+    return Objects.hash(super.hashCode(), Engineer.class);
   }
 
 }

@@ -9,7 +9,7 @@ import java.util.concurrent.BlockingQueue;
  *
  * @author Franco Miranda Oyarzún
  */
-public class AbstractMage extends PlayerCharacter {
+public class AbstractMage extends AbstractPlayerCharacter {
   private int mana;
 
   /**
@@ -17,13 +17,12 @@ public class AbstractMage extends PlayerCharacter {
    *
    * @param name           the character's name
    * @param turnsQueue     the queue with the characters waiting for their turn
-   * @param characterClass the class of this character
    * @param maxLife        the character's maximum life
    * @param defense        the character's defense
    */
-  public AbstractMage(@NotNull String name, @NotNull BlockingQueue<ICharacter> turnsQueue, CharacterClass characterClass,
+  public AbstractMage(@NotNull String name, @NotNull BlockingQueue<ICharacter> turnsQueue,
                       int maxLife, int defense, int mana) {
-    super(name, turnsQueue, characterClass, maxLife, defense);
+    super(name, turnsQueue, maxLife, defense);
     this.mana = mana;
   }
 

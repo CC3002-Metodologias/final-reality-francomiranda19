@@ -2,8 +2,7 @@ package com.github.cc3002.finalreality.model.character;
 
 import com.github.francomiranda19.finalreality.model.character.Enemy;
 import com.github.francomiranda19.finalreality.model.character.ICharacter;
-import com.github.francomiranda19.finalreality.model.character.player.CharacterClass;
-import com.github.francomiranda19.finalreality.model.character.player.Knight;
+import com.github.francomiranda19.finalreality.model.character.player.classes.Knight;
 import com.github.francomiranda19.finalreality.model.weapon.*;
 
 import java.util.ArrayList;
@@ -38,11 +37,11 @@ public abstract class AbstractCharacterTest {
   @BeforeEach
   void basicSetUp() {
     turns = new LinkedBlockingQueue<>();
-    testWeapon = new Axe("Test Weapon", 15, 10, WeaponType.AXE);
+    testWeapon = new Axe("Test Weapon", 15, 10);
     testCharacters = new ArrayList<>();
 
     Enemy testEnemy = new Enemy("Test Enemy", 10, turns, LIFE, DEFENSE, 15);
-    Knight testKnight = new Knight("Test Knight", turns, CharacterClass.KNIGHT, LIFE, DEFENSE);
+    Knight testKnight = new Knight("Test Knight", turns, LIFE, DEFENSE);
     testKnight.equipAxe(testWeapon);
     testCharacters.add(testKnight);
     testCharacters.add(testEnemy);

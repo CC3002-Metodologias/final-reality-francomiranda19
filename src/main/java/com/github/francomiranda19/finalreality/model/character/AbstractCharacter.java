@@ -1,6 +1,5 @@
 package com.github.francomiranda19.finalreality.model.character;
 
-import com.github.francomiranda19.finalreality.model.character.player.CharacterClass;
 import com.github.francomiranda19.finalreality.model.weapon.*;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.ScheduledExecutorService;
@@ -16,18 +15,16 @@ public abstract class AbstractCharacter implements ICharacter {
 
   protected final BlockingQueue<ICharacter> turnsQueue;
   protected final String name;
-  private final CharacterClass characterClass;
-  protected Weapon equippedWeapon = null;
+  protected IWeapon equippedWeapon = null;
   protected ScheduledExecutorService scheduledExecutor;
   private final int maxLife;
   private int currentLife;
   private final int defense;
 
   protected AbstractCharacter(@NotNull BlockingQueue<ICharacter> turnsQueue,
-                              @NotNull String name, CharacterClass characterClass, int maxLife, int defense) {
+                              @NotNull String name, int maxLife, int defense) {
     this.turnsQueue = turnsQueue;
     this.name = name;
-    this.characterClass = characterClass;
     this.maxLife = maxLife;
     this.currentLife = maxLife;
     this.defense = defense;
@@ -45,19 +42,13 @@ public abstract class AbstractCharacter implements ICharacter {
   public String getName() { return name; }
 
   @Override
-  public Weapon getEquippedWeapon() { return equippedWeapon; }
-
-  @Override
-  public CharacterClass getCharacterClass() { return characterClass; }
-
-  @Override
   public int getMaxLife() { return maxLife; }
 
   @Override
-  public int getDefense() { return defense; }
+  public int getCurrentLife() { return currentLife; }
 
   @Override
-  public int getCurrentLife() { return currentLife; }
+  public int getDefense() { return defense; }
 
   @Override
   public void receiveDamage(int attack, int defense) {
