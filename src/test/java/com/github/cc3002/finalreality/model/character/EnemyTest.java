@@ -75,11 +75,11 @@ public class EnemyTest extends AbstractCharacterTest {
     testPlayerCharacter.attack(testEnemy);
     assertEquals(100, testEnemy.getCurrentLife());
 
-    testPlayerCharacter.equipSword(new Sword("Test Sword", 20, 10));
+    testPlayerCharacter.equip(new Sword("Test Sword", 20, 10));
     testPlayerCharacter.attack(testEnemy);
     assertEquals(90, testEnemy.getCurrentLife());
 
-    testDeadPlayerCharacter.equipSword(new Sword("Test Sword", 20, 10));
+    testDeadPlayerCharacter.equip(new Sword("Test Sword", 20, 10));
     testDeadPlayerCharacter.attack(testEnemy);
     assertEquals(90, testEnemy.getCurrentLife());
   }

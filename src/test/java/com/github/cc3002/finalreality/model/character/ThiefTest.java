@@ -3,6 +3,7 @@ package com.github.cc3002.finalreality.model.character;
 import com.github.francomiranda19.finalreality.model.character.Enemy;
 import com.github.francomiranda19.finalreality.model.character.player.classes.Knight;
 import com.github.francomiranda19.finalreality.model.character.player.classes.Thief;
+import com.github.francomiranda19.finalreality.model.weapon.Axe;
 import com.github.francomiranda19.finalreality.model.weapon.Bow;
 import com.github.francomiranda19.finalreality.model.weapon.Staff;
 import com.github.francomiranda19.finalreality.model.weapon.Sword;
@@ -25,6 +26,7 @@ public class ThiefTest extends AbstractCharacterTest {
   private Sword testSword;
   private Staff testStaff;
   private Bow testBow;
+  private Axe testAxe;
 
   /**
    * Setup method.
@@ -39,6 +41,7 @@ public class ThiefTest extends AbstractCharacterTest {
     testSword = new Sword("Test Sword", 15, 10);
     testStaff = new Staff("Test Staff", 20, 10, 20);
     testBow = new Bow("Test Bow", 15, 10);
+    testAxe = new Axe("Test Axe", 10, 10);
     super.basicSetUp();
   }
 
@@ -56,7 +59,7 @@ public class ThiefTest extends AbstractCharacterTest {
     assertEquals(testThief, testThief);
     assertEquals(expectedThief, testThief);
     assertEquals(expectedThief.hashCode(),testThief.hashCode());
-    otherWeaponThief.equipBow(testBow);
+    otherWeaponThief.equip(testBow);
     assertNotEquals(otherWeaponThief, testThief);
     assertNotEquals(otherWeaponThief.hashCode(), testThief.hashCode());
     assertNotEquals(notExpectedThief1, testThief);
@@ -69,45 +72,35 @@ public class ThiefTest extends AbstractCharacterTest {
   }
 
   /**
-   * Checks if the thief equips a Sword.
+   * Checks if the black mage equips its corresponding weapons.
    */
   @Test
-  void equipSwordTest() {
+  void equipWeaponTest() {
     assertNull(testThief.getEquippedWeapon());
-    testThief.equipSword(testSword);
+    testThief.equip(testSword);
     assertEquals(testSword, testThief.getEquippedWeapon());
     assertNotEquals(testStaff, testThief.getEquippedWeapon());
     assertNotEquals(testBow, testThief.getEquippedWeapon());
 
-    testDeadThief.equipSword(testSword);
-    assertNull(testDeadThief.getEquippedWeapon());
-  }
-
-  /**
-   * Checks if the thief equips a Staff.
-   */
-  @Test
-  void equipStaffTest() {
-    testThief.equipStaff(testStaff);
+    testThief.equip(testStaff);
     assertEquals(testStaff, testThief.getEquippedWeapon());
     assertNotEquals(testSword, testThief.getEquippedWeapon());
     assertNotEquals(testBow, testThief.getEquippedWeapon());
 
-    testDeadThief.equipStaff(testStaff);
-    assertNull(testDeadThief.getEquippedWeapon());
-  }
-
-  /**
-   * Checks if the thief equips a Bow.
-   */
-  @Test
-  void equipBowTest() {
-    testThief.equipBow(testBow);
+    testThief.equip(testBow);
     assertEquals(testBow, testThief.getEquippedWeapon());
     assertNotEquals(testSword, testThief.getEquippedWeapon());
     assertNotEquals(testStaff, testThief.getEquippedWeapon());
 
-    testDeadThief.equipBow(testBow);
+    testThief.equip(testAxe);
+    assertEquals(testBow, testThief.getEquippedWeapon());
+    assertNotEquals(testSword, testThief.getEquippedWeapon());
+
+    testDeadThief.equip(testSword);
+    assertNull(testDeadThief.getEquippedWeapon());
+    testDeadThief.equip(testStaff);
+    assertNull(testDeadThief.getEquippedWeapon());
+    testDeadThief.equip(testBow);
     assertNull(testDeadThief.getEquippedWeapon());
   }
 

@@ -1,5 +1,6 @@
 package com.github.francomiranda19.finalreality.model.character;
 
+import com.github.francomiranda19.finalreality.controller.IEventHandler;
 import com.github.francomiranda19.finalreality.model.weapon.*;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.ScheduledExecutorService;
@@ -17,7 +18,7 @@ public abstract class AbstractCharacter implements ICharacter {
   protected final String name;
   protected IWeapon equippedWeapon = null;
   protected ScheduledExecutorService scheduledExecutor;
-  private final int maxLife;
+  private int maxLife;
   private int currentLife;
   private final int defense;
 
@@ -39,16 +40,22 @@ public abstract class AbstractCharacter implements ICharacter {
   }
 
   @Override
+  public abstract void waitTurn();
+
+  @Override
   public String getName() { return name; }
 
   @Override
   public int getMaxLife() { return maxLife; }
 
   @Override
+  public int getDefense() { return defense; }
+
+  @Override
   public int getCurrentLife() { return currentLife; }
 
   @Override
-  public int getDefense() { return defense; }
+  public abstract int getAttack();
 
   @Override
   public void receiveDamage(int attack, int defense) {
@@ -57,5 +64,8 @@ public abstract class AbstractCharacter implements ICharacter {
       this.currentLife -= damage;
     }
   }
+
+  @Override
+  public abstract void addListener(IEventHandler handler);
 
 }

@@ -1,5 +1,7 @@
 package com.github.francomiranda19.finalreality.model.weapon;
 
+import com.github.francomiranda19.finalreality.model.character.player.IPlayerCharacter;
+
 import java.util.Objects;
 
 /**
@@ -38,9 +40,11 @@ public abstract class AbstractWeapon implements IWeapon {
     return weight;
   }
 
+  @Override
+  public abstract void equipTo(IPlayerCharacter character);
+
   /**
    * Checks if two Weapons are equal.
-   *
    * @param o to check object.
    */
   @Override

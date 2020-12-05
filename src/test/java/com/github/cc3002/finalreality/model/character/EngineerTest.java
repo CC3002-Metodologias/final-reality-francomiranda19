@@ -5,6 +5,7 @@ import com.github.francomiranda19.finalreality.model.character.player.classes.En
 import com.github.francomiranda19.finalreality.model.character.player.classes.Thief;
 import com.github.francomiranda19.finalreality.model.weapon.Axe;
 import com.github.francomiranda19.finalreality.model.weapon.Bow;
+import com.github.francomiranda19.finalreality.model.weapon.Knife;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -22,6 +23,7 @@ public class EngineerTest extends AbstractCharacterTest {
   private Enemy testEnemy, testDeadEnemy;
   private Axe testAxe;
   private Bow testBow;
+  private Knife testKnife;
 
   /**
    * Setup method.
@@ -35,6 +37,7 @@ public class EngineerTest extends AbstractCharacterTest {
     testDeadEnemy = new Enemy("Test Dead Enemy", 10, turns, 0, DEFENSE, 15);
     testAxe = new Axe("Test Axe", 20, 10);
     testBow = new Bow("Test Bow", 25, 10);
+    testKnife = new Knife("Test Knife", 15, 10);
     super.basicSetUp();
   }
 
@@ -52,7 +55,7 @@ public class EngineerTest extends AbstractCharacterTest {
     assertEquals(testEngineer, testEngineer);
     assertEquals(expectedEngineer, testEngineer);
     assertEquals(expectedEngineer.hashCode(),testEngineer.hashCode());
-    otherWeaponEngineer.equipAxe(testAxe);
+    otherWeaponEngineer.equip(testAxe);
     assertNotEquals(otherWeaponEngineer, testEngineer);
     assertNotEquals(otherWeaponEngineer.hashCode(), testEngineer.hashCode());
     assertNotEquals(notExpectedEngineer1, testEngineer);
@@ -65,29 +68,26 @@ public class EngineerTest extends AbstractCharacterTest {
   }
 
   /**
-   * Checks if the engineer equips an Axe.
+   * Checks if the black mage equips its corresponding weapons.
    */
   @Test
-  void equipAxeTest() {
+  void equipWeaponTest() {
     assertNull(testEngineer.getEquippedWeapon());
-    testEngineer.equipAxe(testAxe);
+    testEngineer.equip(testAxe);
     assertEquals(testAxe, testEngineer.getEquippedWeapon());
     assertNotEquals(testBow, testEngineer.getEquippedWeapon());
 
-    testDeadEngineer.equipAxe(testAxe);
-    assertNull(testDeadEngineer.getEquippedWeapon());
-  }
-
-  /**
-   * Checks if the engineer equips a Bow.
-   */
-  @Test
-  void equipBowTest() {
-    testEngineer.equipBow(testBow);
+    testEngineer.equip(testBow);
     assertEquals(testBow, testEngineer.getEquippedWeapon());
     assertNotEquals(testAxe, testEngineer.getEquippedWeapon());
 
-    testDeadEngineer.equipBow(testBow);
+    testEngineer.equip(testKnife);
+    assertEquals(testBow, testEngineer.getEquippedWeapon());
+    assertNotEquals(testKnife, testEngineer.getEquippedWeapon());
+
+    testDeadEngineer.equip(testAxe);
+    assertNull(testDeadEngineer.getEquippedWeapon());
+    testDeadEngineer.equip(testBow);
     assertNull(testDeadEngineer.getEquippedWeapon());
   }
 

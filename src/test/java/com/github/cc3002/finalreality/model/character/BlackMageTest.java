@@ -3,6 +3,7 @@ package com.github.cc3002.finalreality.model.character;
 import com.github.francomiranda19.finalreality.model.character.Enemy;
 import com.github.francomiranda19.finalreality.model.character.player.classes.BlackMage;
 import com.github.francomiranda19.finalreality.model.character.player.classes.WhiteMage;
+import com.github.francomiranda19.finalreality.model.weapon.Axe;
 import com.github.francomiranda19.finalreality.model.weapon.Knife;
 import com.github.francomiranda19.finalreality.model.weapon.Staff;
 import org.junit.jupiter.api.BeforeEach;
@@ -22,6 +23,7 @@ public class BlackMageTest extends AbstractCharacterTest {
   private Enemy testEnemy, testDeadEnemy;
   private Knife testKnife;
   private Staff testStaff;
+  private Axe testAxe;
 
   /**
    * Setup method.
@@ -35,6 +37,7 @@ public class BlackMageTest extends AbstractCharacterTest {
     testDeadEnemy = new Enemy("Test Dead Enemy", 10, turns, 0, DEFENSE, 15);
     testKnife = new Knife("Test Knife", 15, 10);
     testStaff = new Staff("Test Staff", 20, 10, 30);
+    testAxe = new Axe("Test Axe", 20, 10);
     super.basicSetUp();
   }
 
@@ -53,7 +56,7 @@ public class BlackMageTest extends AbstractCharacterTest {
     assertEquals(testBlackMage, testBlackMage);
     assertEquals(expectedBlackMage, testBlackMage);
     assertEquals(expectedBlackMage.hashCode(),testBlackMage.hashCode());
-    otherWeaponBlackMage.equipKnife(testKnife);
+    otherWeaponBlackMage.equip(testKnife);
     assertNotEquals(otherWeaponBlackMage, testBlackMage);
     assertNotEquals(otherWeaponBlackMage.hashCode(), testBlackMage.hashCode());
     assertNotEquals(notExpectedBlackMage1, testBlackMage);
@@ -68,29 +71,26 @@ public class BlackMageTest extends AbstractCharacterTest {
   }
 
   /**
-   * Checks if the black mage equips a Knife.
+   * Checks if the black mage equips its corresponding weapons.
    */
   @Test
-  void equipKnifeTest() {
+  void equipWeaponTest() {
     assertNull(testBlackMage.getEquippedWeapon());
-    testBlackMage.equipKnife(testKnife);
+    testBlackMage.equip(testKnife);
     assertEquals(testKnife, testBlackMage.getEquippedWeapon());
     assertNotEquals(testStaff, testBlackMage.getEquippedWeapon());
 
-    testDeadBlackMage.equipKnife(testKnife);
-    assertNull(testDeadBlackMage.getEquippedWeapon());
-  }
-
-  /**
-   * Checks if the black mage equips a Staff.
-   */
-  @Test
-  void equipStaffTest() {
-    testBlackMage.equipStaff(testStaff);
+    testBlackMage.equip(testStaff);
     assertEquals(testStaff, testBlackMage.getEquippedWeapon());
     assertNotEquals(testKnife, testBlackMage.getEquippedWeapon());
 
-    testDeadBlackMage.equipStaff(testStaff);
+    testBlackMage.equip(testAxe);
+    assertEquals(testStaff, testBlackMage.getEquippedWeapon());
+    assertNotEquals(testAxe, testBlackMage.getEquippedWeapon());
+
+    testDeadBlackMage.equip(testKnife);
+    assertNull(testDeadBlackMage.getEquippedWeapon());
+    testDeadBlackMage.equip(testStaff);
     assertNull(testDeadBlackMage.getEquippedWeapon());
   }
 
