@@ -1,6 +1,6 @@
 package com.github.francomiranda19.finalreality.model.character;
 
-import com.github.francomiranda19.finalreality.model.character.player.AbstractPlayerCharacter;
+import com.github.francomiranda19.finalreality.model.character.player.IPlayerCharacter;
 
 /**
  * This represents an enemy from the game.
@@ -8,11 +8,16 @@ import com.github.francomiranda19.finalreality.model.character.player.AbstractPl
  *
  * @author Franco Miranda Oyarzún
  */
-public interface IEnemy {
+public interface IEnemy extends ICharacter {
+
+  /**
+   * Returns the weight of this enemy.
+   */
+  int getWeight();
 
   /**
    * Decreases the player character's life.
    * @param playerCharacter who is going to be attacked.
    */
-  void attack(AbstractPlayerCharacter playerCharacter);
+  void attack(IPlayerCharacter playerCharacter);
 }

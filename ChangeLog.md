@@ -3,6 +3,7 @@ ChangeLog
 
 Version 3.0
 -----------
+- (RC.1) Created a controller for the user and tests made
 - (B.1) Corrected the design of the application and tests
 
 Version 2.0

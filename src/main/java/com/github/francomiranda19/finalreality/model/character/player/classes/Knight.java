@@ -26,11 +26,31 @@ public class Knight extends AbstractPlayerCharacter {
     super(name, turnsQueue, maxLife, defense);
   }
 
-  /**
-   * Equips a sword to this character.
-   *
-   * @param sword the character will equip this weapon
-   */
+  @Override
+  public void equipAxe(Axe axe) {
+    if (this.getCurrentLife() > 0) {
+      this.equippedWeapon = axe;
+    }
+  }
+
+  @Override
+  public void equipBow(Bow bow) {
+
+  }
+
+  @Override
+  public void equipKnife(Knife knife) {
+    if (this.getCurrentLife() > 0) {
+      this.equippedWeapon = knife;
+    }
+  }
+
+  @Override
+  public void equipStaff(Staff staff) {
+
+  }
+
+  @Override
   public void equipSword(Sword sword) {
     if (this.getCurrentLife() > 0) {
       this.equippedWeapon = sword;
@@ -38,30 +58,7 @@ public class Knight extends AbstractPlayerCharacter {
   }
 
   /**
-   * Equips an axe to this character.
-   *
-   * @param axe the character will equip this weapon
-   */
-  public void equipAxe(Axe axe) {
-    if (this.getCurrentLife() > 0) {
-      this.equippedWeapon = axe;
-    }
-  }
-
-  /**
-   * Equips a knife to this character.
-   *
-   * @param knife the character will equip this weapon
-   */
-  public void equipKnife(Knife knife) {
-    if (this.getCurrentLife() > 0) {
-      this.equippedWeapon = knife;
-    }
-  }
-
-  /**
    * Checks if two Knights are equal.
-   *
    * @param o to check object.
    */
   @Override

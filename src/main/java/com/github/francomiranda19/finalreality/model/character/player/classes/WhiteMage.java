@@ -2,8 +2,7 @@ package com.github.francomiranda19.finalreality.model.character.player.classes;
 
 import com.github.francomiranda19.finalreality.model.character.ICharacter;
 import com.github.francomiranda19.finalreality.model.character.player.AbstractMage;
-import com.github.francomiranda19.finalreality.model.weapon.Knife;
-import com.github.francomiranda19.finalreality.model.weapon.Staff;
+import com.github.francomiranda19.finalreality.model.weapon.*;
 import org.jetbrains.annotations.NotNull;
 import java.util.Objects;
 import java.util.concurrent.BlockingQueue;
@@ -26,20 +25,35 @@ public class WhiteMage extends AbstractMage {
     super(name, turnsQueue, maxLife, defense, mana);
   }
 
-  /**
-   * Equips a knife to this character.
-   *
-   * @param knife the character will equip this weapon
-   */
+  @Override
+  public void equipAxe(Axe axe) {
+
+  }
+
+  @Override
+  public void equipBow(Bow bow) {
+
+  }
+
+  @Override
   public void equipKnife(Knife knife) {
     if (this.getCurrentLife() > 0) {
       this.equippedWeapon = knife;
     }
   }
 
+  @Override
+  public void equipStaff(Staff staff) {
+
+  }
+
+  @Override
+  public void equipSword(Sword sword) {
+
+  }
+
   /**
    * Checks if two White Mages are equal.
-   *
    * @param o to check object.
    */
   @Override

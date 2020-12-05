@@ -1,5 +1,7 @@
 package com.github.francomiranda19.finalreality.model.weapon;
 
+import com.github.francomiranda19.finalreality.model.character.player.IPlayerCharacter;
+
 import java.util.Objects;
 
 /**
@@ -19,9 +21,13 @@ public class Sword extends AbstractWeapon {
     super(name, damage, weight);
   }
 
+  @Override
+  public void equipTo(IPlayerCharacter character) {
+    character.equipSword(this);
+  }
+
   /**
    * Checks if two Swords are equal.
-   *
    * @param o to check object.
    */
   @Override

@@ -2,8 +2,7 @@ package com.github.francomiranda19.finalreality.model.character.player.classes;
 
 import com.github.francomiranda19.finalreality.model.character.ICharacter;
 import com.github.francomiranda19.finalreality.model.character.player.AbstractPlayerCharacter;
-import com.github.francomiranda19.finalreality.model.weapon.Axe;
-import com.github.francomiranda19.finalreality.model.weapon.Bow;
+import com.github.francomiranda19.finalreality.model.weapon.*;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Objects;
@@ -28,31 +27,37 @@ public class Engineer extends AbstractPlayerCharacter {
     super(name, turnsQueue, maxLife, defense);
   }
 
-  /**
-   * Equips an axe to this character.
-   *
-   * @param axe the character will equip this weapon
-   */
+  @Override
   public void equipAxe(Axe axe) {
     if (this.getCurrentLife() > 0) {
       this.equippedWeapon = axe;
     }
   }
 
-  /**
-   * Equips a bow to this character.
-   *
-   * @param bow the character will equip this weapon
-   */
+  @Override
   public void equipBow(Bow bow) {
     if (this.getCurrentLife() > 0) {
       this.equippedWeapon = bow;
     }
   }
 
+  @Override
+  public void equipKnife(Knife knife) {
+
+  }
+
+  @Override
+  public void equipStaff(Staff staff) {
+
+  }
+
+  @Override
+  public void equipSword(Sword sword) {
+
+  }
+
   /**
    * Checks if two Engineers are equal.
-   *
    * @param o to check object.
    */
   @Override

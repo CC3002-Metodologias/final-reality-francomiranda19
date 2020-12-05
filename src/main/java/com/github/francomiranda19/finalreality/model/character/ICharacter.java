@@ -1,5 +1,7 @@
 package com.github.francomiranda19.finalreality.model.character;
 
+import com.github.francomiranda19.finalreality.controller.IEventHandler;
+
 /**
  * This represents a character from the game.
  * A character can be controlled by the player or by the CPU (an enemy).
@@ -36,11 +38,17 @@ public interface ICharacter {
   int getCurrentLife();
 
   /**
+   * Returns the attack of this character.
+   */
+  int getAttack();
+
+  /**
    * Updates this character's current life when it receives damage.
-   *
    * @param attack attack of the attacking character
    * @param defense defense of the attacked character
    */
   void receiveDamage(int attack, int defense);
+
+  void addListener(IEventHandler handler);
 
 }

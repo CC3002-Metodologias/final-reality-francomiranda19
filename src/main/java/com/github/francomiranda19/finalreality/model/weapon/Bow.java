@@ -1,5 +1,7 @@
 package com.github.francomiranda19.finalreality.model.weapon;
 
+import com.github.francomiranda19.finalreality.model.character.player.IPlayerCharacter;
+
 import java.util.Objects;
 
 /**
@@ -11,7 +13,7 @@ public class Bow extends AbstractWeapon {
   /**
    * Creates a weapon with a name, a base damage, weight and its type.
    *
-   * @param name This weapon's name
+   * @param name This weapon's name.
    * @param damage This weapon's damage.
    * @param weight This weapon's weight.
    */
@@ -19,9 +21,13 @@ public class Bow extends AbstractWeapon {
     super(name, damage, weight);
   }
 
+  @Override
+  public void equipTo(IPlayerCharacter character) {
+    character.equipBow(this);
+  }
+
   /**
    * Checks if two Bows are equal.
-   *
    * @param o to check object.
    */
   @Override

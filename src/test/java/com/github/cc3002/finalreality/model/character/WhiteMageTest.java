@@ -53,7 +53,7 @@ public class WhiteMageTest extends AbstractCharacterTest {
     assertEquals(testWhiteMage, testWhiteMage);
     assertEquals(expectedWhiteMage, testWhiteMage);
     assertEquals(expectedWhiteMage.hashCode(),testWhiteMage.hashCode());
-    otherWeaponWhiteMage.equipKnife(testKnife);
+    otherWeaponWhiteMage.equip(testKnife);
     assertNotEquals(otherWeaponWhiteMage, testWhiteMage);
     assertNotEquals(otherWeaponWhiteMage.hashCode(), testWhiteMage.hashCode());
     assertNotEquals(notExpectedWhiteMage1, testWhiteMage);
@@ -68,16 +68,20 @@ public class WhiteMageTest extends AbstractCharacterTest {
   }
 
   /**
-   * Checks if the white mage equips a Knife.
+   * Checks if the black mage equips its corresponding weapons.
    */
   @Test
-  void equipKnifeTest() {
+  void equipWeaponTest() {
     assertNull(testWhiteMage.getEquippedWeapon());
-    testWhiteMage.equipKnife(testKnife);
+    testWhiteMage.equip(testKnife);
     assertEquals(testKnife, testWhiteMage.getEquippedWeapon());
     assertNotEquals(testAxe, testWhiteMage.getEquippedWeapon());
 
-    testDeadWhiteMage.equipKnife(testKnife);
+    testWhiteMage.equip(testAxe);
+    assertEquals(testKnife, testWhiteMage.getEquippedWeapon());
+    assertNotEquals(testAxe, testWhiteMage.getEquippedWeapon());
+
+    testDeadWhiteMage.equip(testKnife);
     assertNull(testDeadWhiteMage.getEquippedWeapon());
   }
 

@@ -25,11 +25,31 @@ public class Thief extends AbstractPlayerCharacter {
     super(name, turnsQueue, maxLife, defense);
   }
 
-  /**
-   * Equips a sword to this character.
-   *
-   * @param sword the character will equip this weapon
-   */
+  @Override
+  public void equipAxe(Axe axe) {
+
+  }
+
+  @Override
+  public void equipBow(Bow bow) {
+    if (this.getCurrentLife() > 0) {
+      this.equippedWeapon = bow;
+    }
+  }
+
+  @Override
+  public void equipKnife(Knife knife) {
+
+  }
+
+  @Override
+  public void equipStaff(Staff staff) {
+    if (this.getCurrentLife() > 0) {
+      this.equippedWeapon = staff;
+    }
+  }
+
+  @Override
   public void equipSword(Sword sword) {
     if (this.getCurrentLife() > 0) {
       this.equippedWeapon = sword;
@@ -37,30 +57,7 @@ public class Thief extends AbstractPlayerCharacter {
   }
 
   /**
-   * Equips a staff to this character.
-   *
-   * @param staff the character will equip this weapon
-   */
-  public void equipStaff(Staff staff) {
-    if (this.getCurrentLife() > 0) {
-      this.equippedWeapon = staff;
-    }
-  }
-
-  /**
-   * Equips a bow to this character.
-   *
-   * @param bow the character will equip this weapon
-   */
-  public void equipBow(Bow bow) {
-    if (this.getCurrentLife() > 0) {
-      this.equippedWeapon = bow;
-    }
-  }
-
-  /**
    * Checks if two Thiefs are equal.
-   *
    * @param o to check object.
    */
   @Override
