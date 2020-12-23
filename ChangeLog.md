@@ -3,6 +3,11 @@ ChangeLog
 
 Version 3.0
 -----------
+- (RC.1) Created the GUI of the game and the interaction with the user
+- (B.1) Created the states of the game
+
+Version 3.0
+-----------
 - (RC.1) Created a controller for the user and tests made
 - (B.1) Corrected the design of the application and tests
 

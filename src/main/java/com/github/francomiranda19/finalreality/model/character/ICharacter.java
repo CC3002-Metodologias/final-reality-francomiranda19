@@ -1,6 +1,6 @@
 package com.github.francomiranda19.finalreality.model.character;
 
-import com.github.francomiranda19.finalreality.controller.IEventHandler;
+import com.github.francomiranda19.finalreality.controller.handlers.IEventHandler;
 
 /**
  * This represents a character from the game.
@@ -49,6 +49,10 @@ public interface ICharacter {
    */
   void receiveDamage(int attack, int defense);
 
+  /**
+   * Subscribes to this character
+   * @param handler that handles this event
+   */
   void addListener(IEventHandler handler);
 
 }

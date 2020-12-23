@@ -37,14 +37,14 @@ public class WhiteMage extends AbstractMage {
 
   @Override
   public void equipKnife(Knife knife) {
-    if (this.getCurrentLife() > 0) {
-      this.equippedWeapon = knife;
-    }
+
   }
 
   @Override
   public void equipStaff(Staff staff) {
-
+    if (this.getCurrentLife() > 0) {
+      this.equippedWeapon = staff;
+    }
   }
 
   @Override

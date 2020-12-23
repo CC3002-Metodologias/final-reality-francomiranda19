@@ -1,6 +1,6 @@
 package com.github.francomiranda19.finalreality.model.character;
 
-import com.github.francomiranda19.finalreality.controller.IEventHandler;
+import com.github.francomiranda19.finalreality.controller.handlers.IEventHandler;
 import com.github.francomiranda19.finalreality.model.weapon.*;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.ScheduledExecutorService;
