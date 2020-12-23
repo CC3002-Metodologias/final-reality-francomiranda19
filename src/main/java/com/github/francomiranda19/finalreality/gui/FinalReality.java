@@ -22,7 +22,9 @@ import java.io.FileNotFoundException;
 /**
  * Main entry point for the application.
  * <p>
- * <Complete here with the details of the implemented application>
+ * The player is able to attack enemies and change weapons.
+ * The enemies will attack automatically a random player character.
+ * It will be shown when a character is in turn a when the game is over.
  *
  * @author Ignacio Slater Muñoz.
  * @author Franco Miranda Oyarzún
@@ -96,6 +98,12 @@ public class FinalReality extends Application {
     launch(args);
   }
 
+  /**
+   * Shows the application to the user.
+   * The user can interact with it.
+   * @param primaryStage stage of the application
+   * @throws FileNotFoundException when an image is not found
+   */
   @Override
   public void start(@NotNull Stage primaryStage) throws FileNotFoundException {
     primaryStage.setTitle("Final Reality");

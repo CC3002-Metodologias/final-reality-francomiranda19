@@ -13,6 +13,10 @@ public class EnemyEndsTurnHandler implements IEventHandler {
     this.controller = controller;
   }
 
+  /**
+   * Notifies when an enemy ends turn to the controller
+   * @param evt that is notified
+   */
   @Override
   public void propertyChange(PropertyChangeEvent evt) {
     controller.enemyTurnPlayed((IEnemy) evt.getNewValue(), (IPlayerCharacter) evt.getOldValue());

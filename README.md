@@ -41,4 +41,5 @@ characters, the game is over.
 For the game, I assumed that the characters and the weapons are previously created, then, the player in the GUI will see
 information about the actual state of the game, data about player characters and enemies alive, as well as weapons available,
 information like the life points, defense, attack, etc, and also images about the character that is in turn and its weapon.
-The player will be able to equip weapons and attack enemies, and it will be shown when a turn has finished or the game is over.
+The player will be able to equip weapons and attack enemies. The enemies will attack automatically a random player character.
+It will be shown when a turn has finished or the game is over.
