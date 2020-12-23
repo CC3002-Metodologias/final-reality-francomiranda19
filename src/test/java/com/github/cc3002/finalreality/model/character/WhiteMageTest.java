@@ -4,7 +4,7 @@ import com.github.francomiranda19.finalreality.model.character.Enemy;
 import com.github.francomiranda19.finalreality.model.character.player.classes.BlackMage;
 import com.github.francomiranda19.finalreality.model.character.player.classes.WhiteMage;
 import com.github.francomiranda19.finalreality.model.weapon.Axe;
-import com.github.francomiranda19.finalreality.model.weapon.Knife;
+import com.github.francomiranda19.finalreality.model.weapon.Staff;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -20,7 +20,7 @@ public class WhiteMageTest extends AbstractCharacterTest {
   private static final String WHITE_MAGE_NAME = "Test White Mage";
   private WhiteMage testWhiteMage, testDefensiveWhiteMage, testDeadWhiteMage;
   private Enemy testEnemy, testDeadEnemy;
-  private Knife testKnife;
+  private Staff testStaff;
   private Axe testAxe;
 
   /**
@@ -33,7 +33,7 @@ public class WhiteMageTest extends AbstractCharacterTest {
     testDeadWhiteMage = new WhiteMage("Test Dead White Mage", turns, 0, DEFENSE, MANA);
     testEnemy = new Enemy("Test Enemy", 10, turns, LIFE, DEFENSE, 15);
     testDeadEnemy = new Enemy("Test Dead Enemy", 10, turns, 0, DEFENSE, 15);
-    testKnife = new Knife("Test Knife", 20, 10);
+    testStaff = new Staff("Test Staff", 20, 10, 10);
     testAxe = new Axe("Test Axe", 15, 10);
     super.basicSetUp();
   }
@@ -53,7 +53,7 @@ public class WhiteMageTest extends AbstractCharacterTest {
     assertEquals(testWhiteMage, testWhiteMage);
     assertEquals(expectedWhiteMage, testWhiteMage);
     assertEquals(expectedWhiteMage.hashCode(),testWhiteMage.hashCode());
-    otherWeaponWhiteMage.equip(testKnife);
+    otherWeaponWhiteMage.equip(testStaff);
     assertNotEquals(otherWeaponWhiteMage, testWhiteMage);
     assertNotEquals(otherWeaponWhiteMage.hashCode(), testWhiteMage.hashCode());
     assertNotEquals(notExpectedWhiteMage1, testWhiteMage);
@@ -73,15 +73,15 @@ public class WhiteMageTest extends AbstractCharacterTest {
   @Test
   void equipWeaponTest() {
     assertNull(testWhiteMage.getEquippedWeapon());
-    testWhiteMage.equip(testKnife);
-    assertEquals(testKnife, testWhiteMage.getEquippedWeapon());
+    testWhiteMage.equip(testStaff);
+    assertEquals(testStaff, testWhiteMage.getEquippedWeapon());
     assertNotEquals(testAxe, testWhiteMage.getEquippedWeapon());
 
     testWhiteMage.equip(testAxe);
-    assertEquals(testKnife, testWhiteMage.getEquippedWeapon());
+    assertEquals(testStaff, testWhiteMage.getEquippedWeapon());
     assertNotEquals(testAxe, testWhiteMage.getEquippedWeapon());
 
-    testDeadWhiteMage.equip(testKnife);
+    testDeadWhiteMage.equip(testStaff);
     assertNull(testDeadWhiteMage.getEquippedWeapon());
   }
 

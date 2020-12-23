@@ -1,5 +1,10 @@
 package com.github.francomiranda19.finalreality.controller;
 
+import com.github.francomiranda19.finalreality.controller.exceptions.InvalidMovementException;
+import com.github.francomiranda19.finalreality.controller.exceptions.InvalidTransitionException;
+import com.github.francomiranda19.finalreality.controller.handlers.CharacterEndsTurnHandler;
+import com.github.francomiranda19.finalreality.controller.handlers.EnemyEndsTurnHandler;
+import com.github.francomiranda19.finalreality.controller.handlers.IEventHandler;
 import com.github.francomiranda19.finalreality.model.character.Enemy;
 import com.github.francomiranda19.finalreality.model.character.ICharacter;
 import com.github.francomiranda19.finalreality.model.character.IEnemy;
@@ -18,6 +23,7 @@ import java.util.concurrent.LinkedBlockingQueue;
  * @author Franco Miranda Oyarzún
  */
 public class GameController {
+  private State state;
 
   private final BlockingQueue<ICharacter> turnsQueue;
   private final List<IPlayerCharacter> party;
@@ -31,6 +37,8 @@ public class GameController {
    * Creates a game controller.
    */
   public GameController() {
+    this.setState(new InTurn());
+
     turnsQueue = new LinkedBlockingQueue<>();
     party = new ArrayList<>();
     enemies = new ArrayList<>();
@@ -40,6 +48,60 @@ public class GameController {
     enemyEndsTurnHandler = new EnemyEndsTurnHandler(this);
   }
 
+  void setState(State aState) {
+    this.state = aState;
+    state.setController(this);
+  }
+
+  /**
+   * Returns the name of the state the controller is in
+   */
+  public String getStateName() {
+    return state.getName();
+  }
+
+  /**
+   * Changes the state of the controller to the waiting turn state
+   */
+  public void waitTurn() throws InvalidTransitionException {
+    state.waitTurn();
+  }
+
+  /**
+   * Changes the state of the controller to the in turn state
+   */
+  public void inTurn() throws InvalidTransitionException {
+    state.inTurn();
+  }
+
+  /**
+   * Changes the state of the controller to the game over state
+   */
+  public void gameOver() {
+    state.gameOver();
+  }
+
+  /**
+   * Returns true if the controller is in the waiting state
+   */
+  public boolean isWaitingTurn() {
+    return state.isWaitingTurn();
+  }
+
+  /**
+   * Returns true if the controller is in the in turn state
+   */
+  public boolean isInTurn() {
+    return state.isInTurn();
+  }
+
+  /**
+   * Returns true if the controller is in the game over state
+   */
+  public boolean theGameIsOver() {
+    return state.theGameIsOver();
+  }
+
   /**
    * Creates a black mage
    * @param name of the black mage
@@ -47,10 +109,11 @@ public class GameController {
    * @param defense of the black mage
    * @param mana of the black mage
    */
-  public IPlayerCharacter createBlackMage(String name, int maxLife, int defense, int mana) {
+  public IPlayerCharacter createBlackMage(String name, int maxLife, int defense, int mana, IWeapon weapon) {
     IPlayerCharacter blackMage = new BlackMage(name, turnsQueue, maxLife, defense, mana);
     blackMage.addListener(characterEndsTurnHandler);
     party.add(blackMage);
+    equip(weapon, blackMage);
     blackMage.waitTurn();
     return blackMage;
   }
@@ -61,10 +124,11 @@ public class GameController {
    * @param maxLife of the engineer
    * @param defense of the engineer
    */
-  public IPlayerCharacter createEngineer(String name, int maxLife, int defense) {
+  public IPlayerCharacter createEngineer(String name, int maxLife, int defense, IWeapon weapon) {
     IPlayerCharacter engineer = new Engineer(name, turnsQueue, maxLife, defense);
     engineer.addListener(characterEndsTurnHandler);
     party.add(engineer);
+    equip(weapon, engineer);
     engineer.waitTurn();
     return engineer;
   }
@@ -75,10 +139,11 @@ public class GameController {
    * @param maxLife of the knight
    * @param defense of the knight
    */
-  public IPlayerCharacter createKnight(String name, int maxLife, int defense) {
+  public IPlayerCharacter createKnight(String name, int maxLife, int defense, IWeapon weapon) {
     IPlayerCharacter knight = new Knight(name, turnsQueue, maxLife, defense);
     knight.addListener(characterEndsTurnHandler);
     party.add(knight);
+    equip(weapon, knight);
     knight.waitTurn();
     return knight;
   }
@@ -89,10 +154,11 @@ public class GameController {
    * @param maxLife of the thief
    * @param defense of the thief
    */
-  public IPlayerCharacter createThief(String name, int maxLife, int defense) {
+  public IPlayerCharacter createThief(String name, int maxLife, int defense, IWeapon weapon) {
     IPlayerCharacter thief = new Thief(name, turnsQueue, maxLife, defense);
     thief.addListener(characterEndsTurnHandler);
     party.add(thief);
+    equip(weapon, thief);
     thief.waitTurn();
     return thief;
   }
@@ -104,10 +170,11 @@ public class GameController {
    * @param defense of the white mage
    * @param mana of the white mage
    */
-  public IPlayerCharacter createWhiteMage(String name, int maxLife, int defense, int mana) {
+  public IPlayerCharacter createWhiteMage(String name, int maxLife, int defense, int mana, IWeapon weapon) {
     IPlayerCharacter whiteMage = new WhiteMage(name, turnsQueue, maxLife, defense, mana);
     whiteMage.addListener(characterEndsTurnHandler);
     party.add(whiteMage);
+    equip(weapon, whiteMage);
     whiteMage.waitTurn();
     return whiteMage;
   }
@@ -192,17 +259,31 @@ public class GameController {
   }
 
   /**
+   * Returns the turns queue of the controller
+   */
+  public BlockingQueue<ICharacter> getTurnsQueue() {
+    return turnsQueue;
+  }
+
+  /**
+   * Pops and returns the first character of the turns queue
+   */
+  public ICharacter removeFromTurnsQueue() {
+    return turnsQueue.poll();
+  }
+
+  /**
    * Returns all the available player characters.
    */
   public List<IPlayerCharacter> getParty() {
-    return party;
+    return List.copyOf(party);
   }
 
   /**
    * Returns all the available enemies.
    */
   public List<IEnemy> getEnemies() {
-    return enemies;
+    return List.copyOf(enemies);
   }
 
   /**
@@ -329,7 +410,7 @@ public class GameController {
    * Returns the available weapons
    */
   public List<IWeapon> getInventory() {
-    return inventory;
+    return List.copyOf(inventory);
   }
 
   /**
@@ -352,10 +433,7 @@ public class GameController {
    * @param weapon who's name is wanted
    */
   public String getWeaponName(IWeapon weapon) {
-    if (isAValidWeapon(weapon)) {
-      return weapon.getName();
-    }
-    return null;
+    return weapon.getName();
   }
 
   /**
@@ -383,6 +461,35 @@ public class GameController {
   }
 
   /**
+   * Tries to equip a weapon to a character
+   * @param weapon that a player character will try to equip
+   *               if it is an enemy that will try to do this,
+   *               it will have no effect
+   */
+  public void tryToEquip(IWeapon weapon) {
+    try {
+      state.equip(weapon);
+    } catch (InvalidMovementException e) {
+
+    }
+  }
+
+  /**
+   * Tries to attack another character
+   * @param enemy that a player character will try to attack
+   *              if it is an enemy who will try to attack,
+   *              this parameter is irrelevant
+   */
+  public void tryToAttack(IEnemy enemy) {
+    try {
+      state.attack(enemy);
+      state.poll();
+    } catch (InvalidMovementException | InterruptedException e) {
+
+    }
+  }
+
+  /**
    * Equips a weapon to a character only if the character can equip the weapon.
    * If a character equips a weapon, that weapon will be removed from the inventory
    * and the previous equipped weapon will be added there.
@@ -390,13 +497,13 @@ public class GameController {
    * @param character that will try to equip the weapon
    */
   public void equip(IWeapon weapon, IPlayerCharacter character) {
-    IWeapon equippedWeapon = character.getEquippedWeapon();
+    IWeapon equippedWeapon = getEquippedWeapon(character);
     if (isAValidWeapon(weapon)) {
       character.equip(weapon);
       if (equippedWeapon != getEquippedWeapon(character)) {
         inventory.remove(weapon);
         if (equippedWeapon != null) {
-          inventory.add(weapon);
+          inventory.add(equippedWeapon);
         }
       }
     }
@@ -409,7 +516,6 @@ public class GameController {
    */
   public void characterAttack(IPlayerCharacter character, IEnemy enemy) {
     character.attack(enemy);
-    character.waitTurn();
   }
 
   /**
@@ -417,13 +523,9 @@ public class GameController {
    * @param enemy attacker
    * @param character rival
    */
-  public void enemyAttack(IEnemy enemy, IPlayerCharacter character) {
+  public void enemyAttack(IEnemy enemy, IPlayerCharacter character) throws InterruptedException {
     enemy.attack(character);
-    enemy.waitTurn();
-  }
-
-  public ICharacter nextTurn() {
-    return turnsQueue.poll();
+    Thread.sleep(400);
   }
 
   /**
@@ -432,6 +534,7 @@ public class GameController {
    * @param enemy attacked by the character
    */
   public void characterTurnPlayed(IPlayerCharacter character, IEnemy enemy) {
+    System.out.println(character.getName() + " attacked " + enemy.getName() + "!");
     System.out.println(character.getName() + " turn is over.");
     if (isDead(enemy)) {
       enemyDeath(enemy);
@@ -444,6 +547,7 @@ public class GameController {
    * @param character attacked by the enemy
    */
   public void enemyTurnPlayed(IEnemy enemy, IPlayerCharacter character) {
+    System.out.println(enemy.getName() + " attacked " + character.getName() + "!");
     System.out.println(enemy.getName() + " turn is over.");
     if (isDead(character)) {
       characterDeath(character);
@@ -459,7 +563,9 @@ public class GameController {
     System.out.println(character.getName() + " is dead!");
     party.remove(character);
     turnsQueue.remove(character);
+    inventory.add(getEquippedWeapon(character));
     if (partyIsEmpty()) {
+      gameOver();
       System.out.println("You lost the game uwu");
     }
   }
@@ -474,6 +580,7 @@ public class GameController {
     enemies.remove(enemy);
     turnsQueue.remove(enemy);
     if (enemiesIsEmpty()) {
+      gameOver();
       System.out.println("You won the game :D");
     }
   }

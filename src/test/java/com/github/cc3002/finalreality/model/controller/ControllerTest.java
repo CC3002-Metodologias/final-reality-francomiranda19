@@ -83,11 +83,11 @@ public class ControllerTest {
   void createCharactersTest() {
     assertTrue(testController.partyIsEmpty());
     assertFalse(testController.isAValidCharacter(new Knight(KNIGHT_NAME, turns, MAX_LIFE, DEFENSE)));
-    testBlackMage = testController.createBlackMage(BLACK_MAGE_NAME, MAX_LIFE, DEFENSE, MANA);
-    testEngineer = testController.createEngineer(ENGINEER_NAME, MAX_LIFE, DEFENSE);
-    testKnight = testController.createKnight(KNIGHT_NAME, MAX_LIFE, DEFENSE);
-    testThief = testController.createThief(THIEF_NAME, MAX_LIFE, DEFENSE);
-    testWhiteMage = testController.createWhiteMage(WHITE_MAGE_NAME, MAX_LIFE, DEFENSE, MANA);
+    testBlackMage = testController.createBlackMage(BLACK_MAGE_NAME, MAX_LIFE, DEFENSE, MANA, testSword);
+    testEngineer = testController.createEngineer(ENGINEER_NAME, MAX_LIFE, DEFENSE, testAxe);
+    testKnight = testController.createKnight(KNIGHT_NAME, MAX_LIFE, DEFENSE, testBow);
+    testThief = testController.createThief(THIEF_NAME, MAX_LIFE, DEFENSE, testKnife);
+    testWhiteMage = testController.createWhiteMage(WHITE_MAGE_NAME, MAX_LIFE, DEFENSE, MANA, testStaff);
     assertEquals(5, testController.getPartySize());
     for (int i = 0; i < testController.getPartySize(); i++) {
       IPlayerCharacter character = testController.getParty().get(i);
@@ -159,7 +159,6 @@ public class ControllerTest {
   void notValidWeaponsTest() {
     testAxe = new Axe(AXE_NAME, DAMAGE, WEIGHT);
     assertFalse(testController.isAValidWeapon(testAxe));
-    assertNull(testController.getWeaponName(testAxe));
     assertEquals(-1, testController.getDamage(testAxe));
     assertEquals(-1, testController.getWeaponWeight(testAxe));
   }
@@ -168,8 +167,7 @@ public class ControllerTest {
   void notRemovingWeaponsTest() {
     testAxe = testController.createAxe(AXE_NAME, DAMAGE, WEIGHT);
     testSword = testController.createSword(SWORD_NAME, DAMAGE, WEIGHT);
-    testThief = testController.createThief(THIEF_NAME, MAX_LIFE, DEFENSE);
-    testController.equip(testSword, testThief);
+    testThief = testController.createThief(THIEF_NAME, MAX_LIFE, DEFENSE, testSword);
     assertEquals(testSword, testController.getEquippedWeapon(testThief));
     testController.equip(testAxe, testThief);
     assertEquals(testSword, testController.getEquippedWeapon(testThief));
@@ -179,8 +177,7 @@ public class ControllerTest {
   void notNullWeaponsTest() {
     testSword = testController.createSword(SWORD_NAME, DAMAGE, WEIGHT);
     testBow = testController.createBow(BOW_NAME, DAMAGE, WEIGHT);
-    testThief = testController.createThief(THIEF_NAME, MAX_LIFE, DEFENSE);
-    testController.equip(testSword, testThief);
+    testThief = testController.createThief(THIEF_NAME, MAX_LIFE, DEFENSE, testSword);
     assertEquals(testSword, testController.getEquippedWeapon(testThief));
     assertEquals(1, testController.getInventorySize());
     testController.equip(testBow, testThief);
@@ -190,72 +187,89 @@ public class ControllerTest {
 
   @Test
   void victoryTest() throws InterruptedException {
-    testKnight = testController.createKnight(KNIGHT_NAME, MAX_LIFE, DEFENSE);
-    testSword = testController.createSword(SWORD_NAME, DAMAGE, 2);
+    testSword = testController.createSword(SWORD_NAME, DAMAGE, 1);
+
+    testKnight = testController.createKnight(KNIGHT_NAME, MAX_LIFE, DEFENSE, testSword);
     testEnemy = testController.createEnemy(ENEMY_NAME, 3, MAX_LIFE, DEFENSE, 10);
-    IEnemy anotherTestEnemy = testController.createEnemy("Another Test Enemy", 2, 30, DEFENSE, 20);
+    IEnemy anotherTestEnemy = testController.createEnemy("Another Test Enemy", 5, 30, DEFENSE, 20);
 
-    testController.equip(testSword, testKnight);
+    Thread.sleep(100);
+    assertEquals(testKnight, testController.removeFromTurnsQueue());
+    testController.characterAttack(testKnight, testEnemy);
+    testKnight.waitTurn();
 
     Thread.sleep(200);
-    assertEquals(testKnight, testController.nextTurn());
-    testController.characterAttack(testKnight, testEnemy);
-
-    assertEquals(testEnemy, testController.nextTurn());
+    assertEquals(testEnemy, testController.removeFromTurnsQueue());
     testController.enemyAttack(testEnemy, testKnight);
-
-    assertEquals(anotherTestEnemy, testController.nextTurn());
-    testController.enemyAttack(anotherTestEnemy, testKnight);
+    testEnemy.waitTurn();
 
     Thread.sleep(200);
-    assertEquals(testKnight, testController.nextTurn());
+    assertEquals(anotherTestEnemy, testController.removeFromTurnsQueue());
+    testController.enemyAttack(anotherTestEnemy, testKnight);
+    anotherTestEnemy.waitTurn();
+
+    assertEquals(testKnight, testController.removeFromTurnsQueue());
     testController.characterAttack(testKnight, testEnemy);
+    testKnight.waitTurn();
 
-    assertEquals(anotherTestEnemy, testController.nextTurn());
+    Thread.sleep(400);
+    assertEquals(anotherTestEnemy, testController.removeFromTurnsQueue());
     testController.enemyAttack(anotherTestEnemy, testKnight);
+    anotherTestEnemy.waitTurn();
 
-    Thread.sleep(200);
-    assertEquals(testKnight, testController.nextTurn());
+    assertEquals(testKnight, testController.removeFromTurnsQueue());
     testController.characterAttack(testKnight, anotherTestEnemy);
+    testKnight.waitTurn();
   }
 
   @Test
-  void lossTest() throws InterruptedException {
+  void defeatTest() throws InterruptedException {
+    testKnife = testController.createKnife(KNIFE_NAME, 10, 3);
+    testAxe = testController.createAxe(AXE_NAME, 10, 4);
+
     testEnemy = testController.createEnemy(ENEMY_NAME, 2, MAX_LIFE, DEFENSE, ATTACK);
+    testThief = testController.createThief(THIEF_NAME, MAX_LIFE, DEFENSE, testKnife);
+    testEngineer = testController.createEngineer(ENGINEER_NAME, MAX_LIFE, DEFENSE, testAxe);
+
     Thread.sleep(200);
-    testThief = testController.createThief(THIEF_NAME, MAX_LIFE, DEFENSE);
-    testEngineer = testController.createEngineer(ENGINEER_NAME, MAX_LIFE, DEFENSE);
-    testBow = testController.createBow(BOW_NAME, 10, WEIGHT);
-
-    testController.equip(testBow, testThief);
-    testController.equip(testBow, testEngineer);
-
-    assertEquals(testEnemy, testController.nextTurn());
+    assertEquals(testEnemy, testController.removeFromTurnsQueue());
     testController.enemyAttack(testEnemy, testThief);
+    testEnemy.waitTurn();
 
-    assertEquals(testThief, testController.nextTurn());
+    Thread.sleep(100);
+    assertEquals(testThief, testController.removeFromTurnsQueue());
     testController.characterAttack(testThief, testEnemy);
+    testThief.waitTurn();
 
-    assertEquals(testEngineer, testController.nextTurn());
+    Thread.sleep(100);
+    assertEquals(testEngineer, testController.removeFromTurnsQueue());
     testController.characterAttack(testEngineer, testEnemy);
+    testEngineer.waitTurn();
 
-    Thread.sleep(200);
-    assertEquals(testEnemy, testController.nextTurn());
+    Thread.sleep(100);
+    assertEquals(testEnemy, testController.removeFromTurnsQueue());
     testController.enemyAttack(testEnemy, testThief);
+    testEnemy.waitTurn();
 
-    assertEquals(testEngineer, testController.nextTurn());
+    Thread.sleep(100);
+    assertEquals(testEngineer, testController.removeFromTurnsQueue());
     testController.characterAttack(testEngineer, testEnemy);
+    testEngineer.waitTurn();
 
     Thread.sleep(200);
-    assertEquals(testEnemy, testController.nextTurn());
+    assertEquals(testEnemy, testController.removeFromTurnsQueue());
     testController.enemyAttack(testEnemy, testEngineer);
+    testEnemy.waitTurn();
 
-    assertEquals(testEngineer, testController.nextTurn());
+    Thread.sleep(100);
+    assertEquals(testEngineer, testController.removeFromTurnsQueue());
     testController.characterAttack(testEngineer, testEnemy);
+    testEngineer.waitTurn();
 
-    Thread.sleep(200);
-    assertEquals(testEnemy, testController.nextTurn());
+    Thread.sleep(100);
+    assertEquals(testEnemy, testController.removeFromTurnsQueue());
     testController.enemyAttack(testEnemy, testEngineer);
+    testEnemy.waitTurn();
   }
 
 }

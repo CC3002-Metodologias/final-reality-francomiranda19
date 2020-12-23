@@ -6,7 +6,7 @@ import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
-import com.github.francomiranda19.finalreality.controller.IEventHandler;
+import com.github.francomiranda19.finalreality.controller.handlers.IEventHandler;
 import com.github.francomiranda19.finalreality.model.character.player.IPlayerCharacter;
 import org.jetbrains.annotations.NotNull;
 

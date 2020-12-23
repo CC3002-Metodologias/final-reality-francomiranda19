@@ -1,5 +1,6 @@
-package com.github.francomiranda19.finalreality.controller;
+package com.github.francomiranda19.finalreality.controller.handlers;
 
+import com.github.francomiranda19.finalreality.controller.GameController;
 import com.github.francomiranda19.finalreality.model.character.IEnemy;
 import com.github.francomiranda19.finalreality.model.character.player.IPlayerCharacter;
 

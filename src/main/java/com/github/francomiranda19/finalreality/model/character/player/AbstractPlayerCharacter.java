@@ -1,6 +1,6 @@
 package com.github.francomiranda19.finalreality.model.character.player;
 
-import com.github.francomiranda19.finalreality.controller.IEventHandler;
+import com.github.francomiranda19.finalreality.controller.handlers.IEventHandler;
 import com.github.francomiranda19.finalreality.model.character.AbstractCharacter;
 import com.github.francomiranda19.finalreality.model.character.ICharacter;
 
